@@ -1,0 +1,532 @@
+<div
+  class="w-full lg:container mx-auto relative grid grid-cols-1 lg:grid-cols-5 gap-5 p-4 lg:p-10 min-h-[300px] overflow-hidden items-stretch justify-between"
+  id="products"
+>
+  <!-- Fondo de texto "PRODUCTOS" -->
+  <div
+    class="absolute inset-0 z-0 w-full h-full overflow-hidden px-4 sm:px-6 md:px-24 lg:px-24 2xl:px-4"
+  >
+    <img 
+      src="/images/products.png" 
+      alt="Productos" 
+      class="w-full h-full object-contain brightness-[2]"
+    />
+  </div>
+
+  <!-- Botón FILTROS -->
+  <button
+    class="col-span-1 lg:col-span-2 relative text-white text-center font-bold px-4 py-2 flex flex-col items-center justify-center transform-button z-20"
+  >
+    <div
+      class="content-wrapper inline-block px-4 py-2 w-full lg:w-auto"
+      style="--hover-bg-color: #38b2ac;"
+    >
+      <span class="initial-content text-4xl lg:text-7xl pb-3 font-titles tracking-titles">FILTROS</span>
+      <span class="hover-content hidden text-4xl lg:text-7xl font-titles tracking-titles">FILTROS</span>
+      <span class="hover-subtext hidden text-xl lg:text-2xl font-body">ver más</span>
+    </div>
+  </button>
+
+  <!-- Botón HERRAMIENTAS -->
+  <button
+    class="col-span-1 lg:col-span-3 relative text-white text-center font-bold px-4 py-2 flex flex-col items-center justify-center transform-button z-20"
+  >
+    <div
+      class="content-wrapper inline-block px-4 py-2 w-full lg:w-auto"
+      style="--hover-bg-color: #e74e1c;"
+    >
+      <span class="initial-content text-4xl lg:text-7xl pb-3 font-titles tracking-titles">HERRAMIENTAS</span>
+      <span class="hover-content hidden text-4xl lg:text-7xl font-titles tracking-titles">HERRAMIENTAS</span>
+      <span class="hover-subtext hidden text-xl lg:text-2xl font-body">ver más</span>
+    </div>
+  </button>
+</div>
+
+<div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 items-center justify-center overflow-y-auto">
+  <div class="bg-white rounded-lg w-[90vw] h-[90vh] mx-auto my-8 relative overflow-y-auto">
+    <button 
+      onclick="closeModal()" 
+      class="absolute top-8 right-8 text-white hover:text-gray-200 z-10 bg-black bg-opacity-30 rounded-full p-1.5 transition-all duration-300 hover:bg-opacity-50"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <div id="modal-content" class="h-full">
+      <div class="relative h-full flex items-center justify-center">
+        <!-- Imagen de fondo -->
+        <div class="absolute inset-0 z-0">
+          <img 
+            src="/images/ver-mas-herramientas.webp" 
+            alt="Herramientas de fondo" 
+            class="w-full h-full object-cover brightness-70"
+          />
+        </div>
+        
+        <!-- Contenido central -->
+        <div class="relative z-10 bg-white p-12 w-[90%] max-w-5xl border-b-4 border-secondary">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Columna izquierda - Título -->
+            <div class="text-start flex lg:justify-center items-center">
+              <h2 class="text-3xl lg:text-6xl text-secondary font-titles tracking-titles">
+                HERRAMIENTAS DE
+                <br class="block" />
+                MANO PARA TALLER
+              </h2>
+            </div>
+            
+            <!-- Columna derecha - Descripción -->
+            <div class="text-start flex justify-center items-center">
+              <p class="text-gray-600 text-base lg:text-2xl font-body">
+                Contamos con una amplia gama de herramientas para complementar, 
+                potenciar y optimizar el rendimiento de tus equipos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenido del modal de filtros -->
+    <div id="filtros-modal-content" class="h-full hidden">
+      <div class="relative h-full flex items-center justify-center">
+        <!-- Imagen de fondo -->
+        <div class="absolute inset-0 z-0">
+          <img 
+            src="/images/ver-mas-filtros.webp" 
+            alt="Filtros de fondo" 
+            class="w-full h-full object-cover brightness-70"
+          />
+        </div>
+        
+        <!-- Contenido central -->
+        <div class="relative z-10 bg-white p-4 md:p-8 lg:p-12 w-[95%] md:w-[90%] max-w-5xl border-b-4 border-primary-light">
+          <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-8">
+            <!-- Columna izquierda - Navegación (oculta en mobile) -->
+            <div class="hidden lg:flex lg:col-span-2 flex-col space-y-4">
+              <button class="text-left text-2xl lg:text-3xl font-titles tracking-titles py-2 px-4 filter-nav-btn text-white bg-primary-light" data-slide="0">
+                FILTROS DE ACEITE
+              </button>
+              <button class="text-left text-2xl lg:text-3xl font-titles tracking-titles py-2 px-4 filter-nav-btn text-white bg-primary-light" data-slide="1">
+                FILTROS DE COMBUSTIBLE
+              </button>
+              <button class="text-left text-2xl lg:text-3xl font-titles tracking-titles py-2 px-4 filter-nav-btn text-white bg-primary-light" data-slide="2">
+                FILTROS DE TRANSMISIÓN
+              </button>
+              <button class="text-left text-2xl lg:text-3xl font-titles tracking-titles py-2 px-4 filter-nav-btn text-white bg-primary-light" data-slide="3">
+                FILTROS DE AIRE
+              </button>
+              <button class="text-left text-2xl lg:text-3xl font-titles tracking-titles py-2 px-4 filter-nav-btn text-white bg-primary-light" data-slide="4">
+                FILTROS DE CABINA
+              </button>
+            </div>
+            
+            <!-- Columna derecha - Contenido del carrusel -->
+            <div class="col-span-1 lg:col-span-3 relative">
+              <div class="flex items-center gap-2 lg:gap-4">
+                <!-- Flechas de navegación -->
+                <button class="carousel-prev text-primary-light hover:text-primary-dark transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+
+                <!-- Contenedor del carrusel -->
+                <div class="carousel-container flex-1">
+                  <!-- Slides con texto responsive -->
+                  <div class="carousel-slide active">
+                    <h3 class="text-2xl lg:text-4xl font-titles tracking-titles text-white bg-primary-light px-4 py-2 mb-4">
+                      FILTROS DE ACEITE
+                    </h3>
+                    <p class="text-gray-600 text-base lg:text-xl font-body mb-6">
+                      Mantienen la lubricación adecuada del motor, eliminando contaminantes.
+                    </p>
+                    <div class="benefits pb-4 mb-4">
+                      <h4 class="text-xl lg:text-2xl font-titles tracking-titles text-primary-light mb-4">
+                        - BENEFICIOS -
+                      </h4>
+                      <ul class="space-y-3 text-gray-600 text-lg lg:text-xl font-body">
+                        <li class="pb-3 border-b-2 border-primary-light">Protege el motor de desgaste prematuro.</li>
+                        <li class="pb-3 border-b-2 border-primary-light">Mejora la eficiencia del combustible.</li>
+                        <li class="pb-3">Reduce el riesgo de sobrecalentamiento.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Slide 2: Filtros de Combustible -->
+                  <div class="carousel-slide hidden">
+                    <h3 class="text-2xl lg:text-4xl font-titles tracking-titles text-white bg-primary-light px-4 py-2 mb-4">
+                      FILTROS DE COMBUSTIBLE
+                    </h3>
+                    <p class="text-gray-600 text-base lg:text-xl font-body mb-6">
+                      Eliminan impurezas del combustible antes de que llegue al motor.
+                    </p>
+                    <div class="benefits">
+                      <h4 class="text-xl lg:text-2xl font-titles tracking-titles text-primary-light mb-4">
+                        - BENEFICIOS -
+                      </h4>
+                      <ul class="space-y-3 text-gray-600 text-lg lg:text-xl font-body">
+                        <li class="pb-3 border-b-2 border-primary-light">Asegura un flujo de combustible limpio.</li>
+                        <li class="pb-3 border-b-2 border-primary-light">Mejora el rendimiento del motor.</li>
+                        <li class="pb-3">Previene fallos en el sistema de inyección.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Slide 3: Filtros de Transmisión -->
+                  <div class="carousel-slide hidden">
+                    <h3 class="text-2xl lg:text-4xl font-titles tracking-titles text-white bg-primary-light px-4 py-2 mb-4">
+                      FILTROS DE TRANSMISIÓN
+                    </h3>
+                    <p class="text-gray-600 text-base lg:text-xl font-body mb-6">
+                      Mantienen la calidad del fluido de transmisión.
+                    </p>
+                    <div class="benefits">
+                      <h4 class="text-xl lg:text-2xl font-titles tracking-titles text-primary-light mb-4">
+                        - BENEFICIOS -
+                      </h4>
+                      <ul class="space-y-3 text-gray-600 text-lg lg:text-xl font-body">
+                        <li class="pb-3 border-b-2 border-primary-light">Asegura un rendimiento óptimo de la transmisión.</li>
+                        <li class="pb-3 border-b-2 border-primary-light">Previene costosas reparaciones.</li>
+                        <li class="pb-3">Mejora la suavidad en el cambio de marchas.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Slide 4: Filtros de Aire -->
+                  <div class="carousel-slide hidden">
+                    <h3 class="text-2xl lg:text-4xl font-titles tracking-titles text-white bg-primary-light px-4 py-2 mb-4">
+                      FILTROS DE AIRE
+                    </h3>
+                    <p class="text-gray-600 text-base lg:text-xl font-body mb-6">
+                      Filtran el aire que ingresa al motor, eliminando partículas.
+                    </p>
+                    <div class="benefits">
+                      <h4 class="text-xl lg:text-2xl font-titles tracking-titles text-primary-light mb-4">
+                        - BENEFICIOS -
+                      </h4>
+                      <ul class="space-y-3 text-gray-600 text-lg lg:text-xl font-body">
+                        <li class="pb-3 border-b-2 border-primary-light">Aumenta la potencia del motor.</li>
+                        <li class="pb-3 border-b-2 border-primary-light">Reduce las emisiones contaminantes.</li>
+                        <li class="pb-3">Extiende la vida útil del motor.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Slide 5: Filtros de Cabina -->
+                  <div class="carousel-slide hidden">
+                    <h3 class="text-2xl lg:text-4xl font-titles tracking-titles text-white bg-primary-light px-4 py-2 mb-4">
+                      FILTROS DE CABINA
+                    </h3>
+                    <p class="text-gray-600 text-base lg:text-xl font-body mb-6">
+                      Purifican el aire en la cabina de la máquina.
+                    </p>
+                    <div class="benefits">
+                      <h4 class="text-xl lg:text-2xl font-titles tracking-titles text-primary-light mb-4">
+                        - BENEFICIOS -
+                      </h4>
+                      <ul class="space-y-3 text-gray-600 text-lg lg:text-xl font-body">
+                        <li class="pb-3 border-b-2 border-primary-light">Aumenta la comodidad del operador.</li>
+                        <li class="pb-3 border-b-2 border-primary-light">Mejora la salud y seguridad en el lugar de trabajo.</li>
+                        <li class="pb-3">Reduce la acumulación de polvo y alérgenos.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="carousel-next text-primary-light hover:text-primary-dark transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .transform-button {
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+  }
+  .content-wrapper {
+    position: relative;
+    transition: background-color 0.3s ease;
+  }
+  .content-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--hover-bg-color);
+    transition: top 0.3s ease;
+  }
+
+  .initial-content {
+    display: block;
+  }
+
+  .hover-content,
+  .hover-subtext {
+    display: none;
+  }
+
+  .content-wrapper:hover {
+    background-color: var(--hover-bg-color);
+  }
+
+  .content-wrapper:hover::before {
+    top: 0;
+  }
+
+  .content-wrapper:hover .initial-content {
+    display: none;
+  }
+
+  .content-wrapper:hover .hover-content {
+    display: block;
+  }
+
+  .content-wrapper:hover .hover-subtext {
+    display: block;
+  }
+
+  /* Parallax effect for "PRODUCTOS" */
+  .parallax-text {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Mejora visibilidad */
+    position: relative;
+    transition: transform 0.5s ease;
+  }
+
+  /* Modificar solo el color para cada botón */
+  [style*="--hover-bg-color: #38b2ac;"] .content-wrapper::before {
+    background-color: #38b2ac; /* primary light */
+  }
+
+  [style*="--hover-bg-color: #e74e1c;"] .content-wrapper::before {
+    background-color: #e74e1c; /* secondary */
+  }
+
+  .filter-nav-btn {
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    color: white !important;
+  }
+
+  .filter-nav-btn span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .filter-nav-btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-light);
+    transition: all 0.3s ease;
+  }
+
+  .filter-nav-btn:hover::before {
+    background-color: #4A4A4A;
+  }
+
+  .filter-nav-btn.active::before {
+    background-color: #4A4A4A;
+  }
+
+  /* Asegurar que el texto permanezca blanco en todos los estados */
+  .filter-nav-btn,
+  .filter-nav-btn:hover,
+  .filter-nav-btn:active,
+  .filter-nav-btn.active {
+    color: white !important;
+  }
+
+  .carousel-slide {
+    display: none;
+  }
+
+  .carousel-slide.active {
+    display: block;
+  }
+
+  /* Modificar la visualización del contenido para móviles */
+  @media (max-width: 1023px) { /* lg breakpoint en Tailwind */
+    .initial-content {
+      display: none !important;
+    }
+    
+    .hover-content,
+    .hover-subtext {
+      display: block !important;
+    }
+    
+    .content-wrapper {
+      background-color: var(--hover-bg-color) !important;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; /* Sombra suave */
+      border-radius: 8px !important; /* Bordes redondeados */
+      transform: translateY(0) !important; /* Posición inicial */
+      transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    }
+    
+    .content-wrapper:active {
+      transform: translateY(2px) !important; /* Efecto de presión */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important; /* Sombra más pequeña al presionar */
+    }
+    
+    .content-wrapper::before {
+      top: 0 !important;
+    }
+
+    /* Agregar un sutil brillo pulsante */
+    .content-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 8px;
+      background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+      animation: pulse 2s infinite;
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+</style>
+
+<script is:inline>
+  window.addEventListener("scroll", function () {
+    const parallaxText = document.querySelector(".parallax-text");
+    const offset = window.pageYOffset;
+    const startPoint = window.innerHeight / 2; // Punto medio del viewport
+
+    if (offset > startPoint) {
+      parallaxText.style.transform = `translateY(${(offset - startPoint) * 0.3}px)`;
+    } else {
+      parallaxText.style.transform = "translateY(0)"; // Posición inicial
+    }
+  });
+</script>
+<script is:inline>
+  // Funcionalidad de los modales
+  function openModal(type) {
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modal-content');
+    const filtrosContent = document.getElementById('filtros-modal-content');
+    
+    if (type === 'herramientas') {
+      modalContent.classList.remove('hidden');
+      filtrosContent.classList.add('hidden');
+    } else if (type === 'filtros') {
+      modalContent.classList.add('hidden');
+      filtrosContent.classList.remove('hidden');
+    }
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modal-content');
+    const filtrosContent = document.getElementById('filtros-modal-content');
+    
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    modalContent.classList.add('hidden');
+    filtrosContent.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  }
+
+  // Event listeners para los botones principales
+  document.querySelectorAll('.transform-button').forEach(button => {
+    button.addEventListener('click', function() {
+      const isHerramientas = this.querySelector('.initial-content').textContent.trim() === 'HERRAMIENTAS';
+      openModal(isHerramientas ? 'herramientas' : 'filtros');
+    });
+  });
+
+  // Funcionalidad del carrusel
+  function initCarousel() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const navButtons = document.querySelectorAll('.filter-nav-btn');
+    const prevButton = document.querySelector('.carousel-prev');
+    const nextButton = document.querySelector('.carousel-next');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      // Ocultar todos los slides
+      slides.forEach(slide => {
+        slide.classList.add('hidden');
+        slide.classList.remove('active');
+      });
+      
+      // Resetear todos los botones
+      navButtons.forEach(btn => {
+        btn.classList.remove('bg-gray-600');
+        btn.classList.add('bg-primary-light');
+      });
+      
+      // Mostrar el slide seleccionado
+      slides[index].classList.remove('hidden');
+      slides[index].classList.add('active');
+      
+      // Activar el botón correspondiente
+      navButtons[index].classList.remove('bg-primary-light');
+      navButtons[index].classList.add('bg-gray-600');
+      
+      currentSlide = index;
+    }
+
+    // Event listeners para los botones de navegación
+    navButtons.forEach((button, index) => {
+      button.addEventListener('click', () => showSlide(index));
+    });
+
+    // Event listeners para las flechas
+    prevButton?.addEventListener('click', () => {
+      const newIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+      showSlide(newIndex);
+    });
+
+    nextButton?.addEventListener('click', () => {
+      const newIndex = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
+      showSlide(newIndex);
+    });
+
+    // Inicializar el primer slide
+    showSlide(0);
+  }
+
+  // Inicializar el carrusel cuando se abre el modal de filtros
+  document.addEventListener('DOMContentLoaded', () => {
+    const filtrosButton = document.querySelector('.transform-button:not(:first-child)');
+    filtrosButton?.addEventListener('click', () => {
+      setTimeout(initCarousel, 100);
+    });
+  });
+</script>

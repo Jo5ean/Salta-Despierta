@@ -1,0 +1,115 @@
+---
+const aboutData = {
+  title: "Sobre Nosotros",
+  subtitle: "Su socio confiable",
+  description: "Su socio confiable en el sector de filtros y herramientas para maquinaria pesada.",
+  image: "/images/quienes-somos-fachada.webp",
+  color: "#61c1ce",
+  sections: [
+    {
+      title: "",
+      content: "Somos una empresa familiar con más de 15 años de experiencia, brindando soluciones personalizadas y de alta calidad para máquinas pesadas. Nos especializamos en satisfacer las necesidades de sectores clave como el agrícola, minero, industrial, construcción y vial. Nuestros filtros y herramientas son la solución que nuestros clientes necesitan para garantizar la eficiencia y durabilidad de sus equipos."
+    },
+    {
+      title: "Misión",
+      content: "Creamos alianzas estratégicas con empresas para maximizar la eficiencia de sus equipos mediante soluciones personalizadas, tiempos de respuesta ágiles y un firme compromiso con la accesibilidad económica y la excelencia operativa, impulsando el crecimiento de nuestra comunidad."
+    }
+  ]
+};
+---
+<div class="bg-[#EFEFEF]">
+<div class="container mx-auto px-4 md:px-24 lg:px-24 2xl:px-4" id="about">
+  <div class="grid grid-cols-1 xl:grid-cols-2 h-screen lg:min-h-screen font-body">
+    <!-- Columna izquierda - Contenido -->
+    <div class="flex flex-col justify-start py-4 md:py-10 lg:py-10 xl:py-20 overflow-y-auto lg:overflow-visible">
+      <div class="max-w-2xl lg:max-w-none lg:w-full xl:pr-8">
+        <!-- Encabezado -->
+        <div class="flex flex-col">
+          <h1 class="text-primary-light text-3xl sm:text-5xl 2xl:text-7xl font-titles tracking-titles leading-tight text-left">
+            <span class="hidden xl:inline">SOBRE<br />NOSOTROS</span>
+            <span class="xl:hidden">SOBRE NOSOTROS</span>
+          </h1>
+          <div class="underline-animation h-1.5 w-20 bg-primary-light mt-4 self-start"></div>
+        </div>
+
+        <p class="text-primary-light text-base sm:text-xl xl:text-xl 2xl:text-2xl max-w-2xl text-justify font-body mt-6">
+          {aboutData.description}
+        </p>
+
+        <!-- Resto del contenido -->
+        <div class="space-y-6 xl:space-y-8 mt-8">
+          {aboutData.sections.map((section, index) => (
+            <div class={`prose prose-xl max-w-none ${index === 1 ? 'hidden xl:block' : ''}`}>
+              <h2 class="text-2xl sm:text-3xl 2xl:text-4xl text-primary-light font-semibold mb-2 xl:mb-4">
+                {section.title}
+              </h2>
+              <p class="text-base sm:text-xl 2xl:text-2xl text-gray-700 text-justify">
+                {section.content}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Columna derecha - Imagen -->
+    <div class="relative h-[40vh] xl:h-full mt-8 xl:mt-0">
+      <img
+        src={aboutData.image}
+        alt="Fachada de nuestra empresa"
+        class="absolute inset-0 w-full h-full object-cover object-center"
+      />
+    </div>
+  </div>
+</div>
+</div>
+
+<style>
+  .transparent-text-with-stroke {
+    color: transparent;
+    -webkit-text-stroke-width: 1px;
+    text-stroke-width: 1px;
+  }
+
+  @media (min-width: 640px) {
+    .transparent-text-with-stroke {
+      -webkit-text-stroke-width: 1.5px;
+      text-stroke-width: 1.5px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .transparent-text-with-stroke {
+      -webkit-text-stroke-width: 2px;
+      text-stroke-width: 2px;
+    }
+  }
+
+  .underline-animation {
+    width: 0;
+    opacity: 0;
+    transition: width 0.8s ease-out, opacity 0.3s ease-out;
+  }
+
+  .underline-animation.visible {
+    width: 5rem; /* w-20 equivale a 5rem */
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  document.querySelectorAll('.underline-animation').forEach((el) => {
+    observer.observe(el);
+  });
+</script>

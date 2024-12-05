@@ -1,0 +1,94 @@
+<div class="relative h-screen mb-0" id="why-choose-us">
+    <div class="absolute inset-0">
+        <img 
+            src="/images/por-que-elegirnos.webp" 
+            alt="¿Por qué elegirnos?" 
+            class="w-full h-full object-cover brightness-[2]"
+        />
+    </div>
+    <div class="relative h-screen container mx-auto px-4 sm:px-6 md:px-24 2xl:px-4 flex flex-col justify-center">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="text-start lg:text-end lg:order-2 flex flex-col justify-center">
+                <h1 class="text-4xl sm:text-7xl md:text-8xl xl:text-9xl font-titles tracking-titles mb-3 lg:mb-6 flex flex-col">
+                    <span>¿Por qué Elegirnos?</span>
+                </h1>
+                <div class="underline-animation h-2 w-24 self-start lg:self-end bg-white"></div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:order-1">
+                <div class="flex flex-col justify-center lg:border-r lg:border-b border-primary-light p-1 lg:p-8">
+                    <div class="flex flex-col">
+                        <h2 class="text-2xl sm:text-3xl xl:text-4xl text-primary-light font-titles tracking-titles mb-3">Experiencia</h2>
+                        <div class="underline-animation h-1.5 w-24 bg-primary-light"></div>
+                    </div>
+                    <p class="text-base sm:text-xl xl:text-2xl text-white font-body mt-4">
+                        15 años de dedicación en el sector, aportando un
+                        conocimiento profundo y pasión por la innovación.
+                    </p>
+                </div>
+                <div class="flex flex-col justify-center lg:border-l lg:border-b border-primary-light p-1 lg:p-8">
+                    <div class="flex flex-col">
+                        <h2 class="text-2xl sm:text-3xl xl:text-4xl text-primary-light font-titles tracking-titles mb-3">Compromiso</h2>
+                        <div class="underline-animation h-1.5 w-24 bg-primary-light"></div>
+                    </div>
+                    <p class="text-base sm:text-xl xl:text-2xl text-white font-body mt-4">
+                        Entendemos que nuestros productos son esenciales para el
+                        crecimiento de nuestros clientes.
+                       
+                    </p>
+                </div>
+                <div class="flex flex-col justify-center lg:border-r lg:border-t border-primary-light p-1 lg:p-8">
+                    <div class="flex flex-col">
+                        <h2 class="text-2xl sm:text-3xl xl:text-4xl text-primary-light font-titles tracking-titles mb-3">Transparencia</h2>
+                        <div class="underline-animation h-1.5 w-24 bg-primary-light"></div>
+                    </div>
+                    <p class="text-base sm:text-xl xl:text-2xl text-white font-body mt-4">
+                        Asesoramos a nuestros clientes con sinceridad, priorizando
+                        soluciones que marquen la diferencia.
+                    </p>
+                </div>
+                <div class="flex flex-col justify-center lg:border-l lg:border-t border-primary-light p-1 lg:p-8">
+                    <div class="flex flex-col">
+                        <h2 class="text-2xl sm:text-3xl xl:text-4xl text-primary-light font-titles tracking-titles mb-3">Soluciones</h2>
+                        <div class="underline-animation h-1.5 w-24 bg-primary-light"></div>
+                    </div>
+                    <p class="text-base sm:text-xl xl:text-2xl text-white font-body mt-4">
+                        Ofrecemos productos de alta calidad que cumplen con
+                        estándares internacionales.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .underline-animation {
+        width: 0;
+        opacity: 0;
+        transition: width 0.8s ease-out, opacity 0.3s ease-out;
+    }
+
+    .underline-animation.visible {
+        width: 5rem; /* w-20 equivale a 5rem */
+        opacity: 1;
+    }
+</style>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Una vez que se añade la clase, podemos dejar de observar
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    // Observar todos los elementos con la clase underline-animation
+    document.querySelectorAll('.underline-animation').forEach((el) => {
+        observer.observe(el);
+    });
+</script>

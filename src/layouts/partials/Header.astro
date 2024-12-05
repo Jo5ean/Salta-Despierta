@@ -1,0 +1,304 @@
+<header class="bg-black/50 backdrop-blur text-white fixed w-full z-30">
+    <div class="container mx-auto py-4 flex justify-between items-center px-4 md:px-24 lg:px-24 xl:px-4">
+        <div class="flex items-center space-x-4">
+            <img
+                src="/logos/logo-sw-tucuman-aventuras.png"
+                alt="SW Tucumán Aventuras Logo"
+                class="h-10 lg:h-14"
+            />
+            <span class="text-3xl lg:text-4xl 2xl:text-5xl font-bold font-dobra">SW Tucumán Aventuras</span>
+        </div>
+
+        <!-- Menú navegación -->
+        <nav class="hidden xl:block">
+            <ul class="flex flex-row items-center text-xl font-light">
+                <li>
+                    <a
+                        href="#about"
+                        class="nav-link hover:text-primary-light transition-all duration-300 relative group px-6"
+                    >
+                        Nosotros
+                        <div
+                            class="underline-animation h-0.5 bg-primary-light/70 absolute -bottom-2 left-0 right-0"
+                        >
+                        </div>
+                    </a>
+                </li>
+                <li class="text-white/50">|</li>
+                <li>
+                    <a
+                        href="#why-choose-us"
+                        class="nav-link hover:text-primary-light transition-all duration-300 relative group px-6"
+                    >
+                        Industria
+                        <div
+                            class="underline-animation h-0.5 bg-primary-light/70 absolute -bottom-2 left-0 right-0"
+                        >
+                        </div>
+                    </a>
+                </li>
+                <li class="text-white/50">|</li>
+                <li>
+                    <a
+                        href="#products"
+                        class="nav-link hover:text-primary-light transition-all duration-300 relative group px-6"
+                    >
+                        Productos
+                        <div
+                            class="underline-animation h-0.5 bg-primary-light/70 absolute -bottom-2 left-0 right-0"
+                        >
+                        </div>
+                    </a>
+                </li>
+                <li class="text-white/50">|</li>
+                <li>
+                    <a
+                        href="#contact"
+                        class="nav-link hover:text-primary-light transition-all duration-300 relative group px-6"
+                    >
+                        Contacto
+                        <div
+                            class="underline-animation h-0.5 bg-primary-light/70 absolute -bottom-2 left-0 right-0"
+                        >
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Botón hamburguesa para móvil -->
+        <button class="xl:hidden" id="menuButton" aria-label="Menu">
+            <svg
+                class="w-8 h-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+
+        <!-- Menú móvil -->
+        <div
+            id="mobileMenu"
+            class="hidden fixed inset-0 bg-black/90 z-50 xl:hidden h-screen"
+        >
+            <div
+                class="flex flex-col items-center justify-center h-full relative"
+            >
+                <button class="absolute top-8 right-8" id="closeButton">
+                    <svg
+                        class="w-10 h-10 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <div class="mb-16">
+                    <img
+                        src="/logos/logo-agro-pila.png"
+                        alt="Agroabesan Logo"
+                        class="h-24 mb-4"
+                    />
+                </div>
+                <ul
+                    class="flex flex-col items-center space-y-8 text-2xl font-light"
+                >
+                    <li class="menu-item group">
+                        <a
+                            href="#about"
+                            class="nav-link hover:text-primary-light transition-all duration-300 relative group"
+                        >
+                            Nosotros
+                            <div
+                                class="underline-animation h-0.5 bg-primary-light/70 absolute -bottom-2 left-0 right-0"
+                            >
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a
+                            href="#why-choose-us"
+                            class="nav-link hover:text-primary-light transition-all duration-300 relative group"
+                        >
+                            Industria
+                            <div
+                                class="underline-animation h-0.5 bg-primary-light/70 absolute -bottom-2 left-0 right-0"
+                            >
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a
+                            href="#products"
+                            class="nav-link hover:text-primary-light transition-all duration-300 relative group"
+                        >
+                            Productos
+                            <div
+                                class="underline-animation h-0.5 bg-primary-light/70 absolute -bottom-2 left-0 right-0"
+                            >
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a
+                            href="#contact"
+                            class="nav-link hover:text-primary-light transition-all duration-300 relative group"
+                        >
+                            Contacto
+                            <div
+                                class="underline-animation h-0.5 bg-primary-light/70 absolute -bottom-2 left-0 right-0"
+                            >
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<style>
+    /* Reemplazar la animación anterior del subrayado */
+    .underline-animation {
+        width: 0;
+        opacity: 0;
+        transition:
+            width 0.8s ease-out,
+            opacity 0.3s ease-out;
+    }
+
+    .nav-link:hover .underline-animation {
+        width: 100%;
+        opacity: 1;
+    }
+
+    /* Cambiar colores corporativos */
+    .nav-link:hover {
+        color: #F15A24; /* Naranja principal */
+    }
+
+    .underline-animation {
+        background-color: #F15A24; /* Naranja principal */
+    }
+
+    /* Animaciones para el menú móvil */
+    .menu-enter {
+        animation: menuEnter 0.4s ease forwards;
+    }
+
+    .menu-exit {
+        animation: menuExit 0.4s ease forwards;
+    }
+
+    .menu-item {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .menu-enter .menu-item {
+        animation: menuItemEnter 0.4s ease forwards;
+    }
+
+    @keyframes menuEnter {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes menuExit {
+        from {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+    }
+
+    @keyframes menuItemEnter {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<script>
+    const menuButton = document.getElementById(
+        "menuButton",
+    ) as HTMLButtonElement;
+    const closeButton = document.getElementById(
+        "closeButton",
+    ) as HTMLButtonElement;
+    const mobileMenu = document.getElementById("mobileMenu") as HTMLDivElement;
+    const mobileLinks = document.querySelectorAll(
+        "#mobileMenu a",
+    ) as NodeListOf<HTMLAnchorElement>;
+
+    menuButton?.addEventListener("click", () => {
+        mobileMenu?.classList.remove("hidden");
+        mobileMenu?.classList.add("menu-enter");
+        document.body.style.overflow = "hidden";
+
+        // Animar cada item del menú con delay
+        const menuItems = document.querySelectorAll(
+            ".menu-item",
+        ) as NodeListOf<HTMLLIElement>;
+        menuItems.forEach((item, index) => {
+            item.style.animationDelay = `${0.1 + index * 0.1}s`;
+        });
+    });
+
+    const closeMenu = () => {
+        mobileMenu?.classList.add("menu-exit");
+        setTimeout(() => {
+            mobileMenu?.classList.add("hidden");
+            mobileMenu?.classList.remove("menu-enter", "menu-exit");
+        }, 300);
+        document.body.style.overflow = "";
+    };
+
+    closeButton?.addEventListener("click", closeMenu);
+    mobileLinks.forEach((link) => {
+        link.addEventListener("click", closeMenu);
+    });
+
+    // Agregar scroll suave para todos los enlaces internos
+    const anchors = document.querySelectorAll(
+        'a[href^="#"]',
+    ) as NodeListOf<HTMLAnchorElement>;
+
+    anchors.forEach((anchor) => {
+        anchor.addEventListener("click", function (e: any) {
+            e.preventDefault();
+            const { target } = e;
+            const targetId = target.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                    inline: "nearest",
+                });
+            }
+        });
+    });
+</script>

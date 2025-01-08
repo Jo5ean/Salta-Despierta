@@ -1,0 +1,82 @@
+---
+import { adventures } from "@/data/adventure";
+import { formatName } from "@/utils/helpers";
+---
+
+<section class="py-8 px-4 md:px-8 lg:px-16 bg-white">
+  <h1 class="text-4xl font-bold text-center text-black mb-12">ATRACCIONES</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+    {adventures.map((adventure) => (
+      <div class="bg-white rounded-lg overflow-hidden shadow-lg group">
+        <div class="relative">
+          <img 
+            src={adventure.image} 
+            alt={adventure.title}
+            class="w-full h-48 object-cover"
+          />
+          <button class="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/40">
+            <span class="text-white">♡</span>
+          </button>
+          <div class="absolute bottom-4 left-4 bg-gray-800/80 rounded-full py-1 px-3 flex items-center gap-2">
+            <span class="text-lg">{adventure.category}</span>
+            <span class="text-white text-sm font-medium">{adventure.category}</span>
+          </div>
+        </div>
+
+        <div class="p-4">
+          <h3 class="font-bold text-lg mb-2 text-gray-800">{adventure.title}</h3>
+          <p class="text-gray-600 text-sm mb-4">{adventure.location}</p>
+          
+          <div class="space-y-2 text-gray-700">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">⏱</span>
+              <span class="text-sm">Duración: {adventure.duration}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">📊</span>
+              <span class="text-sm">Dificultad: {adventure.difficulty}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">👥</span>
+              <span class="text-sm">horarios: {adventure.date.join(", ")}</span>
+            </div>
+          </div>
+
+          <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-green-600">${adventure.price}</span>
+            <a 
+              href={`/atracciones/${adventure.id}`} 
+              class="px-4 py-2 bg-green-600 text-white rounded-full text-sm hover:bg-green-700 transition"
+            >
+              ¡Reserva ahora!
+            </a>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- <div class="flex flex-wrap justify-center gap-4 mt-12 max-w-7xl mx-auto">
+    <button
+      class="flex items-center gap-2 px-6 py-3 bg-[#f4a261] text-white rounded-full shadow-md hover:bg-[#e76f51] transition"
+    >
+      🕒 Ver horarios
+    </button>
+    <button
+      class="flex items-center gap-2 px-6 py-3 bg-[#ffd700] text-black rounded-full shadow-md hover:bg-[#ffcd00] transition"
+    >
+      ℹ️ Condiciones para una mejor experiencia
+    </button>
+    <button
+      class="flex items-center gap-2 px-6 py-3 bg-[#ffd700] text-black rounded-full shadow-md hover:bg-[#ffcd00] transition"
+    >
+      🛡️ Modo seguro
+    </button>
+    <button
+      class="flex items-center gap-2 px-6 py-3 bg-[#ffd700] text-black rounded-full shadow-md hover:bg-[#ffcd00] transition"
+    >
+      💰 Precios
+    </button>
+  </div> -->
+</section>

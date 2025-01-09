@@ -1,0 +1,188 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { adventures } from "@/data/adventure";
+
+export function getStaticPaths() {
+  return adventures.map(adventure => ({
+    params: { id: adventure.id.toString() },
+    props: { adventure }
+  }));
+}
+
+const { id } = Astro.params;
+const adventure = adventures.find(adv => adv.id.toString() === id);
+
+if (!adventure) {
+  return Astro.redirect('/404');
+}
+---
+
+<Layout title={adventure.title}>
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    {/* Breadcrumb */}
+    <div class="mb-4 text-gray-600">
+      <span>Argentina</span> &gt; <span>Tucumán</span>
+    </div>
+
+    {/* Contenedor principal de dos columnas */}
+    <div class="grid grid-cols-[1fr_400px] gap-8 py-24">
+      {/* Columna izquierda */}
+      <div class="space-y-8">
+        {/* Carrusel */}
+        <section class="relative">
+          <div class="h-[500px] rounded-lg overflow-hidden">
+            <img 
+              src={adventure.image} 
+              alt={adventure.title}
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <button class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 p-2 rounded-full">
+            &lt;
+          </button>
+          <button class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 p-2 rounded-full">
+            &gt;
+          </button>
+        </section>
+
+        {/* Título y detalles */}
+        <div class="space-y-6">
+          <h1 class="text-3xl font-bold text-gray-800">{adventure.title}</h1>
+          <p class="text-gray-600">{adventure.location}</p>
+
+          {/* Grid de características */}
+          <div class="grid grid-cols-2 gap-4">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">🎯 Actividad:</span>
+              <span>{adventure.category}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">⭐ Calificación:</span>
+              <span>No posee</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">📅 Disponible:</span>
+              <span>todo el año</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">💰 Precio:</span>
+              <span>Desde ARS {adventure.price} x Persona</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">🕒 Horarios:</span>
+              <span>{adventure.date.join(", ")}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">📢 Idioma:</span>
+              <span>Español</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">� Duración:</span>
+              <span>{adventure.duration}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">📊 Dificultad:</span>
+              <span>{adventure.difficulty}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">�� Traslados:</span>
+              <span>NO ofrece</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">🔄 Tipo de cancelación:</span>
+              <span>Flexible</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">👶 No apto menores de:</span>
+              <span>5 años</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-600">👥 Mínimo de participantes:</span>
+              <span>1</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Sección "¿Qué harás durante la actividad?" */}
+        <section class="space-y-4">
+          <h2 class="text-xl font-bold">¿Qué harás durante la actividad?</h2>
+          <p class="text-gray-600">{adventure.description}</p>
+        </section>
+      </div>
+
+      {/* Columna derecha */}
+      <div class="space-y-6">
+        {/* Panel de reserva */}
+        <div class="bg-white rounded-lg shadow-lg p-6 sticky top-4">
+          <div class="mb-6">
+            <h3 class="text-xl font-bold mb-4">Elija una fecha</h3>
+            <div class="bg-emerald-500 text-white p-4 rounded-lg">
+              <p>para visualizar los horarios y precios correspondientes</p>
+            </div>
+            {/* Calendario */}
+            <div class="mt-4 border rounded-lg p-4">
+              {/* Aquí iría el componente de calendario */}
+            </div>
+          </div>
+
+          {/* Precio por persona */}
+          <div class="space-y-4">
+            <h3 class="text-xl font-bold">Precio por persona</h3>
+            <div class="flex justify-between items-center">
+              <div>
+                <p>Adultos</p>
+                <p class="text-sm text-gray-600">De 11 a 65 años</p>
+                <p>ARS {adventure.price}</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <button class="px-3 py-1 border rounded">-</button>
+                <span>1</span>
+                <button class="px-3 py-1 border rounded">+</button>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center">
+              <div>
+                <p>Menor</p>
+                <p class="text-sm text-gray-600">De 6 a 10 años</p>
+                <p>ARS {adventure.price}</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <button class="px-3 py-1 border rounded">-</button>
+                <span>0</span>
+                <button class="px-3 py-1 border rounded">+</button>
+              </div>
+            </div>
+
+            {/* Total y botones */}
+            <div class="border-t pt-4 mt-4">
+              <div class="flex justify-between items-center mb-4">
+                <span>Total:</span>
+                <span class="font-bold">ARS {adventure.price}</span>
+              </div>
+              <div class="flex gap-4">
+                <button class="flex-1 px-4 py-2 border border-emerald-500 text-emerald-500 rounded-lg">
+                  Preguntar
+                </button>
+                <button class="flex-1 px-4 py-2 bg-emerald-500 text-white rounded-lg">
+                  Reservar
+                </button>
+              </div>
+            </div>
+
+            {/* Métodos de pago */}
+            <div class="border-t pt-4">
+              <div class="grid grid-cols-3 gap-2">
+                <img src="/visa.png" alt="Visa" class="h-8 object-contain"/>
+                <img src="/mastercard.png" alt="Mastercard" class="h-8 object-contain"/>
+                <img src="/amex.png" alt="American Express" class="h-8 object-contain"/>
+                <img src="/paypal.png" alt="PayPal" class="h-8 object-contain"/>
+                <img src="/mercadopago.png" alt="Mercado Pago" class="h-8 object-contain"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

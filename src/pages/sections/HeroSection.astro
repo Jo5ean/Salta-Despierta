@@ -1,40 +1,40 @@
 ---
 const projects = [
   {
-    title: "Para la Minería",
-    type: "Architecture",
-    location: "Zona Alto NOA Shopping",
-    image: "/images/mina-3.webp",
-    color: "#61c1ce",
+    title: "Arquería",
+    type: "Actividad",
+    location: "Aire libre",
+    image: "/images/arqueria.webp",
+    color: "#F15A24",
   },
   {
-    title: "Para el Agro",
-    type: "Architecture",
-    location: "Zona Alto NOA Shopping",
-    image: "/images/campo-1.webp",
-    color: "#61c1ce",
+    title: "Buceo",
+    type: "Actividad",
+    location: "Acuática",
+    image: "/images/buceo.webp",
+    color: "#F15A24",
   },
   {
-    title: "De Máquina Vial",
-    type: "Interior Design",
-    location: "Downtown Metropolis",
-    image: "/images/vial-2.webp",
-    color: "#61c1ce",
+    title: "Cabalgata",
+    type: "Actividad",
+    location: "Aire libre",
+    image: "/images/cabalgata.webp",
+    color: "#F15A24",
   },
   {
-    title: "Para la Construcción",
-    type: "Interior Design",
-    location: "Downtown Metropolis",
-    image: "/images/construccion-1.webp",
-    color: "#61c1ce",
+    title: "Muro Escalada",
+    type: "Actividad",
+    location: "Aventura",
+    image: "/images/muro-escalada.webp",
+    color: "#F15A24",
   },
-  /*   {
-    title: "Para Ciudad",
-    type: "Sustainable Architecture",
-    location: "Green Valley",
-    image: "/images/VA_02.webp",
-    color: "#32cd32",
-  }, */
+  {
+    title: "Tirolesa",
+    type: "Actividad",
+    location: "Aventura",
+    image: "/images/tirolesa.webp",
+    color: "#F15A24",
+  },
 ];
 ---
 
@@ -62,18 +62,19 @@ const projects = [
               {index + 1}/{projects.length}
             </div>
             <h1 class="font-titles tracking-titles text-6xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-2 sm:mb-3 md:mb-4 flex flex-col items-start">
-              <span class="mb-1 sm:mb-2 md:mb-3">Filtros</span>
               <span
-                class="transparent-text-with-stroke"
-                style={`-webkit-text-stroke-color: ${project.color}; text-stroke-color: ${project.color};`}
+                style={`color: ${project.color};`}
               >
                 {project.title}
               </span>
             </h1>
             <div
-              class="fade-in-line h-1 sm:h-1.5 w-16 sm:w-20 mt-3 sm:mt-4 opacity-0"
+              class="fade-in-line h-1 sm:h-1.5 w-16 sm:w-20 mt-3 sm:mt-4 opacity-0 mb-5"
               style={`background-color: ${project.color}; transition: opacity 1s ease-in-out;`}
             />
+            <p class="text-2xl md:text-xl">
+              {project.type} | {project.location}
+            </p>
           </div>
         </div>
       </div>
@@ -83,9 +84,7 @@ const projects = [
   <!-- Previous Slide Button -->
   <button
     id="prev-slide"
-    class="absolute text-white hover:text-gray-300 transition-all duration-400 flex items-center justify-center px-4 
-    sm:px-6 h-14 sm:h-[80vh] border-r-[0.1px] border-white hover:backdrop-blur-lg
-    left-0 bottom-5 sm:left-0 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 lg:hover:h-screen"
+    class="absolute text-white hover:text-gray-300 transition-all duration-400 flex items-center justify-center p-4 border-[1px] border-white hover:bg-white hover:bg-opacity-10 backdrop-blur-lg rounded-full bottom-5 left-5 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2"
     tabindex="0"
   >
     <svg
@@ -108,9 +107,7 @@ const projects = [
   <!-- Next Slide Button -->
   <button
     id="next-slide"
-    class="absolute text-white hover:text-gray-300 transition-all duration-400 flex items-center justify-center px-4 
-    sm:px-6 h-14 sm:h-[80vh] border-l-[0.1px] border-white hover:backdrop-blur-lg
-    left-14 bottom-5 sm:right-0 sm:left-auto sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 lg:hover:h-screen"
+    class="absolute text-white hover:text-gray-300 transition-all duration-400 flex items-center justify-center p-4 border-[1px] border-white hover:bg-white hover:bg-opacity-10 backdrop-blur-lg rounded-full bottom-5 right-5 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2"
     tabindex="0"
   >
     <svg
@@ -132,33 +129,6 @@ const projects = [
 </div>
 
 <style is:global>
-  .transparent-text-with-stroke {
-    color: transparent;
-    -webkit-text-stroke-width: 0.5px;
-    text-stroke-width: 0.5px;
-  }
-
-  @media (min-width: 640px) {
-    .transparent-text-with-stroke {
-      -webkit-text-stroke-width: 1px;
-      text-stroke-width: 1px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .transparent-text-with-stroke {
-      -webkit-text-stroke-width: 1.5px;
-      text-stroke-width: 1.5px;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .transparent-text-with-stroke {
-      -webkit-text-stroke-width: 1px;
-      text-stroke-width: 1px;
-    }
-  }
-
   .fade-in-line {
     opacity: 0;
     animation: slideInOut 5s ease-in-out forwards;

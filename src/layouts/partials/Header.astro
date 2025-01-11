@@ -1,14 +1,20 @@
-<header class="bg-black/50 backdrop-blur text-white fixed w-full z-30">
+---
+interface Props {
+  isFixed?: boolean;
+}
+
+const { isFixed = true } = Astro.props;
+---
+<header class={`bg-black/50 backdrop-blur text-white ${isFixed ? 'fixed' : 'static'} w-full z-30`}>
     <div class="container mx-auto py-4 flex justify-between items-center px-4 md:px-24 lg:px-24 xl:px-4">
         <div class="flex items-center space-x-4">
             <img
-                src="../../../public/logos/imagotipo-blend.png"
+                src="/logos/imagotipo-blend.PNG"
                 alt="SW Tucumán Aventuras Logo"
                 class="h-20 lg:h-24"
             />
         </div>
 
-        <!-- Menú navegación -->
         <nav class="hidden xl:block">
             <ul class="flex flex-row items-center text-xl font-light">
                 <li>
@@ -102,8 +108,8 @@
                 </button>
                 <div class="mb-16">
                     <img
-                        src="/logos/logo-agro-pila.png"
-                        alt="Agroabesan Logo"
+                        src="/logos/logotipo-color.PNG"
+                        alt="SW Tucumán Aventuras Logo"
                         class="h-24 mb-4"
                     />
                 </div>

@@ -1,12 +1,20 @@
 ---
+import { adventures } from "@/data/adventure";
+import { formatName } from "@/utils/helpers";
+
 interface Props {
-  isFixed?: boolean;
+    isFixed?: boolean;
 }
 
 const { isFixed = true } = Astro.props;
 ---
-<header class={`bg-black/50 backdrop-blur text-white ${isFixed ? 'fixed' : 'static'} w-full z-30`}>
-    <div class="container mx-auto py-4 flex justify-between items-center px-4 md:px-24 lg:px-24 xl:px-4">
+
+<header
+    class={`bg-black/50 backdrop-blur text-white ${isFixed ? "fixed" : "static"} w-full z-30`}
+>
+    <div
+        class="container mx-auto py-4 flex justify-between items-center px-4 md:px-24 lg:px-24 xl:px-4"
+    >
         <div class="flex items-center space-x-4">
             <img
                 src="/logos/imagotipo-blend.PNG"
@@ -18,51 +26,57 @@ const { isFixed = true } = Astro.props;
         <nav class="hidden xl:block">
             <ul class="flex flex-row items-center text-xl font-light">
                 <li>
-                    <a href="/" class="nav-link hover:text-primary transition-all duration-300 relative group px-6">
+                    <a
+                        href="/"
+                        class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
+                    >
                         Home
-                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
+                        <div
+                            class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                        >
+                        </div>
                     </a>
                 </li>
                 <li class="text-white/50">|</li>
                 <li>
-                    <a href="/agua" class="nav-link hover:text-primary transition-all duration-300 relative group px-6">
-                        Agua
-                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
+                    <a
+                        href="#"
+                        class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
+                    >
+                        Aventuras
+                        <div
+                            class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                        >
+                        </div>
                     </a>
+                    <ul
+                        class="hidden group-hover:block absolute bg-black text-white w-48 rounded-lg shadow-lg mt-2"
+                    >
+                        {
+                            adventures.map((item) => (
+                                <li class="relative">
+                                    <a
+                                        href={`/atracciones/${item.id}/${formatName(item.title)}`}
+                                        class="nav-link hover:text-primary transition-all duration-300 relative group px-4 py-2 block whitespace-normal"
+                                    >
+                                        {item.category}
+                                    </a>
+                                </li>
+                            ))
+                        }
+                    </ul>
                 </li>
                 <li class="text-white/50">|</li>
                 <li>
-                    <a href="/aventura" class="nav-link hover:text-primary transition-all duration-300 relative group px-6">
-                        Aventura
-                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
-                    </a>
-                </li>
-                <li class="text-white/50">|</li>
-                <li>
-                    <a href="/coaching" class="nav-link hover:text-primary transition-all duration-300 relative group px-6">
-                        Coaching
-                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
-                    </a>
-                </li>
-                <li class="text-white/50">|</li>
-                <li>
-                    <a href="/campamentos" class="nav-link hover:text-primary transition-all duration-300 relative group px-6">
-                        Campamentos
-                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
-                    </a>
-                </li>
-                <li class="text-white/50">|</li>
-                <li>
-                    <a href="/buceo" class="nav-link hover:text-primary transition-all duration-300 relative group px-6">
-                        Buceo
-                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
-                    </a>
-                </li>
-                <li class="text-white/50">|</li>
-                <li>
-                    <a href="/contacto" class="nav-link hover:text-primary transition-all duration-300 relative group px-6">
+                    <a
+                        href="/contacto"
+                        class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
+                    >
                         Contacto
-                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
+                        <div
+                            class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                        >
+                        </div>
                     </a>
                 </li>
             </ul>
@@ -118,43 +132,32 @@ const { isFixed = true } = Astro.props;
                 >
                     <li class="menu-item group">
                         <a
-                            href="#about"
+                            href="/"
                             class="nav-link hover:text-primary transition-all duration-300 relative group"
                         >
-                            Nosotros
+                            Home
                             <div
                                 class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
                             >
                             </div>
                         </a>
                     </li>
+                    {
+                        adventures.map((item) => (
+                            <li class="menu-item">
+                                <a
+                                    href={`/atracciones/${item.id}/${formatName(item.title)}`}
+                                    class="nav-link hover:text-primary transition-all duration-300 relative group"
+                                >
+                                    {item.category}
+                                    <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
+                                </a>
+                            </li>
+                        ))
+                    }
                     <li class="menu-item">
                         <a
-                            href="#why-choose-us"
-                            class="nav-link hover:text-primary transition-all duration-300 relative group"
-                        >
-                            Industria
-                            <div
-                                class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
-                            >
-                            </div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a
-                            href="#products"
-                            class="nav-link hover:text-primary transition-all duration-300 relative group"
-                        >
-                            Productos
-                            <div
-                                class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
-                            >
-                            </div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a
-                            href="#contact"
+                            href="/contacto"
                             class="nav-link hover:text-primary transition-all duration-300 relative group"
                         >
                             Contacto
@@ -185,11 +188,11 @@ const { isFixed = true } = Astro.props;
     }
 
     .nav-link:hover {
-        color: #F15A24;
+        color: #f15a24;
     }
 
     .underline-animation {
-        background-color: #F15A24;
+        background-color: #f15a24;
     }
 
     .menu-enter {
@@ -297,6 +300,24 @@ const { isFixed = true } = Astro.props;
                     block: "start",
                     inline: "nearest",
                 });
+            }
+        });
+    });
+
+    const navItems = document.querySelectorAll("nav ul li");
+
+    navItems.forEach((item) => {
+        item.addEventListener("click", () => {
+            const submenu = item.querySelector("ul");
+            if (submenu) {
+                submenu.classList.toggle("hidden");
+            }
+        });
+
+        item.addEventListener("mouseenter", () => {
+            const submenu = item.querySelector("ul");
+            if (submenu) {
+                submenu.classList.remove("hidden");
             }
         });
     });

@@ -1,0 +1,93 @@
+---
+const aboutData = {
+    description:
+        "SW Tucumán Aventura es una empresa de turismo activo, prestadora de servicios en la naturaleza, comprometida con el uso saludable y sustentable del ambiente. La misión de SW Tucumán Aventura es brindar servicios de turismo activo; de índole educativo, deportivo, recreacional y empresarial; acompañado de una gran responsabilidad social en relación al uso de nuestro ambiente.",
+    secondaryText:
+        "Para ello utilizamos los recursos de la naturaleza, en armonía con actividades de aventura, en los alrededores del Dique Celestino Gelsi; el cual se encuentra ubicado en la comuna El Cadillal, en la Provincia de Tucumán.",
+};
+---
+
+<div class="bg-gray-200 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 py-16 relative z-10" id="about">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <!-- Columna derecha - Contenido -->
+            <div class="lg:pl-12 space-y-8 relative z-0">
+                <div
+                    class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8 space-y-6"
+                >
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-gray-800 font-medium mb-1" for="name">Nombre</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                required
+                                class="w-full p-2 border-b border-gray-300 focus:outline-none focus:border-primary transition duration-200"
+                                placeholder="Ingresa tu nombre"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-gray-800 font-medium mb-1" for="email">Correo Electrónico</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                                class="w-full p-2 border-b border-gray-300 focus:outline-none focus:border-primary transition duration-200"
+                                placeholder="Ingresa tu correo electrónico"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-gray-800 font-medium mb-1" for="message">Mensaje</label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                required
+                                class="w-full p-2 border-b border-gray-300 focus:outline-none focus:border-primary transition duration-200"
+                                rows="4"
+                                placeholder="Escribe tu mensaje aquí"
+                            ></textarea>
+                        </div>
+                        <div class="pt-4">
+                            <button
+                                type="submit"
+                                class="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all duration-300 font-semibold"
+                            >
+                                Enviar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="relative z-10">
+                <div
+                    class="slide-in relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] mx-auto"
+                >
+                    <div class="absolute inset-0">
+                        <div
+                            class="w-full h-full bg-[#005F73] flex items-center justify-center transform transition-transform hover:scale-105 duration-300 px-10"
+                        >
+                            <div class="text-center text-white">
+                                <span
+                                    class="translate-effect block text-5xl sm:text-6xl font-bold tracking-wide"
+                                >
+                                    DEJANOS
+                                </span>
+                                <span
+                                    class="translate-effect block text-5xl sm:text-6xl font-bold tracking-wide mt-2"
+                                >
+                                    TU MENSAJE
+                                </span>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute inset-[-10px] border-4 border-[#005F73]/20 animate-spin-slow"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

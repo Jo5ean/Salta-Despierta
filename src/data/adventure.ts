@@ -2,7 +2,7 @@ import {type Adventure} from "../types/adventure";
 
 export const adventures: Adventure[] = [
     {
-        id: "1",
+        id: "S6M29",
         title: "Vuelo en Tirolesa en el Dique Cadillal en Tucumán",
         location: "En Cadillal",
         image: "/images/adventures/tiroleza/tiroleza_2.jpg",
@@ -15,7 +15,7 @@ export const adventures: Adventure[] = [
         price: 8235,
     },
     {
-        id: "2",
+        id: "VS1T7",
         title: "Paseo en Kayak por el Dique Cadillal en Tucumán",
         location: "En Cadillal",
         image: "/images/adventures/kayak/kayak_2.jpg",
@@ -28,7 +28,7 @@ export const adventures: Adventure[] = [
         price: 8236,
     },
     {
-        id: "3",
+        id: "UVP3I",
         title: "Paseo en Barco por el Dique Cadillal en Tucumán",
         location: "En Cadillal",
         image: "/images/adventures/catamaran/camaken.jpg",

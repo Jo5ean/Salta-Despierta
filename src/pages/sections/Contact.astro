@@ -1,13 +1,8 @@
----
-const aboutData = {
-    description:
-        "SW Tucumán Aventura es una empresa de turismo activo, prestadora de servicios en la naturaleza, comprometida con el uso saludable y sustentable del ambiente. La misión de SW Tucumán Aventura es brindar servicios de turismo activo; de índole educativo, deportivo, recreacional y empresarial; acompañado de una gran responsabilidad social en relación al uso de nuestro ambiente.",
-    secondaryText:
-        "Para ello utilizamos los recursos de la naturaleza, en armonía con actividades de aventura, en los alrededores del Dique Celestino Gelsi; el cual se encuentra ubicado en la comuna El Cadillal, en la Provincia de Tucumán.",
-};
----
-
 <div class="bg-gray-200 relative overflow-hidden">
+    <div class="ocean absolute inset-0 z-0">
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
     <div class="max-w-7xl mx-auto px-4 py-16 relative z-10" id="about">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <!-- Columna derecha - Contenido -->
@@ -17,7 +12,10 @@ const aboutData = {
                 >
                     <form class="space-y-4">
                         <div>
-                            <label class="block text-gray-800 font-medium mb-1" for="name">Nombre</label>
+                            <label
+                                class="block text-gray-800 font-medium mb-1"
+                                for="name">Nombre</label
+                            >
                             <input
                                 type="text"
                                 id="name"
@@ -28,7 +26,10 @@ const aboutData = {
                             />
                         </div>
                         <div>
-                            <label class="block text-gray-800 font-medium mb-1" for="email">Correo Electrónico</label>
+                            <label
+                                class="block text-gray-800 font-medium mb-1"
+                                for="email">Correo Electrónico</label
+                            >
                             <input
                                 type="email"
                                 id="email"
@@ -39,7 +40,10 @@ const aboutData = {
                             />
                         </div>
                         <div>
-                            <label class="block text-gray-800 font-medium mb-1" for="message">Mensaje</label>
+                            <label
+                                class="block text-gray-800 font-medium mb-1"
+                                for="message">Mensaje</label
+                            >
                             <textarea
                                 id="message"
                                 name="message"
@@ -66,7 +70,7 @@ const aboutData = {
                 >
                     <div class="absolute inset-0">
                         <div
-                            class="w-full h-full bg-[#005F73] flex items-center justify-center transform transition-transform hover:scale-105 duration-300 px-10"
+                            class="w-full h-full bg-[#E26128] flex items-center justify-center transform transition-transform hover:scale-105 duration-300 px-10"
                         >
                             <div class="text-center text-white">
                                 <span
@@ -82,7 +86,7 @@ const aboutData = {
                             </div>
                         </div>
                         <div
-                            class="absolute inset-[-10px] border-4 border-[#005F73]/20 animate-spin-slow"
+                            class="absolute inset-[-10px] border-4 border-[#E26128]/20"
                         >
                         </div>
                     </div>
@@ -91,3 +95,84 @@ const aboutData = {
         </div>
     </div>
 </div>
+
+<style>
+    .ocean {
+        height: 100%;
+        background: linear-gradient(180deg, #E26128/5 0%, #E26128/30 100%);
+    }
+
+    .wave {
+        background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg)
+            repeat-x;
+        position: absolute;
+        filter: invert(1);
+        bottom: 0;
+        width: 6400px;
+        height: 198px;
+        animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+        transform: translate3d(0, 0, 0);
+    }
+
+    .wave:nth-of-type(2) {
+        bottom: 25px;
+        animation:
+            wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+            swell 7s ease -1.25s infinite;
+        opacity: 0.5;
+    }
+
+    @keyframes wave {
+        0% {
+            margin-left: 0;
+        }
+        100% {
+            margin-left: -1600px;
+        }
+    }
+
+    @keyframes swell {
+        0%,
+        100% {
+            transform: translate3d(0, -25px, 0);
+        }
+        50% {
+            transform: translate3d(0, 5px, 0);
+        }
+    }
+
+    .slide-in {
+        overflow: visible;
+    }
+
+    .translate-effect {
+        opacity: 0;
+        transform: translateX(-100%);
+        transition: all 0.8s ease-out;
+    }
+
+    .translate-effect.visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+</style>
+
+<script>
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        {
+            threshold: 0.1,
+        },
+    );
+
+    document.querySelectorAll(".translate-effect").forEach((el) => {
+        observer.observe(el);
+    });
+</script>

@@ -1,0 +1,43 @@
+<section class="map-section pt-10 bg-white">
+    <div class="mb-16 text-center relative">
+        <div class="inline-block relative">
+            <h1 class="text-5xl md:text-6xl font-bold relative z-10">
+                <span class="text-primary">¿CÓMO</span>
+                <br />
+                <span class="text-gray-800">LLEGAR?</span>
+            </h1>
+            <!-- Elemento decorativo -->
+            <div
+                class="absolute -bottom-4 left-0 w-1/2 h-2 bg-primary animate-slide"
+            >
+            </div>
+            <div class="absolute -bottom-4 left-0 w-full h-2 bg-primary/20">
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col items-center text-tertiary">
+        <div class="map-container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3566.770675474034!2d-65.20336182381959!3d-26.623796481195527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94226487579f9c8d%3A0x9196f1acb7ee933!2sSW%20Tucuman%20Aventuras!5e0!3m2!1ses-419!2sar!4v1736727860412!5m2!1ses-419!2sar"
+                width="100%"
+                height="450"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</section>
+
+<style>
+    .map-section {
+        background-color: white; /* Fondo blanco */
+    }
+
+    .map-container {
+        width: 100%;
+        max-width: 100%; /* Ocupa toda la pantalla */
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+</style>

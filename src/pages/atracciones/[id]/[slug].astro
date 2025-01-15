@@ -1,0 +1,620 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Calendar from '../sections/Calendar.astro';
+import { adventures } from "@/data/adventure";
+import { formatName } from '@/utils/helpers';
+
+export function getStaticPaths() {
+  return adventures.map(adventure => ({
+    params: { 
+      id: adventure.id.toString(),
+      slug: formatName(adventure.title)
+    },
+    props: { adventure }
+  }));
+}
+
+const { id } = Astro.params;
+const adventure = adventures.find(adv => adv.id.toString() === id);
+
+if (!adventure) {
+  return Astro.redirect('/404');
+}
+---
+
+<Layout title={adventure.title} fixedHeader={false}>
+  <div class="bg-gray-200 w-full">
+    <main class="max-w-7xl mx-auto py-6 px-4 sm:py-10 sm:px-6">
+      {/* Breadcrumb */}
+      <div class="mb-4 text-gray-600 flex flex-wrap items-center gap-2 text-sm sm:text-base">
+        <span>Argentina</span>
+        <span class="text-gray-400">/</span>
+        <span>{adventure.location}</span>
+        <span class="text-gray-400">/</span>
+        <span>{adventure.category}</span>
+      </div>
+
+      {/* Contenedor principal de dos columnas */}
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-6 lg:gap-8">
+        {/* Columna izquierda */}
+        <div class="space-y-6 sm:space-y-8">
+          {/* Carrusel */}
+          <section class="relative">
+            <div class="h-[300px] sm:h-[400px] md:h-[500px] rounded-lg overflow-hidden">
+              {adventure.gallery.map((image, index) => (
+                <img 
+                  src={image} 
+                  alt={`${adventure.title} - Imagen ${index + 1}`}
+                  class="w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-300"
+                  data-carousel-item
+                  data-active={index === 0}
+                  style={`opacity: ${index === 0 ? '1' : '0'}`}
+                />
+              ))}
+            </div>
+            <button 
+              class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-800/50 w-10 h-10 rounded-full hover:bg-gray-800/70 transition-colors flex items-center justify-center text-white"
+              id="prevButton"
+              aria-label="Imagen anterior"
+            >
+              &lt;
+            </button>
+            <button 
+              class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-800/50 w-10 h-10 rounded-full hover:bg-gray-800/70 transition-colors flex items-center justify-center text-white"
+              id="nextButton"
+              aria-label="Siguiente imagen"
+            >
+              &gt;
+            </button>
+
+            {/* Indicadores del carrusel */}
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+              {adventure.gallery.map((_, index) => (
+                <button
+                  class="w-2 h-2 rounded-full bg-white/60 hover:bg-white transition-colors"
+                  data-carousel-indicator={index}
+                  data-active={index === 0}
+                  aria-label={`Ir a imagen ${index + 1}`}
+                />
+              ))}
+            </div>
+          </section>
+
+          {/* Título y detalles */}
+          <div class="space-y-4 sm:space-y-6">
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">{adventure.title}</h1>
+            <p class="text-gray-600">{adventure.location}</p>
+
+            {/* Grid de características */}
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 font-medium">🧗‍♀️ Actividad:</span>
+                <span class="text-gray-600">{adventure.category}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 font-medium">⭐ Calificación:</span>
+                <span class="text-gray-600">No posee</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 font-medium">📅 Disponible:</span>
+                <span class="text-gray-600">todo el año</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 font-medium">💰 Precio:</span>
+                <span class="text-gray-600">Desde ARS {adventure.price} x Persona</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 font-medium">🕒 Horarios:</span>
+                <span class="text-gray-600">{adventure.date.join(", ")}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 font-medium">📢 Idioma:</span>
+                <span class="text-gray-600">Español</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 font-medium">🕒 Duración:</span>
+                <span class="text-gray-600">{adventure.duration}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 font-medium">📊 Dificultad:</span>
+                <span class="text-gray-600">{adventure.difficulty}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 font-medium">🕒 Traslados:</span>
+                <span class="text-gray-600">NO ofrece</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 font-medium">🔄 Tipo de cancelación:</span>
+                <span class="text-gray-600">Flexible</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 font-medium">👶 No apto menores de:</span>
+                <span class="text-gray-600">5 años</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 font-medium">👥 Mínimo de participantes:</span>
+                <span class="text-gray-600">1</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Sección "¿Qué harás durante la actividad?" */}
+          <section class="space-y-4 pb-10">
+            <h2 class="text-xl font-bold text-gray-800">¿Qué harás durante la actividad?</h2>
+            <p class="text-gray-600 leading-relaxed">{adventure.description}</p>
+          </section>
+        </div>
+
+        {/* Columna derecha */}
+        <div class="space-y-6">
+          {/* Panel de reserva - Solo visible en desktop */}
+          <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:sticky lg:top-4 hidden lg:block">
+            <div class="mb-6">
+              <h3 class="text-xl font-bold text-gray-800 mb-4">Elija una fecha</h3>
+              <div class="bg-primary text-white p-4 rounded-lg">
+                <p>para visualizar los horarios y precios correspondientes</p>
+              </div>
+              {/* Calendario */}
+              <div class="mt-4 rounded-lg p-4">
+                <Calendar availableHours={adventure.date} />
+              </div>
+            </div>
+
+            {/* Precio por persona */}
+            <div class="space-y-4">
+              <h3 class="text-xl font-bold text-gray-800">Precio por persona</h3>
+              <div class="flex justify-between items-center">
+                <div>
+                  <p class="text-gray-700">Adultos</p>
+                  <p class="text-sm text-gray-500">De 11 a 65 años</p>
+                  <p class="text-emerald-600 font-medium">ARS {adventure.price}</p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button 
+                    class="decrease-adults px-3 py-1 border rounded text-gray-700 hover:bg-gray-50" 
+                    disabled
+                  >-</button>
+                  <span class="adults-count text-gray-700">1</span>
+                  <button 
+                    class="increase-adults px-3 py-1 border rounded text-gray-700 hover:bg-gray-50"
+                  >+</button>
+                </div>
+              </div>
+
+              <div class="flex justify-between items-center">
+                <div>
+                  <p class="text-gray-700">Menor</p>
+                  <p class="text-sm text-gray-500">De 6 a 10 años</p>
+                  <p class="text-emerald-600 font-medium">ARS {adventure.price}</p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button 
+                    class="decrease-children px-3 py-1 border rounded text-gray-700 hover:bg-gray-50" 
+                    disabled
+                  >-</button>
+                  <span class="children-count text-gray-700">0</span>
+                  <button 
+                    class="increase-children px-3 py-1 border rounded text-gray-700 hover:bg-gray-50"
+                  >+</button>
+                </div>
+              </div>
+
+              <div class="border-t pt-4 mt-4">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="text-gray-700">Total:</span>
+                  <span class="total-price font-bold text-emerald-600">ARS {adventure.price}</span>
+                </div>
+                <div class="flex gap-4">
+                  <button class="flex-1 px-4 py-2 border border-primary text-primary rounded-lg hover:bg-emerald-50 hover:scale-105 transition-all duration-300">
+                    Preguntar
+                  </button>
+                  <button class="flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-emerald-600 hover:scale-105 transition-all duration-300">
+                    Reservar
+                  </button>
+                </div>
+              </div>
+
+              {/* Métodos de pago */}
+              <div class="border-t pt-4">
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+                  <div class="bg-white p-3 rounded-full flex items-center justify-center">
+                    <img src="/images/wallets/bna.png" alt="Banco Nación" class="h-10 w-10 sm:h-12 sm:w-12 object-contain"/>
+                  </div>
+                  <div class="bg-white p-3 rounded-full flex items-center justify-center">
+                    <img src="/images/wallets/lemon.png" alt="Lemon" class="h-10 w-10 sm:h-12 sm:w-12 object-contain"/>
+                  </div>
+                  <div class="bg-white p-3 rounded-full flex items-center justify-center">
+                    <img src="/images/wallets/mercadopago.png" alt="Mercado Pago" class="h-10 w-10 sm:h-12 sm:w-12 object-contain"/>
+                  </div>
+                  <div class="bg-white p-3 rounded-full flex items-center justify-center">
+                    <img src="/images/wallets/naranjax.png" alt="Naranja" class="h-10 w-10 sm:h-12 sm:w-12 object-contain"/>
+                  </div>
+                  <div class="bg-white p-3 rounded-full flex items-center justify-center">
+                    <img src="/images/wallets/ppy.png" alt="Pago Par" class="h-10 w-10 sm:h-12 sm:w-12 object-contain rounded-xl"/>
+                  </div>
+                  <div class="bg-white p-3 rounded-full flex items-center justify-center">
+                    <img src="/images/wallets/uala.png" alt="Ualá" class="h-10 w-10 sm:h-12 sm:w-12 object-contain"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  {/* Botón flotante para móviles - agregar dentro de un contenedor */}
+  <div class="relative lg:hidden">
+    <button 
+      id="openSidebar"
+      class="fixed bottom-6 left-6 z-40 bg-primary text-white rounded-full px-6 py-3 shadow-lg hover:bg-emerald-600 transition-all duration-300"
+    >
+      <span>Reservar</span>
+    </button>
+  </div>
+
+  {/* Overlay y Sidebar - Solo visible en mobile */}
+  <div 
+    id="sidebarOverlay"
+    class="fixed inset-0 bg-black/50 z-40 lg:hidden hidden"
+  ></div>
+
+  <div 
+    id="reservationSidebar"
+    class="fixed inset-y-0 right-0 w-full sm:w-[400px] bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden"
+  >
+    <div class="h-full overflow-y-auto">
+      {/* Botón cerrar para móviles */}
+      <button 
+        id="closeSidebar"
+        class="absolute top-4 right-4 lg:hidden text-gray-500 hover:text-gray-700"
+      >
+        ✕
+      </button>
+
+      {/* Panel de reserva - contenido existente */}
+      <div class="bg-white p-4 sm:p-6 h-full">
+        <div class="mb-6">
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Elija una fecha</h3>
+          <div class="bg-primary text-white p-4 rounded-lg">
+            <p>para visualizar los horarios y precios correspondientes</p>
+          </div>
+          {/* Calendario */}
+          <div class="mt-4 rounded-lg p-4">
+            <Calendar availableHours={adventure.date} />
+          </div>
+        </div>
+
+        {/* Precio por persona */}
+        <div class="space-y-4">
+          <h3 class="text-xl font-bold text-gray-800">Precio por persona</h3>
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-gray-700">Adultos</p>
+              <p class="text-sm text-gray-500">De 11 a 65 años</p>
+              <p class="text-emerald-600 font-medium">ARS {adventure.price}</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button 
+                class="decrease-adults px-3 py-1 border rounded text-gray-700 hover:bg-gray-50" 
+                disabled
+              >-</button>
+              <span class="adults-count text-gray-700">1</span>
+              <button 
+                class="increase-adults px-3 py-1 border rounded text-gray-700 hover:bg-gray-50"
+              >+</button>
+            </div>
+          </div>
+
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-gray-700">Menor</p>
+              <p class="text-sm text-gray-500">De 6 a 10 años</p>
+              <p class="text-emerald-600 font-medium">ARS {adventure.price}</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button 
+                class="decrease-children px-3 py-1 border rounded text-gray-700 hover:bg-gray-50" 
+                disabled
+              >-</button>
+              <span class="children-count text-gray-700">0</span>
+              <button 
+                class="increase-children px-3 py-1 border rounded text-gray-700 hover:bg-gray-50"
+              >+</button>
+            </div>
+          </div>
+
+          <div class="border-t pt-4 mt-4">
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-gray-700">Total:</span>
+              <span class="total-price font-bold text-emerald-600">ARS {adventure.price}</span>
+            </div>
+            <div class="flex gap-4">
+              <button class="flex-1 px-4 py-2 border border-primary text-primary rounded-lg hover:bg-emerald-50 hover:scale-105 transition-all duration-300">
+                Preguntar
+              </button>
+              <button class="flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-emerald-600 hover:scale-105 transition-all duration-300">
+                Reservar
+              </button>
+            </div>
+          </div>
+
+          {/* Métodos de pago */}
+          <div class="border-t pt-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+              <div class="bg-white p-3 rounded-full flex items-center justify-center">
+                <img src="/images/wallets/bna.png" alt="Banco Nación" class="h-10 w-10 sm:h-12 sm:w-12 object-contain"/>
+              </div>
+              <div class="bg-white p-3 rounded-full flex items-center justify-center">
+                <img src="/images/wallets/lemon.png" alt="Lemon" class="h-10 w-10 sm:h-12 sm:w-12 object-contain"/>
+              </div>
+              <div class="bg-white p-3 rounded-full flex items-center justify-center">
+                <img src="/images/wallets/mercadopago.png" alt="Mercado Pago" class="h-10 w-10 sm:h-12 sm:w-12 object-contain"/>
+              </div>
+              <div class="bg-white p-3 rounded-full flex items-center justify-center">
+                <img src="/images/wallets/naranjax.png" alt="Naranja" class="h-10 w-10 sm:h-12 sm:w-12 object-contain"/>
+              </div>
+              <div class="bg-white p-3 rounded-full flex items-center justify-center">
+                <img src="/images/wallets/ppy.png" alt="Pago Par" class="h-10 w-10 sm:h-12 sm:w-12 object-contain rounded-xl"/>
+              </div>
+              <div class="bg-white p-3 rounded-full flex items-center justify-center">
+                <img src="/images/wallets/uala.png" alt="Ualá" class="h-10 w-10 sm:h-12 sm:w-12 object-contain"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Script para el funcionamiento del carrusel
+  const items = document.querySelectorAll('[data-carousel-item]');
+  const indicators = document.querySelectorAll('[data-carousel-indicator]');
+  const prevButton = document.getElementById('prevButton');
+  const nextButton = document.getElementById('nextButton');
+  let currentIndex = 0;
+
+  function showImage(index: number) {
+    // Ocultar todas las imágenes
+    items.forEach((item) => {
+      item.setAttribute('style', 'opacity: 0');
+      item.setAttribute('data-active', 'false');
+    });
+    
+    // Actualizar indicadores
+    indicators.forEach((indicator) => {
+      indicator.setAttribute('data-active', 'false');
+      indicator.classList.remove('bg-white');
+      indicator.classList.add('bg-white/60');
+    });
+
+    // Mostrar la imagen seleccionada
+    items[index].setAttribute('style', 'opacity: 1');
+    items[index].setAttribute('data-active', 'true');
+    
+    // Actualizar indicador activo
+    indicators[index].setAttribute('data-active', 'true');
+    indicators[index].classList.remove('bg-white/60');
+    indicators[index].classList.add('bg-white');
+    
+    currentIndex = index;
+  }
+
+  // Event listeners para los botones
+  prevButton?.addEventListener('click', () => {
+    const newIndex = currentIndex === 0 ? items.length - 1 : currentIndex - 1;
+    showImage(newIndex);
+  });
+
+  nextButton?.addEventListener('click', () => {
+    const newIndex = currentIndex === items.length - 1 ? 0 : currentIndex + 1;
+    showImage(newIndex);
+  });
+
+  // Event listeners para los indicadores
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+      showImage(index);
+    });
+  });
+
+  // Autoplay (opcional)
+  setInterval(() => {
+    const newIndex = currentIndex === items.length - 1 ? 0 : currentIndex + 1;
+    showImage(newIndex);
+  }, 5000);
+</script>
+
+<script define:vars={{ price: adventure.price }}>
+  let adults = 1;
+  let children = 0;
+  const MAX_PARTICIPANTS = 10;
+
+  // Elementos del DOM
+  const adultsCountElements = document.querySelectorAll('.adults-count');
+  const childrenCountElements = document.querySelectorAll('.children-count');
+  const totalPriceElements = document.querySelectorAll('.total-price');
+  const decreaseAdultsButtons = document.querySelectorAll('.decrease-adults');
+  const increaseAdultsButtons = document.querySelectorAll('.increase-adults');
+  const decreaseChildrenButtons = document.querySelectorAll('.decrease-children');
+  const increaseChildrenButtons = document.querySelectorAll('.increase-children');
+
+  function updateTotal() {
+    const total = (adults + children) * price;
+    totalPriceElements.forEach(element => {
+      element.textContent = `ARS ${total.toLocaleString()}`; //suma el total
+    });
+  }
+
+  function updateCounters() { //contador de adultos y menores
+    adultsCountElements.forEach(element => {
+      element.textContent = adults.toString();
+    });
+    childrenCountElements.forEach(element => {
+      element.textContent = children.toString();
+    });
+  }
+
+  function updateButtonStates() { //estados de botones
+    const totalParticipants = adults + children;
+    
+    decreaseAdultsButtons.forEach(button => {
+      button.disabled = adults <= 1;
+      if (button.disabled) {
+        button.classList.add('opacity-50', 'cursor-not-allowed');
+      } else {
+        button.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+    });
+
+    increaseAdultsButtons.forEach(button => {
+      button.disabled = totalParticipants >= MAX_PARTICIPANTS;
+      if (button.disabled) {
+        button.classList.add('opacity-50', 'cursor-not-allowed');
+      } else {
+        button.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+    });
+
+    decreaseChildrenButtons.forEach(button => {
+      button.disabled = children <= 0;
+      if (button.disabled) {
+        button.classList.add('opacity-50', 'cursor-not-allowed');
+      } else {
+        button.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+    });
+
+    increaseChildrenButtons.forEach(button => {
+      button.disabled = totalParticipants >= MAX_PARTICIPANTS;
+      if (button.disabled) {
+        button.classList.add('opacity-50', 'cursor-not-allowed');
+      } else {
+        button.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+    });
+  }
+
+  // Event Listeners
+  increaseAdultsButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (adults + children < MAX_PARTICIPANTS) {
+        adults++;
+        updateCounters();
+        updateTotal();
+        updateButtonStates();
+      }
+    });
+  });
+
+  decreaseAdultsButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (adults > 1) {
+        adults--;
+        updateCounters();
+        updateTotal();
+        updateButtonStates();
+      }
+    });
+  });
+
+  increaseChildrenButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (adults + children < MAX_PARTICIPANTS) {
+        children++;
+        updateCounters();
+        updateTotal();
+        updateButtonStates();
+      }
+    });
+  });
+
+  decreaseChildrenButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (children > 0) {
+        children--;
+        updateCounters();
+        updateTotal();
+        updateButtonStates();
+      }
+    });
+  });
+
+  // Inicializar estados
+  updateButtonStates();
+  updateTotal();
+</script>
+
+<script is:inline>
+  // Funcionalidad del sidebar
+  const sidebar = document.getElementById('reservationSidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  const openButton = document.getElementById('openSidebar');
+  const closeButton = document.getElementById('closeSidebar');
+
+  function openSidebar() {
+    sidebar?.classList.remove('translate-x-full');
+    overlay?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    sidebar?.classList.add('translate-x-full');
+    overlay?.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  openButton?.addEventListener('click', openSidebar);
+  closeButton?.addEventListener('click', closeSidebar);
+  overlay?.addEventListener('click', closeSidebar);
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) { 
+      closeSidebar();
+    }
+  });
+</script>
+
+<script>
+  const reserveButton = document.getElementById('openSidebar');
+  const footer = document.querySelector('footer');
+
+  if (reserveButton && footer) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          reserveButton.style.position = 'absolute';
+          reserveButton.style.bottom = 'fixed';
+          //centramos el boton 
+          reserveButton.style.left = '50%';
+          reserveButton.style.transform = 'translateX(-50%)';
+        } else {
+          reserveButton.style.position = 'fixed';
+          reserveButton.style.bottom = '24px';
+          //devuelve el boton a su posicion original
+          reserveButton.style.left = '10px';
+          reserveButton.style.transform = 'none';
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(footer);
+  }
+</script>
+
+<style>
+  [data-carousel-item] {
+    transition: opacity 300ms ease-in-out;
+  }
+
+  body.sidebar-open {
+    overflow: hidden;
+  }
+  #reservationSidebar {
+    overscroll-behavior: contain;
+  }
+</style>

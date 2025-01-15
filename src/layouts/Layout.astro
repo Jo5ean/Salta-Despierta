@@ -73,9 +73,15 @@ const canonicalURL = new URL(pathname, url);
 		/>
 	</head>
 	<body class="bg-gray-800 text-white max-w-full overflow-x-hidden font-body">
-		<Header isFixed={fixedHeader} />
-		<slot />
-		<Footer />
+		<div class="z-[999] relative">
+			<Header isFixed={fixedHeader} />
+		</div>
+		<div class="relative z-[1]">
+			<slot />
+		</div>
+		
+			<Footer isFixed={false}/>
+	
 	</body>
 </html>
 <style is:global>

@@ -1,5 +1,6 @@
 ---
 import { adventures } from "@/data/adventure";
+import { formatName } from "@/utils/helpers";
 ---
 
 <section class="bg-gray-200 relative overflow-hidden">
@@ -13,7 +14,6 @@ import { adventures } from "@/data/adventure";
   </div>
 
   <div class="max-w-7xl mx-auto py-16 px-4">
-    <!-- Título con diseño minimalista -->
     <div class="mb-16 text-center relative">
       <div class="inline-block relative">
         <h1 class="text-5xl md:text-6xl font-bold relative z-10">
@@ -21,7 +21,6 @@ import { adventures } from "@/data/adventure";
           <br/>
           <span class="text-gray-800">AVENTURAS</span>
         </h1>
-        <!-- Elemento decorativo -->
         <div class="absolute -bottom-4 left-0 w-full h-2 bg-primary/20"></div>
         <div class="absolute -bottom-4 left-0 w-1/2 h-2 bg-primary animate-slide"></div>
       </div>
@@ -66,10 +65,10 @@ import { adventures } from "@/data/adventure";
             <div class="mt-6 flex justify-between items-center">
               <span class="text-lg font-bold text-primary">${adventure.price}</span>
               <a 
-                href={`/atracciones/${adventure.id}`} 
+                href={`/atracciones/${adventure.id}/${formatName(adventure.title)}`}
                 class="px-4 py-2 bg-primary text-white rounded-full hover:scale-105 hover:bg-primary/90 transition-all duration-300"
               >
-                ¡Reserva ahora!
+                ¡Reserv&aacute; ahora!
               </a>
             </div>
           </div>

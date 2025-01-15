@@ -36,40 +36,49 @@ const { availableDates = [], availableHours = [] } = Astro.props;
   import flatpickr from 'flatpickr';
   import { Spanish } from 'flatpickr/dist/l10n/es.js';
 
-  flatpickr('.flatpickr', {
-    locale: Spanish,
-    dateFormat: 'Y-m-d',
-    minDate: 'today',
-    enableTime: false,
-    altInput: true,
-    altFormat: 'D j F, Y',
-    disableMobile: false,
-    inline: true,
-    onChange: function(selectedDates, dateStr, instance) {
-      const timeSlotsContainer = document.getElementById('timeSlots');
-      timeSlotsContainer?.classList.remove('hidden');
+  // Inicializar todos los calendarios
+  document.querySelectorAll('.flatpickr').forEach(calendar => {
+    flatpickr(calendar, {
+      locale: Spanish,
+      dateFormat: 'Y-m-d',
+      minDate: 'today',
+      enableTime: false,
+      altInput: true,
+      altFormat: 'D j F, Y',
+      disableMobile: false,
+      inline: true,
+      onChange: function(selectedDates, dateStr, instance) {
+        // Encontrar el contenedor de horarios más cercano al calendario actual
+        const timeSlotsContainer = instance.element.closest('.calendar-wrapper')?.querySelector('#timeSlots');
+        timeSlotsContainer?.classList.remove('hidden');
 
-      const event = new CustomEvent('dateSelected', { 
-        detail: { date: dateStr }
-      });
-      document.dispatchEvent(event);
-    }
+        const event = new CustomEvent('dateSelected', { 
+          detail: { date: dateStr }
+        });
+        document.dispatchEvent(event);
+      }
+    });
   });
 
-  // Manejar la selección de horario después de que el DOM esté listo
+  // Manejar la selección de horario
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.time-slot').forEach(button => {
       button.addEventListener('click', (e) => {
-        // Remover selección previa
-        document.querySelectorAll('.time-slot').forEach(btn => {
+        // Encontrar todos los botones dentro del mismo contenedor
+        const wrapper = (e.target as HTMLElement).closest('.calendar-wrapper');
+        const timeSlots = wrapper?.querySelectorAll('.time-slot');
+        
+        // Remover selección previa en el contenedor actual
+        timeSlots?.forEach(btn => {
           btn.classList.remove('bg-primary', 'text-white');
         });
 
         // Marcar el botón seleccionado
         const target = e.target as HTMLButtonElement;
         target.classList.add('bg-primary', 'text-white');
+
         // Emitir evento con fecha y hora seleccionada
-        const selectedDate = document.querySelector<HTMLInputElement>('.flatpickr-input')?.value; //esto no entiendo nada
+        const selectedDate = wrapper?.querySelector<HTMLInputElement>('.flatpickr-input')?.value;
         const selectedTime = target.dataset.time;
         
         const event = new CustomEvent('dateTimeSelected', {

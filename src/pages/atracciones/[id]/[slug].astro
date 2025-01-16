@@ -25,6 +25,7 @@ if (!adventure) {
 
 <Layout
   title={adventure.title}
+  image={adventure.image}
   fixedHeader={false}
   messageContact=`Quisiera consultar por la aventura ${adventure.title}`
 >
@@ -48,7 +49,7 @@ if (!adventure) {
           {/* Carrusel */}
           <section class="relative">
             <div
-              class="h-[300px] sm:h-[400px] md:h-[500px] rounded-lg overflow-hidden"
+              class="h-[300px] sm:h-[400px] md:h-[500px] rounded-lg overflow-hidden object-cover"
             >
               {
                 adventure.gallery.map((image, index) => (

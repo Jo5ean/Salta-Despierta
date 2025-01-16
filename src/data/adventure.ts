@@ -1,4 +1,4 @@
-import {type Adventure} from "../types/adventure";
+import { type Adventure } from "../types/adventure";
 
 export const adventures: Adventure[] = [
     {
@@ -6,7 +6,7 @@ export const adventures: Adventure[] = [
         title: "Vuelo en Tirolesa en el Dique Cadillal en Tucumán",
         location: "En Cadillal",
         image: "/images/adventures/tiroleza/tiroleza_3.avif",
-        gallery: ["/images/adventures/tiroleza/tiroleza_3.avif", "/images/adventures/tiroleza/tiroleza_4.avif", "/images/adventures/tiroleza/tiroleza_5.avif", "/images/adventures/tiroleza/tiroleza_6.avif", "/images/adventures/tiroleza/tiroleza.avif"],
+        gallery: ["/images/adventures/tiroleza/tiroleza_2.avif", "/images/adventures/tiroleza/tiroleza_3.avif", "/images/adventures/tiroleza/tiroleza_4.avif", "/images/adventures/tiroleza/tiroleza_5.avif", "/images/adventures/tiroleza/tiroleza_6.avif", "/images/adventures/tiroleza/tiroleza.avif"],
         description: "Iniciaremos la actividad con una charla técnica y de seguridad y la colocación del equipo por parte de neustros guías. En nuestra actividad de tirolesa, te invitamos a disfrutar de un emocionante vuelo de un tramo de 250 metros. En invierno, volarás sobre el agua del lago, mientras que en verano, el nivel del dique desciende, permitiendo que tu vuelo pase sobre áreas verdes. Alcanzarás velocidades de hasta 40 km por hora en esta experiencia inolvidable que combina emoción y belleza natural. Únete a nosotros y descubre la Tucumán de una manera única.",
         category: "Canopy - Tirolesa",
         duration: "30 Minutos",

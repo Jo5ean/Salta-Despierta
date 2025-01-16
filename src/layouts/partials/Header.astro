@@ -74,6 +74,7 @@ const { isFixed = true, messageContact = null } = Astro.props;
                 <li>
                     <button
                         id="contactButton"
+                        aria-label="Abrir formulario de contacto"
                         class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
                     >
                         Contacto
@@ -110,7 +111,11 @@ const { isFixed = true, messageContact = null } = Astro.props;
             <div
                 class="flex flex-col items-center justify-center h-full relative"
             >
-                <button class="absolute top-8 right-8" id="closeButton">
+                <button
+                    class="absolute top-8 right-8"
+                    id="closeButton"
+                    arial-label="Cerrar menú"
+                >
                     <svg
                         class="w-10 h-10 text-white"
                         fill="none"
@@ -162,6 +167,7 @@ const { isFixed = true, messageContact = null } = Astro.props;
                     <li class="menu-item">
                         <button
                             id="mobileContactButton"
+                            aria-label="Abrir formulario de contacto"
                             class="nav-link hover:text-primary transition-all duration-300 relative group"
                         >
                             Contacto
@@ -183,6 +189,7 @@ const { isFixed = true, messageContact = null } = Astro.props;
 >
     <button
         id="closeSidebar"
+        aria-label="Cerrar formulario de contacto"
         class="absolute top-8 right-8 text-gray-800 hover:text-primary"
     >
         <svg

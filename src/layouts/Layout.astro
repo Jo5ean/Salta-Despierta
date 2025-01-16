@@ -4,9 +4,10 @@ import Header from "../layouts/partials/Header.astro";
 interface Props {
 	title: string;
 	fixedHeader?: boolean;
+	messageContact?: string;
 }
 
-const { title, fixedHeader = true } = Astro.props;
+const { title, fixedHeader = true, messageContact = null } = Astro.props;
 
 import config from "../config/config";
 
@@ -74,14 +75,13 @@ const canonicalURL = new URL(pathname, url);
 	</head>
 	<body class="bg-gray-800 text-white max-w-full overflow-x-hidden font-body">
 		<div class="z-[999] relative">
-			<Header isFixed={fixedHeader} />
+			<Header isFixed={fixedHeader} messageContact={messageContact} />
 		</div>
 		<div class="relative z-[1]">
 			<slot />
 		</div>
-		
-			<Footer isFixed={false}/>
-	
+
+		<Footer isFixed={false} />
 	</body>
 </html>
 <style is:global>

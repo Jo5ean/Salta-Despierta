@@ -5,13 +5,15 @@ import { formatName } from "@/utils/helpers";
 import Whatsapp from "@/components/icons/Whatsapp.astro";
 
 interface Props {
-    isFixed?: boolean;
+  isFixed?: boolean;
 }
 
 const { isFixed = false } = Astro.props;
 ---
 
-<footer class={`bg-black/50 backdrop-blur ${isFixed ? "fixed" : "static"} w-full bottom-0`}>
+<footer
+  class={`bg-black/50 backdrop-blur ${isFixed ? "fixed" : "static"} w-full bottom-0`}
+>
   <div
     class="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8"
   >
@@ -83,7 +85,7 @@ const { isFixed = false } = Astro.props;
 </footer>
 
 <a
-  href={``}
+  href={socials.find((item) => item.name.toLowerCase() === "whatsapp")?.url}
   class="fixed bottom-6 right-6 z-50 group"
   aria-label="Chatear por WhatsApp"
   target="_blank"

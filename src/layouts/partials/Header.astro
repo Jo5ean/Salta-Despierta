@@ -5,9 +5,10 @@ import ContactSidebar from "@/pages/sections/ContactSidebar.astro";
 
 interface Props {
     isFixed?: boolean;
+    messageContact?: string | null;
 }
 
-const { isFixed = true } = Astro.props;
+const { isFixed = true, messageContact = null } = Astro.props;
 ---
 
 <header
@@ -153,7 +154,7 @@ const { isFixed = true } = Astro.props;
                                     class="nav-link hover:text-primary transition-all duration-300 relative group"
                                 >
                                     {item.category}
-                                    <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
+                                    <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0" />
                                 </a>
                             </li>
                         ))
@@ -178,7 +179,7 @@ const { isFixed = true } = Astro.props;
 
 <div
     id="contactSidebar"
-    class="fixed inset-y-0 right-0 w-full lg:w-1/2 bg-white transform translate-x-full transition-transform duration-300 ease-in-out z-50 overflow-y-auto"
+    class="fixed inset-y-0 right-0 w-full max-w-full lg:max-w-3xl bg-white transform translate-x-full transition-transform duration-300 ease-in-out z-50 overflow-y-auto"
 >
     <button
         id="closeSidebar"
@@ -194,13 +195,10 @@ const { isFixed = true } = Astro.props;
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-            ></path>
+                d="M6 18L18 6M6 6l12 12"></path>
         </svg>
     </button>
-    <div class="h-full">
-        <ContactSidebar />
-    </div>
+    <ContactSidebar messageContact={messageContact} />
 </div>
 
 <!-- overlay -->
@@ -290,6 +288,24 @@ const { isFixed = true } = Astro.props;
         visibility: visible;
         transform: translateY(0);
     }
+
+    /* Estilos para la barra de desplazamiento */
+    #contactSidebar::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    #contactSidebar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    #contactSidebar::-webkit-scrollbar-thumb {
+        background: #e26128;
+        border-radius: 3px;
+    }
+
+    #contactSidebar::-webkit-scrollbar-thumb:hover {
+        background: #c04d1f;
+    }
 </style>
 
 <script>
@@ -333,13 +349,13 @@ const { isFixed = true } = Astro.props;
 
     //test de logica de scroll smooth
     const anchors = document.querySelectorAll(
-        'a[href^="#"], a[href="/"]'
+        'a[href^="#"], a[href="/"]',
     ) as NodeListOf<HTMLAnchorElement>;
 
     anchors.forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
             const href = this.getAttribute("href");
-            
+
             if (href?.startsWith("#")) {
                 e.preventDefault();
                 const targetElement = document.querySelector(href);
@@ -354,15 +370,17 @@ const { isFixed = true } = Astro.props;
                 e.preventDefault();
                 window.scrollTo({
                     top: 0,
-                    behavior: "smooth"
+                    behavior: "smooth",
                 });
             }
         });
     });
 
-    const navItems = document.querySelectorAll(".nav-item") as NodeListOf<HTMLElement>;
+    const navItems = document.querySelectorAll(
+        ".nav-item",
+    ) as NodeListOf<HTMLElement>;
     navItems.forEach((item: HTMLElement) => {
-        const submenu = item.querySelector("ul"); 
+        const submenu = item.querySelector("ul");
         if (submenu) {
             item.addEventListener("click", (e: Event) => {
                 e.stopPropagation();
@@ -396,6 +414,8 @@ const { isFixed = true } = Astro.props;
 
     contactButton?.addEventListener("click", openSidebar);
     mobileContactButton?.addEventListener("click", openSidebar);
-    document.getElementById("closeSidebarBtn")?.addEventListener("click", closeSidebarHandler);
+    document
+        .getElementById("closeSidebarBtn")
+        ?.addEventListener("click", closeSidebarHandler);
     sidebarOverlay?.addEventListener("click", closeSidebarHandler);
 </script>

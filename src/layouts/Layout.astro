@@ -2,26 +2,32 @@
 import Footer from "../layouts/partials/Footer.astro";
 import Header from "../layouts/partials/Header.astro";
 interface Props {
+	image?: string;
 	title: string;
 	fixedHeader?: boolean;
 	messageContact?: string;
 }
 
-const { title, fixedHeader = true, messageContact = null } = Astro.props;
+const { description, image: imageConfig } = config;
+const {
+	title,
+	fixedHeader = true,
+	messageContact = null,
+	image = imageConfig,
+} = Astro.props;
 
 import config from "../config/config";
 
-const { description, image } = config;
+const titleD = `${title} | ${config.title}`.slice(0, 69);
 const { pathname } = Astro.url;
 const url = Astro.url.toString().replace("http://", "https://");
 const canonicalURL = new URL(pathname, url);
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="es" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
@@ -29,7 +35,7 @@ const canonicalURL = new URL(pathname, url);
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
 		/>
-		<title>{title}</title>
+		<title>{titleD}</title>
 
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
@@ -45,12 +51,12 @@ const canonicalURL = new URL(pathname, url);
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:site" content={config.author} />
 		<meta name="twitter:creator" content={config.author} />
-		<meta name="twitter:title" content={title} />
+		<meta name="twitter:title" content={titleD} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={new URL(image, url)} />
 
 		<meta name="og:image" content={new URL(image, url)} />
-		<meta name="og:title" content={title} />
+		<meta name="og:title" content={titleD} />
 		<meta name="og:description" content={description} />
 		<meta name="og:url" content={url} />
 		<meta name="og:site_name" content={config.site_name} />

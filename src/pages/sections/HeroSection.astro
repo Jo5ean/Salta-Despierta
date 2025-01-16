@@ -1,8 +1,10 @@
 ---
+import config from "@/config/config";
 import { adventures } from "@/data/adventure";
 import { formatName } from "@/utils/helpers";
 ---
 
+<h1 class="hidden">{config.title}</h1>
 <div
   class="relative h-screen w-full overflow-hidden"
   id="hero-carousel"
@@ -26,11 +28,11 @@ import { formatName } from "@/utils/helpers";
             <div class="font-body text-xl">
               {index + 1}/{adventures.length}
             </div>
-            
+
             <div class="space-y-4 md:space-y-6">
-              <h1 class="font-titles tracking-titles text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+              <h2 class="font-titles tracking-titles text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
                 <span>{project.category}</span>
-              </h1>
+              </h2>
               <p class="text-xl md:text-lg text-white/90">
                 {project.category} | {project.location}
               </p>

@@ -1,11 +1,11 @@
 const config = {
-    title: "Agroabesan - Filtros y Herramientas para Maquinaria Pesada",
-    site_name: "Agroabesan",
-    description: "Empresa familiar con 15 años de experiencia en filtros y herramientas para maquinaria pesada. Especialistas en soluciones para sectores agrícola, minero, industrial y construcción. Garantizamos calidad y eficiencia en todos nuestros productos.",
-    image: "/images/fachada-empresa.webp",
+    title: "SW Tucumán Aventuras | El Cadillal | San Javier",
+    site_name: "swaventuras",
+    description: "SW Tucumán Aventuras ofrece turismo activo en la naturaleza, con compromiso ambiental y experiencias únicas, promoviendo sostenibilidad y cuidado del entorno.",
+    image: "/logos/imagotipo-blend.PNG",
     theme_color: "#009bce",
-    keywords: "filtros maquinaria pesada, herramientas industriales, sector agrícola, minería, construcción, filtros industriales, maquinaria pesada, repuestos maquinaria, asesoría técnica, filtros a medida",
-    author: "@agroabesan",
-    email: "soporte@agroabesan.com",
+    keywords: "turismo activo, experiencias únicas, naturaleza, cuidado del medio ambiente, uso responsable, sostenibilidad, aventuras, SW Tucumán, servicios en la naturaleza, compromiso ambiental",
+    author: "@swaventuras",
+    email: "soporte@swaventuras.com",
 }
 export default config;

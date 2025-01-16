@@ -1,41 +1,6 @@
 ---
-const projects = [
-  {
-    title: "Arquería",
-    type: "Actividad",
-    location: "Aire libre",
-    image: "/images/arqueria.webp",
-    color: "#F15A24",
-  },
-  {
-    title: "Buceo",
-    type: "Actividad",
-    location: "Acuática",
-    image: "/images/buceo.webp",
-    color: "#F15A24",
-  },
-  {
-    title: "Cabalgata",
-    type: "Actividad",
-    location: "Aire libre",
-    image: "/images/cabalgata.webp",
-    color: "#F15A24",
-  },
-  {
-    title: "Muro Escalada",
-    type: "Actividad",
-    location: "Aventura",
-    image: "/images/muro-escalada.webp",
-    color: "#F15A24",
-  },
-  {
-    title: "Tirolesa",
-    type: "Actividad",
-    location: "Aventura",
-    image: "/images/tirolesa.webp",
-    color: "#F15A24",
-  },
-];
+import { adventures } from "@/data/adventure";
+import { formatName } from "@/utils/helpers";
 ---
 
 <div
@@ -44,7 +9,7 @@ const projects = [
   aria-live="polite"
 >
   {
-    projects.map((project, index) => (
+    adventures.map((project, index) => (
       <div
         class={`absolute inset-0 transition-opacity duration-1000 ${index === 0 ? "opacity-100" : "opacity-0"}`}
         data-carousel-item
@@ -57,34 +22,88 @@ const projects = [
         <div class="absolute inset-0 bg-black bg-opacity-60" />
 
         <div class="container mx-auto px-4 sm:px-6 md:px-24 lg:px-24 2xl:px-4">
-          <div class="absolute top-1/2 transform -translate-y-1/2 text-white">
-            <div class="font-body text-xl md:text-2xl mb-2 sm:mb-3 md:mb-4">
-              {index + 1}/{projects.length}
+          <div class="absolute top-1/2 transform -translate-y-1/2 text-white h-[50vh] md:h-[40vh] flex flex-col justify-between">
+            <div class="font-body text-xl">
+              {index + 1}/{adventures.length}
             </div>
-            <h1 class="font-titles tracking-titles text-6xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-2 sm:mb-3 md:mb-4 flex flex-col items-start">
-              <span
-                style={`color: ${project.color};`}
-              >
-                {project.title}
-              </span>
-            </h1>
-            <div
-              class="fade-in-line h-1 sm:h-1.5 w-16 sm:w-20 mt-3 sm:mt-4 opacity-0 mb-5"
-              style={`background-color: ${project.color}; transition: opacity 1s ease-in-out;`}
-            />
-            <p class="text-2xl md:text-xl">
-              {project.type} | {project.location}
-            </p>
+            
+            <div class="space-y-4 md:space-y-6">
+              <h1 class="font-titles tracking-titles text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+                <span>{project.category}</span>
+              </h1>
+              <p class="text-xl md:text-lg text-white/90">
+                {project.category} | {project.location}
+              </p>
+            </div>
+
+            <a
+              class="px-4 py-2 text-white border-2 border-primary hover:text-white transition-all duration-300 ease-in-out backdrop-blur-lg bg-white/10 rounded-full transform hover:-translate-y-1 hover:shadow-lg w-fit"
+              href={`/atracciones/${project.id}/${formatName(project.title)}`}
+            >
+              Más Información
+            </a>
           </div>
         </div>
       </div>
     ))
   }
 
-  <!-- Previous Slide Button -->
+  <!-- Contenedor para los botones en mobile -->
+  <div class="absolute bottom-5 left-6 flex sm:hidden">
+    <!-- Previous Slide Button -->
+    <button
+      id="prev-slide"
+      class="text-white hover:text-gray-300 transition-all duration-400 flex items-center justify-center p-4 border-[1px] border-white hover:bg-white hover:bg-opacity-10 backdrop-blur-lg rounded-l-full"
+      tabindex="0"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M15 19L8 12L15 5"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+      <span class="sr-only">Previous</span>
+    </button>
+
+    <!-- Separador vertical -->
+    <div class="w-[1px] bg-white"></div>
+
+    <!-- Next Slide Button -->
+    <button
+      id="next-slide"
+      class="text-white hover:text-gray-300 transition-all duration-400 flex items-center justify-center p-4 border-[1px] border-white hover:bg-white hover:bg-opacity-10 backdrop-blur-lg rounded-r-full"
+      tabindex="0"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M9 5L16 12L9 19"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+      <span class="sr-only">Next</span>
+    </button>
+  </div>
+
+  <!-- Botones para versión desktop -->
   <button
-    id="prev-slide"
-    class="absolute text-white hover:text-gray-300 transition-all duration-400 flex items-center justify-center p-4 border-[1px] border-white hover:bg-white hover:bg-opacity-10 backdrop-blur-lg rounded-full bottom-5 left-5 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2"
+    id="prev-slide-desktop"
+    class="hidden sm:flex absolute text-white hover:text-gray-300 transition-all duration-400 items-center justify-center p-4 border-[1px] border-white hover:bg-white hover:bg-opacity-10 backdrop-blur-lg rounded-full top-1/2 -translate-y-1/2 left-5"
     tabindex="0"
   >
     <svg
@@ -104,10 +123,9 @@ const projects = [
     <span class="sr-only">Previous</span>
   </button>
 
-  <!-- Next Slide Button -->
   <button
-    id="next-slide"
-    class="absolute text-white hover:text-gray-300 transition-all duration-400 flex items-center justify-center p-4 border-[1px] border-white hover:bg-white hover:bg-opacity-10 backdrop-blur-lg rounded-full bottom-5 right-5 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2"
+    id="next-slide-desktop"
+    class="hidden sm:flex absolute text-white hover:text-gray-300 transition-all duration-400 items-center justify-center p-4 border-[1px] border-white hover:bg-white hover:bg-opacity-10 backdrop-blur-lg rounded-full top-1/2 -translate-y-1/2 right-5"
     tabindex="0"
   >
     <svg
@@ -129,32 +147,8 @@ const projects = [
 </div>
 
 <style is:global>
-  .fade-in-line {
-    opacity: 0;
-    animation: slideInOut 5s ease-in-out forwards;
-  }
-
   [data-carousel-item] {
     will-change: opacity;
-  }
-
-  @keyframes slideInOut {
-    0% {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-    10% {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    90% {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(100%);
-      opacity: 0;
-    }
   }
 </style>
 
@@ -163,22 +157,15 @@ const projects = [
   const slides = carousel.querySelectorAll("[data-carousel-item]");
   const prevButton = document.getElementById("prev-slide");
   const nextButton = document.getElementById("next-slide");
+  const prevButtonDesktop = document.getElementById("prev-slide-desktop");
+  const nextButtonDesktop = document.getElementById("next-slide-desktop");
   let currentSlide = 0;
   let slideInterval;
 
   function showSlide(index) {
     slides.forEach((slide, i) => {
-      const line = slide.querySelector(".fade-in-line");
       slide.classList.toggle("opacity-100", i === index);
       slide.classList.toggle("opacity-0", i !== index);
-
-      if (i === index) {
-        line.style.animation = "none";
-        void line.offsetWidth;
-        line.style.animation = "slideInOut 5s ease-in-out forwards";
-      } else {
-        line.style.animation = "none";
-      }
     });
   }
 
@@ -205,6 +192,16 @@ const projects = [
   });
 
   nextButton.addEventListener("click", () => {
+    nextSlide();
+    resetInterval();
+  });
+
+  prevButtonDesktop.addEventListener("click", () => {
+    prevSlide();
+    resetInterval();
+  });
+
+  nextButtonDesktop.addEventListener("click", () => {
     nextSlide();
     resetInterval();
   });

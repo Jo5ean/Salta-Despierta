@@ -1,0 +1,178 @@
+<div class="bg-gray-200 relative overflow-hidden">
+    <div class="ocean absolute inset-0 z-0">
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 py-16 relative z-10" id="about">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <!-- Columna derecha - Contenido -->
+            <div class="order-2 lg:order-1 lg:pl-12 space-y-8 relative z-0">
+                <div
+                    class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8 space-y-6"
+                >
+                    <form class="space-y-4">
+                        <div>
+                            <label
+                                class="block text-gray-800 font-medium mb-1"
+                                for="name">Nombre</label
+                            >
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                required
+                                class="w-full p-2 border-b border-gray-300 focus:outline-none focus:border-primary transition duration-200"
+                                placeholder="Ingresa tu nombre"
+                            />
+                        </div>
+                        <div>
+                            <label
+                                class="block text-gray-800 font-medium mb-1"
+                                for="email">Correo Electrónico</label
+                            >
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                                class="w-full p-2 border-b border-gray-300 focus:outline-none focus:border-primary transition duration-200"
+                                placeholder="Ingresa tu correo electrónico"
+                            />
+                        </div>
+                        <div>
+                            <label
+                                class="block text-gray-800 font-medium mb-1"
+                                for="message">Mensaje</label
+                            >
+                            <textarea
+                                id="message"
+                                name="message"
+                                required
+                                class="w-full p-2 border-b border-gray-300 focus:outline-none focus:border-primary transition duration-200"
+                                rows="4"
+                                placeholder="Escribe tu mensaje aquí"
+                            ></textarea>
+                        </div>
+                        <div class="pt-4">
+                            <button
+                                type="submit"
+                                class="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all duration-300 font-semibold"
+                            >
+                                Enviar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="relative z-10">
+                <div
+                    class="slide-in relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] mx-auto"
+                >
+                    <div class="absolute inset-0">
+                        <div
+                            class="w-full h-full bg-[#E26128] flex items-center justify-center transform transition-transform hover:scale-105 duration-300 px-10"
+                        >
+                            <div class="text-center text-white">
+                                <span
+                                    class="translate-effect block text-5xl sm:text-6xl font-bold tracking-wide"
+                                >
+                                    DEJANOS
+                                </span>
+                                <span
+                                    class="translate-effect block text-5xl sm:text-6xl font-bold tracking-wide mt-2"
+                                >
+                                    TU MENSAJE
+                                </span>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute inset-[-10px] border-4 border-[#E26128]/20"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .ocean {
+        height: 100%;
+        background: linear-gradient(180deg, #E26128/5 0%, #E26128/30 100%);
+    }
+
+    .wave {
+        background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg)
+            repeat-x;
+        position: absolute;
+        filter: invert(1);
+        bottom: 0;
+        width: 6400px;
+        height: 198px;
+        animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+        transform: translate3d(0, 0, 0);
+    }
+
+    .wave:nth-of-type(2) {
+        bottom: 25px;
+        animation:
+            wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+            swell 7s ease -1.25s infinite;
+        opacity: 0.5;
+    }
+
+    @keyframes wave {
+        0% {
+            margin-left: 0;
+        }
+        100% {
+            margin-left: -1600px;
+        }
+    }
+
+    @keyframes swell {
+        0%,
+        100% {
+            transform: translate3d(0, -25px, 0);
+        }
+        50% {
+            transform: translate3d(0, 5px, 0);
+        }
+    }
+
+    .slide-in {
+        overflow: visible;
+    }
+
+    .translate-effect {
+        opacity: 0;
+        transform: translateX(-100%);
+        transition: all 0.8s ease-out;
+    }
+
+    .translate-effect.visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+</style>
+
+<script>
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        {
+            threshold: 0.1,
+        },
+    );
+
+    document.querySelectorAll(".translate-effect").forEach((el) => {
+        observer.observe(el);
+    });
+</script>

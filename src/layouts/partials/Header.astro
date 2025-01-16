@@ -1,63 +1,87 @@
-<header class="bg-black/50 backdrop-blur text-white fixed w-full z-30">
-    <div class="container mx-auto py-4 flex justify-between items-center px-4 md:px-24 lg:px-24 xl:px-4">
+---
+import { adventures } from "@/data/adventure";
+import { formatName } from "@/utils/helpers";
+import ContactSidebar from "@/pages/sections/ContactSidebar.astro";
+
+interface Props {
+    isFixed?: boolean;
+    messageContact?: string | null;
+}
+
+const { isFixed = true, messageContact = null } = Astro.props;
+---
+
+<header
+    class={`bg-black/50 backdrop-blur text-white ${isFixed ? "fixed" : "static"} w-full z-40`}
+>
+    <div
+        class="container mx-auto py-4 flex justify-between items-center px-4 md:px-24 lg:px-24 xl:px-4"
+    >
         <div class="flex items-center space-x-4">
-            <img
-                src="../../../public/logos/imagotipo-blend.png"
-                alt="SW Tucumán Aventuras Logo"
-                class="h-20 lg:h-24"
-            />
+            <a href="/" class="cursor-pointer">
+                <img
+                    src="/logos/imagotipo-blend.PNG"
+                    alt="SW Tucumán Aventuras Logo"
+                    class="h-20 lg:h-24"
+                />
+            </a>
         </div>
 
-        <!-- Menú navegación -->
         <nav class="hidden xl:block">
             <ul class="flex flex-row items-center text-xl font-light">
                 <li>
-                    <a href="/" class="nav-link hover:text-primary transition-all duration-300 relative group px-6">
+                    <a
+                        href="/"
+                        class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
+                    >
                         Home
-                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
+                        <div
+                            class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                        >
+                        </div>
                     </a>
                 </li>
                 <li class="text-white/50">|</li>
-                <li>
-                    <a href="/agua" class="nav-link hover:text-primary transition-all duration-300 relative group px-6">
-                        Agua
-                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
+                <li class="relative nav-item">
+                    <a
+                        href="#"
+                        class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
+                    >
+                        Aventuras
+                        <div
+                            class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                        >
+                        </div>
                     </a>
+                    <ul
+                        class="dropdown-menu absolute bg-tertiary text-white w-64 rounded-lg shadow-lg mt-2 mx-auto px-2 py-4 z-50"
+                    >
+                        {
+                            adventures.map((item) => (
+                                <li class="relative">
+                                    <a
+                                        href={`/atracciones/${item.id}/${formatName(item.title)}`}
+                                        class="nav-link hover:text-primary transition-all duration-300 relative group px-4 py-2 block whitespace-normal"
+                                    >
+                                        {item.category}
+                                    </a>
+                                </li>
+                            ))
+                        }
+                    </ul>
                 </li>
                 <li class="text-white/50">|</li>
                 <li>
-                    <a href="/aventura" class="nav-link hover:text-primary transition-all duration-300 relative group px-6">
-                        Aventura
-                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
-                    </a>
-                </li>
-                <li class="text-white/50">|</li>
-                <li>
-                    <a href="/coaching" class="nav-link hover:text-primary transition-all duration-300 relative group px-6">
-                        Coaching
-                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
-                    </a>
-                </li>
-                <li class="text-white/50">|</li>
-                <li>
-                    <a href="/campamentos" class="nav-link hover:text-primary transition-all duration-300 relative group px-6">
-                        Campamentos
-                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
-                    </a>
-                </li>
-                <li class="text-white/50">|</li>
-                <li>
-                    <a href="/buceo" class="nav-link hover:text-primary transition-all duration-300 relative group px-6">
-                        Buceo
-                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
-                    </a>
-                </li>
-                <li class="text-white/50">|</li>
-                <li>
-                    <a href="/contacto" class="nav-link hover:text-primary transition-all duration-300 relative group px-6">
+                    <button
+                        id="contactButton"
+                        class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
+                    >
                         Contacto
-                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"></div>
-                    </a>
+                        <div
+                            class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                        >
+                        </div>
+                    </button>
                 </li>
             </ul>
         </nav>
@@ -81,7 +105,7 @@
         <!-- Menú móvil -->
         <div
             id="mobileMenu"
-            class="hidden fixed inset-0 bg-black/90 z-50 xl:hidden h-screen"
+            class="hidden fixed inset-0 bg-black/90 xl:hidden h-screen"
         >
             <div
                 class="flex flex-col items-center justify-center h-full relative"
@@ -102,8 +126,8 @@
                 </button>
                 <div class="mb-16">
                     <img
-                        src="/logos/logo-agro-pila.png"
-                        alt="Agroabesan Logo"
+                        src="/logos/logotipo-color.PNG"
+                        alt="SW Tucumán Aventuras Logo"
                         class="h-24 mb-4"
                     />
                 </div>
@@ -112,43 +136,32 @@
                 >
                     <li class="menu-item group">
                         <a
-                            href="#about"
+                            href="/"
                             class="nav-link hover:text-primary transition-all duration-300 relative group"
                         >
-                            Nosotros
+                            Home
                             <div
                                 class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
                             >
                             </div>
                         </a>
                     </li>
+                    {
+                        adventures.map((item) => (
+                            <li class="menu-item">
+                                <a
+                                    href={`/atracciones/${item.id}/${formatName(item.title)}`}
+                                    class="nav-link hover:text-primary transition-all duration-300 relative group"
+                                >
+                                    {item.category}
+                                    <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0" />
+                                </a>
+                            </li>
+                        ))
+                    }
                     <li class="menu-item">
-                        <a
-                            href="#why-choose-us"
-                            class="nav-link hover:text-primary transition-all duration-300 relative group"
-                        >
-                            Industria
-                            <div
-                                class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
-                            >
-                            </div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a
-                            href="#products"
-                            class="nav-link hover:text-primary transition-all duration-300 relative group"
-                        >
-                            Productos
-                            <div
-                                class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
-                            >
-                            </div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a
-                            href="#contact"
+                        <button
+                            id="mobileContactButton"
                             class="nav-link hover:text-primary transition-all duration-300 relative group"
                         >
                             Contacto
@@ -156,13 +169,44 @@
                                 class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
                             >
                             </div>
-                        </a>
+                        </button>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 </header>
+
+<div
+    id="contactSidebar"
+    class="fixed inset-y-0 right-0 w-full max-w-full lg:max-w-3xl bg-white transform translate-x-full transition-transform duration-300 ease-in-out z-50 overflow-y-auto"
+>
+    <button
+        id="closeSidebar"
+        class="absolute top-8 right-8 text-gray-800 hover:text-primary"
+    >
+        <svg
+            class="w-8 h-8"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
+    <ContactSidebar messageContact={messageContact} />
+</div>
+
+<!-- overlay -->
+<div
+    id="sidebarOverlay"
+    class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-40"
+>
+</div>
 
 <style>
     .underline-animation {
@@ -179,11 +223,11 @@
     }
 
     .nav-link:hover {
-        color: #F15A24;
+        color: #f15a24;
     }
 
     .underline-animation {
-        background-color: #F15A24;
+        background-color: #f15a24;
     }
 
     .menu-enter {
@@ -231,6 +275,37 @@
             transform: translateY(0);
         }
     }
+
+    .dropdown-menu {
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        transform: translateY(-10px);
+    }
+
+    .nav-item:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    /* Estilos para la barra de desplazamiento */
+    #contactSidebar::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    #contactSidebar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    #contactSidebar::-webkit-scrollbar-thumb {
+        background: #e26128;
+        border-radius: 3px;
+    }
+
+    #contactSidebar::-webkit-scrollbar-thumb:hover {
+        background: #c04d1f;
+    }
 </style>
 
 <script>
@@ -250,7 +325,6 @@
         mobileMenu?.classList.add("menu-enter");
         document.body.style.overflow = "hidden";
 
-        // Animar cada item del menú con delay
         const menuItems = document.querySelectorAll(
             ".menu-item",
         ) as NodeListOf<HTMLLIElement>;
@@ -273,25 +347,75 @@
         link.addEventListener("click", closeMenu);
     });
 
-    // Agregar scroll suave para todos los enlaces internos
+    //test de logica de scroll smooth
     const anchors = document.querySelectorAll(
-        'a[href^="#"]',
+        'a[href^="#"], a[href="/"]',
     ) as NodeListOf<HTMLAnchorElement>;
 
     anchors.forEach((anchor) => {
-        anchor.addEventListener("click", function (e: any) {
-            e.preventDefault();
-            const { target } = e;
-            const targetId = target.getAttribute("href");
-            const targetElement = document.querySelector(targetId);
+        anchor.addEventListener("click", function (e) {
+            const href = this.getAttribute("href");
 
-            if (targetElement) {
-                targetElement.scrollIntoView({
+            if (href?.startsWith("#")) {
+                e.preventDefault();
+                const targetElement = document.querySelector(href);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                        inline: "nearest",
+                    });
+                }
+            } else if (href === "/" && window.location.pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
                     behavior: "smooth",
-                    block: "start",
-                    inline: "nearest",
                 });
             }
         });
     });
+
+    const navItems = document.querySelectorAll(
+        ".nav-item",
+    ) as NodeListOf<HTMLElement>;
+    navItems.forEach((item: HTMLElement) => {
+        const submenu = item.querySelector("ul");
+        if (submenu) {
+            item.addEventListener("click", (e: Event) => {
+                e.stopPropagation();
+                submenu.classList.toggle("hidden");
+            });
+            item.addEventListener("mouseenter", () => {
+                submenu.classList.remove("hidden");
+            });
+        }
+    });
+
+    const contactButton = document.getElementById("contactButton");
+    const mobileContactButton = document.getElementById("mobileContactButton");
+    const contactSidebar = document.getElementById("contactSidebar");
+    const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+    const openSidebar = () => {
+        contactSidebar?.classList.remove("translate-x-full");
+        sidebarOverlay?.classList.remove("opacity-0", "pointer-events-none");
+        document.body.style.overflow = "hidden";
+        // Si estamos en móvil, cerrar el menú móvil también
+        mobileMenu?.classList.add("hidden");
+        mobileMenu?.classList.remove("menu-enter");
+    };
+
+    const closeSidebarHandler = () => {
+        contactSidebar?.classList.add("translate-x-full");
+        sidebarOverlay?.classList.add("opacity-0", "pointer-events-none");
+        document.body.style.overflow = "";
+    };
+
+    contactButton?.addEventListener("click", openSidebar);
+    mobileContactButton?.addEventListener("click", openSidebar);
+    document
+        .getElementById("closeSidebarBtn")
+        ?.addEventListener("click", closeSidebarHandler);
+    sidebarOverlay?.addEventListener("click", closeSidebarHandler);
 </script>

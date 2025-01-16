@@ -1,0 +1,123 @@
+---
+import "flatpickr/dist/flatpickr.css";
+
+interface Props {
+  availableDates?: string[];
+  availableHours: string[];
+  date?: string | null;
+  horary?: string | null;
+}
+
+const { availableDates = [], availableHours = [], date, horary } = Astro.props;
+---
+
+<div
+  class="calendar-wrapper flex flex-col items-center justify-center gap-4 p-4"
+>
+  <input
+    type="text"
+    class="flatpickr w-80 rounded-lg p-2 text-tertiary"
+    placeholder="Selecciona una fecha"
+    data-input
+  />
+  <input type="hidden" id="date" value={date ?? ""} />
+  <input type="hidden" id="horary" value={horary ?? ""} />
+
+  <div id="timeSlots" class="mt-4 hidden">
+    <h3 class="text-lg font-semibold mb-2 text-tertiary">
+      Horarios disponibles:
+    </h3>
+    <div class="flex flex-wrap gap-2">
+      {
+        availableHours.map((hour) => (
+          <button
+            class="time-slot px-4 py-2 rounded-lg border border-primary text-tertiary hover:bg-primary/20 transition-colors"
+            data-time={hour}
+          >
+            {hour}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  import flatpickr from "flatpickr";
+  import { Spanish } from "flatpickr/dist/l10n/es.js";
+  const date = document.getElementById("date") as HTMLInputElement;
+  const horary = document.getElementById("horary") as HTMLInputElement;
+  if (!date) throw new Error("No se ha encontrado el elemento 'date'");
+  if (!horary) throw new Error("No se ha encontrado el elemento 'horary'");
+
+  // Inicializar todos los calendarios
+  document.querySelectorAll(".flatpickr").forEach((calendar) => {
+    flatpickr(calendar, {
+      locale: Spanish,
+      dateFormat: "Y-m-d",
+      minDate: "today",
+      enableTime: false,
+      altInput: true,
+      altFormat: "D j F, Y",
+      disableMobile: false,
+      inline: true,
+      onChange: function (selectedDates, dateStr, instance) {
+        // Encontrar el contenedor de horarios más cercano al calendario actual
+        const timeSlotsContainer = instance.element
+          .closest(".calendar-wrapper")
+          ?.querySelector("#timeSlots");
+        timeSlotsContainer?.classList.remove("hidden");
+
+        const event = new CustomEvent("dateSelected", {
+          detail: { date: dateStr },
+        });
+        date.value = dateStr ?? "";
+        document.dispatchEvent(event);
+      },
+    });
+  });
+
+  // Manejar la selección de horario
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".time-slot").forEach((button) => {
+      button.addEventListener("click", (e) => {
+        // Encontrar todos los botones dentro del mismo contenedor
+        const wrapper = (e.target as HTMLElement).closest(".calendar-wrapper");
+        const timeSlots = wrapper?.querySelectorAll(".time-slot");
+
+        // Remover selección previa en el contenedor actual
+        timeSlots?.forEach((btn) => {
+          btn.classList.remove("bg-primary", "text-white");
+        });
+
+        // Marcar el botón seleccionado
+        const target = e.target as HTMLButtonElement;
+        target.classList.add("bg-primary", "text-white");
+
+        // Emitir evento con fecha y hora seleccionada
+        const selectedDate =
+          wrapper?.querySelector<HTMLInputElement>(".flatpickr-input")?.value;
+        const selectedTime = target.dataset.time;
+
+        const event = new CustomEvent("dateTimeSelected", {
+          detail: {
+            date: selectedDate,
+            time: selectedTime,
+          },
+        });
+        document.dispatchEvent(event);
+        date.value = selectedDate ?? "";
+        horary.value = selectedTime ?? "";
+      });
+    });
+
+    // Aplicar estilos al calendario
+    const calendarDays = document.querySelectorAll(".flatpickr-day");
+    calendarDays.forEach((day) => {
+      day.classList.add("hover:bg-primary/20", "transition-colors");
+      if (day.classList.contains("selected")) {
+        day.classList.add("bg-primary", "border-primary", "text-white");
+      }
+    });
+  });
+</script>

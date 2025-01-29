@@ -6,11 +6,16 @@ import { formatName } from "@/utils/helpers";
 <section class="bg-gray-200 relative overflow-hidden">
   <!-- Efecto de gotas -->
   <div class="absolute top-0 w-full flex justify-between px-32">
-    {Array.from({ length: 3 }).map((_, i) => (
-      <div class="drip-container" style={`animation-delay: ${Math.random() * 8}s`}>
-        <div class="drop"></div>
-      </div>
-    ))}
+    {
+      Array.from({ length: 3 }).map((_, i) => (
+        <div
+          class="drip-container"
+          style={`animation-delay: ${Math.random() * 8}s`}
+        >
+          <div class="drop" />
+        </div>
+      ))
+    }
   </div>
 
   <div class="max-w-7xl mx-auto py-16 px-4">
@@ -18,62 +23,79 @@ import { formatName } from "@/utils/helpers";
       <div class="inline-block relative">
         <h2 class="text-5xl md:text-6xl font-bold relative z-10">
           <span class="text-primary">NUESTRAS</span>
-          <br/>
+          <br />
           <span class="text-gray-800">AVENTURAS</span>
         </h2>
         <div class="absolute -bottom-4 left-0 w-full h-2 bg-primary/20"></div>
-        <div class="absolute -bottom-4 left-0 w-1/2 h-2 bg-primary animate-slide"></div>
+        <div
+          class="absolute -bottom-4 left-0 w-1/2 h-2 bg-primary animate-slide"
+        >
+        </div>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {adventures.map((adventure) => (
-        <div class="bg-white/90 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg group hover:scale-105 transition-all duration-300">
-          <div class="relative">
-            <img 
-              src={adventure.image} 
-              alt={adventure.title}
-              class="w-full h-48 object-cover"
-            />
-            <button class="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/40 transition-all">
-              <span class="text-white">♡</span>
-            </button>
-            <div class="absolute bottom-4 left-4 bg-primary/80 backdrop-blur-sm rounded-full py-1 px-3 flex items-center gap-2">
-              <span class="text-white text-sm font-medium">{adventure.category}</span>
-            </div>
-          </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8">
+      {
+        adventures
+          .filter((adventure) => adventure.allowReserve)
+          .map((adventure) => (
+            <div class="bg-white/90 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg group hover:scale-105 transition-all duration-300">
+              <div class="relative">
+                <img
+                  src={adventure.image}
+                  alt={adventure.title}
+                  class="w-full h-48 object-cover"
+                />
+                <button class="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/40 transition-all">
+                  <span class="text-white">♡</span>
+                </button>
+                <div class="absolute bottom-4 left-4 bg-primary/80 backdrop-blur-sm rounded-full py-1 px-3 flex items-center gap-2">
+                  <span class="text-white text-sm font-medium">
+                    {adventure.category}
+                  </span>
+                </div>
+              </div>
 
-          <div class="p-6">
-            <h3 class="font-bold text-lg mb-2 text-gray-800">{adventure.title}</h3>
-            <p class="text-gray-600 text-sm mb-4">{adventure.location}</p>
-            
-            <div class="space-y-2 text-gray-700">
-              <div class="flex items-center gap-2">
-                <span class="text-primary">⏱</span>
-                <span class="text-sm">Duración: {adventure.duration}</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="text-primary">📊</span>
-                <span class="text-sm">Dificultad: {adventure.difficulty}</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="text-primary">👥</span>
-                <span class="text-sm">Horarios: {adventure.date.join(", ")}</span>
-              </div>
-            </div>
+              <div class="p-6">
+                <h3 class="font-bold text-lg mb-2 text-gray-800">
+                  {adventure.title}
+                </h3>
+                <p class="text-gray-600 text-sm mb-4">{adventure.location}</p>
 
-            <div class="mt-6 flex justify-between items-center">
-              <span class="text-lg font-bold text-primary">${adventure.price}</span>
-              <a 
-                href={`/atracciones/${adventure.id}/${formatName(adventure.title)}`}
-                class="px-4 py-2 bg-primary text-white rounded-full hover:scale-105 hover:bg-primary/90 transition-all duration-300"
-              >
-                ¡Reserv&aacute; ahora!
-              </a>
+                <div class="space-y-2 text-gray-700">
+                  <div class="flex items-center gap-2">
+                    <span class="text-primary">⏱</span>
+                    <span class="text-sm">Duración: {adventure.duration}</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-primary">📊</span>
+                    <span class="text-sm">
+                      Dificultad: {adventure.difficulty}
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-primary">👥</span>
+                    <span class="text-sm">
+                      Horarios: {adventure.date.join(", ")}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="mt-6 flex justify-between items-center">
+                  <span class="text-lg font-bold text-primary">
+                    ${adventure.price}
+                  </span>
+                  <a
+                    href={`/atracciones/${adventure.id}/${formatName(adventure.title)}`}
+                    class="px-4 py-2 bg-primary text-white rounded-full hover:scale-105 hover:bg-primary/90 transition-all duration-300"
+                  >
+                    ¡Reserv&aacute; ahora!
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      ))}
+          ))
+      }
     </div>
   </div>
 </section>
@@ -95,7 +117,7 @@ import { formatName } from "@/utils/helpers";
     top: -30px;
     left: 50%;
     transform: translateX(-50%);
-    animation: drip 3s cubic-bezier(1,0,.91,.19) infinite;
+    animation: drip 3s cubic-bezier(1, 0, 0.91, 0.19) infinite;
     animation-delay: inherit;
   }
 
@@ -117,7 +139,8 @@ import { formatName } from "@/utils/helpers";
   }
 
   @keyframes drip-reset {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 1;
     }
     95% {
@@ -127,7 +150,7 @@ import { formatName } from "@/utils/helpers";
 
   /* Efecto de condensación en el "techo" */
   .water-drop::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -4px;
     left: 50%;

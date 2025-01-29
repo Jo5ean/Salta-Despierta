@@ -35,19 +35,11 @@ const { isFixed = false } = Astro.props;
               href={`/atracciones/${item.id}/${formatName(item.title)}`}
               class="text-white hover:text-primary transition-all duration-300"
             >
-              {item.category}
+              {item.nameMenu}
             </a>
           </div>
         ))
       }
-      <div class="px-5 py-2">
-        <a
-          href="/contacto"
-          class="text-white hover:text-primary transition-all duration-300"
-        >
-          Contacto
-        </a>
-      </div>
     </nav>
 
     {/* Redes Sociales */}

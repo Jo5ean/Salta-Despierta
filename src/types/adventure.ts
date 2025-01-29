@@ -1,6 +1,7 @@
 export interface Adventure {
     id: string;
     title: string;
+    nameMenu: string;
     location: string;
     image: string;
     gallery: string[];
@@ -10,4 +11,6 @@ export interface Adventure {
     difficulty: string;
     date: string[];
     price: number;
+    allowReserve: boolean;
+    isSubMenu: boolean;
 }

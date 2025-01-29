@@ -1,47 +1,64 @@
 ---
 interface Props {
     messageContact?: string | null;
+    isSection?: boolean;
 }
-const { messageContact = null } = Astro.props;
+const { messageContact = null, isSection = true } = Astro.props;
 
 import { socials } from "@/data/social";
 import config from "@/config/config";
 ---
 
 <div class="bg-gray-200 relative overflow-hidden" id="contactSidebar">
-    <!-- X -->
-    <button
-        id="closeSidebarBtn"
-        aria-label="Cerrar formulario de reserva"
-        class="absolute top-4 right-4 z-20 p-2 text-gray-800 hover:text-primary transition-colors duration-300"
-        aria-label="Cerrar contacto"
-    >
-        <svg
-            class="w-8 h-8"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-    </button>
+    {
+        isSection && (
+            <button
+                id="closeSidebarBtn"
+                aria-label="Cerrar formulario de reserva"
+                class="absolute top-4 right-4 z-20 p-2 text-gray-800 hover:text-primary transition-colors duration-300"
+                aria-label="Cerrar contacto"
+            >
+                <svg
+                    class="w-8 h-8"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                    />
+                </svg>
+            </button>
+        )
+    }
 
-    <div class="ocean absolute inset-0 z-0">
-        <div class="wave"></div>
-        <div class="wave"></div>
-    </div>
-    <div class="px-4 py-12 relative z-10 h-full">
+    {
+        isSection && (
+            <div class="ocean absolute inset-0 z-0">
+                <div class="wave" />
+                <div class="wave" />
+            </div>
+        )
+    }
+    <div class={`px-4 ${isSection ? "py-12" : "py-0"} relative z-10 h-full`}>
         <div class="w-full space-y-6">
             <!-- titulo -->
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-gray-800">Contáctanos</h2>
-                <p class="text-gray-600 mt-2">Estamos aquí para ayudarte</p>
-            </div>
+            {
+                isSection && (
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-gray-800">
+                            Contáctanos
+                        </h2>
+                        <p class="text-gray-600 mt-2">
+                            Estamos aquí para ayudarte
+                        </p>
+                    </div>
+                )
+            }
 
             <!-- formulario -->
             <div

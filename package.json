@@ -1,12 +1,11 @@
 {
-    "name": "swtucumanaventuras",
+    "name": "tucuman-aventuras",
     "type": "module",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "scripts": {
+        "start": "astro dev --port $PORT --host",
         "dev": "astro dev",
-        "build": "astro build",
-        "preview": "astro preview",
-        "astro": "astro"
+        "build": "astro build"
     },
     "dependencies": {
         "@astrojs/tailwind": "^5.1.4",

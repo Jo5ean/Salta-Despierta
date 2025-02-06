@@ -8,8 +8,8 @@
         "build": "astro build"
     },
     "dependencies": {
-        "@astrojs/tailwind": "^5.1.4",
-        "astro": "^5.1.5",
+        "@astrojs/tailwind": "^6.0.0",
+        "astro": "^5.2.5",
         "axios": "^1.7.9",
         "flatpickr": "^4.6.13",
         "notyf": "^3.10.0",

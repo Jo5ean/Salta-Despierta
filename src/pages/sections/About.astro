@@ -6,33 +6,53 @@ const aboutData = {
 ---
 <div class="bg-gray-200 relative overflow-hidden">
   <!-- Efecto de olas -->
-  <div class="ocean absolute inset-0 z-0">
+  <!-- <div class="ocean absolute inset-0 z-0">
     <div class="wave"></div>
     <div class="wave"></div>
-  </div>
+  </div> -->
 
-  <div class="max-w-7xl mx-auto px-4 py-16 relative z-10" id="about">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-      <!-- Columna izquierda - Título circular -->
-      <div class="relative z-10">
-        <div class="slide-in relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] mx-auto lg:mx-0">
+  <div class="max-w-7xl mx-auto px-4 py-10 relative z-10" id="about">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start justify-center">
+      <!-- Columna izquierda - Título cuadrado y sección del instructor -->
+      <div class="relative z-10 flex flex-col items-center space-y-8">
+        <div class="slide-in relative w-[300px] h-[200px] sm:w-[500px] sm:h-[250px] mx-auto">
           <div class="absolute inset-0">
-            <div class="w-full h-full rounded-full bg-primary flex items-center justify-center transform transition-transform hover:scale-105 duration-300">
+            <div class="w-full h-full bg-primary flex items-center justify-center transform transition-transform hover:scale-105 duration-300 px-10 rounded-lg">
               <div class="text-center text-white">
-                <span class="translate-effect block text-4xl sm:text-5xl font-bold tracking-wide">
+                <span class="translate-effect block text-3xl sm:text-4xl font-bold tracking-wide">
                   QUIENES
                 </span>
-                <span class="translate-effect block text-5xl sm:text-6xl font-bold tracking-wide mt-2">
+                <span class="translate-effect block text-4xl sm:text-5xl font-bold tracking-wide mt-2">
                   SOMOS
                 </span>
               </div>
             </div>
-            <div class="absolute inset-[-10px] border-4 border-primary/20 rounded-full animate-spin-slow"></div>
+            <div class="absolute inset-[-10px] border-4 border-primary/20"></div>
+          </div>
+        </div>
+
+        <!-- Nueva sección - Conocer al Instructor -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-4 sm:p-6 space-y-4 w-[300px] h-[200px] sm:w-[500px] sm:h-[250px] mx-auto flex flex-col justify-center">
+          <h2 class="text-[#005F73] text-lg sm:text-xl font-bold">Conoce a Nuestro Instructor</h2>
+          <div class="flex items-center space-x-2 sm:space-x-4">
+            <img src="/images/sergio-wilde.jpg" alt="Sergio Wilde" class="w-16 h-16 sm:w-24 sm:h-24 rounded-full shadow-lg" />
+            <p class="text-gray-700 text-xs sm:text-base leading-relaxed">
+              Sergio Wilde, nuestro experimentado instructor, está aquí para guiarte en cada aventura.
+            </p>
+          </div>
+          <div class="pt-2 sm:pt-4">
+            <button 
+              class="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 bg-primary text-white rounded-lg hover:scale-105 hover:bg-primary/90 transition-all duration-300"
+              onclick="window.location.href='/sergio-wilde/'"
+            >
+              <span class="mr-1 sm:mr-2">📄</span>
+              Ver CV
+            </button>
           </div>
         </div>
       </div>
 
-      <!-- Columna derecha - Contenido -->
+      <!-- Columna derecha - Texto original -->
       <div class="lg:pl-12 space-y-8 relative z-0">
         <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8 space-y-6">
           <h2 class="text-[#005F73] text-2xl font-bold">S.W. Tucuman Aventuras</h2>
@@ -62,7 +82,7 @@ const aboutData = {
 </div>
 
 <style>
-  .ocean { 
+  /* .ocean { 
     height: 100%;
     background: linear-gradient(180deg, #E26128/5 0%, #E26128/30 100%);
   }
@@ -99,7 +119,7 @@ const aboutData = {
     50% {
       transform: translate3d(0,5px,0);
     }
-  }
+  } */
 
   .slide-in {
     overflow: visible;
@@ -145,4 +165,9 @@ const aboutData = {
   document.querySelectorAll('.translate-effect').forEach((el) => {
     observer.observe(el);
   });
+
+  function showInstructorCV() {
+    // Aquí puedes implementar la lógica para mostrar el CV, como abrir un modal o redirigir a otra página
+    alert('Aquí se mostrará el CV del instructor.');
+  }
 </script>

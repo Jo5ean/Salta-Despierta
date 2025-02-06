@@ -3,6 +3,20 @@ import config from "@/config/config.ts";
 ---
 
 <section class="map-section pt-10 bg-white">
+    <!-- Efecto de goteo -->
+    <div class="absolute top-0 w-full flex justify-between px-32">
+        {
+            Array.from({ length: 3 }).map((_, i) => (
+                <div
+                    class="drip-container"
+                    style={{ "--delay": `${Math.random() * 8}s` }}
+                >
+                    <div class="drop" />
+                </div>
+            ))
+        }
+    </div>
+
     <div class="mb-16 text-center relative">
         <div class="inline-block relative">
             <h2 class="text-5xl md:text-6xl font-bold relative z-10">
@@ -54,14 +68,63 @@ import config from "@/config/config.ts";
 </section>
 
 <style>
-    .map-section {
-        background-color: white; /* Fondo blanco */
-    }
 
     .map-container {
         width: 100%;
         max-width: 100%; /* Ocupa toda la pantalla */
         overflow: hidden;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Efecto de goteo */
+    .drip-container {
+        position: relative;
+        width: 40px;
+        height: 300px;
+        animation: drip-reset 8s infinite;
+    }
+
+    .drop {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: #015871;
+        border-radius: 20px;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: drip 3s cubic-bezier(1, 0, 0.91, 0.19) infinite;
+        animation-delay: var(--delay);
+    }
+
+    .drop:before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 30px solid #015871;
+        top: -22px;
+    }
+
+    @keyframes drip {
+        from {
+            top: -30px;
+        }
+        to {
+            top: 190px;
+        }
+    }
+
+    @keyframes drip-reset {
+        0%, 100% {
+            opacity: 1;
+            top: -30px;
+        }
+        95% {
+            opacity: 0;
+            top: 190px;
+        }
     }
 </style>

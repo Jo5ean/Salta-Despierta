@@ -7,53 +7,90 @@ import Layout from '../../layouts/Layout.astro';
     <main class="max-w-7xl mx-auto py-6 px-4 sm:py-8 sm:px-6">
       <div class="flex flex-col lg:flex-row gap-4 shadow-xl rounded-lg overflow-hidden">
         <!-- Columna lateral izquierda - Aumentado el ancho de 1/4 a 1/3 -->
-        <aside class="lg:w-1/3 bg-gray-800 text-white p-6">
+        <aside class="lg:w-1/3 bg-tertiary text-secondary p-6">
           <div class="sticky top-8">
             <div class="mb-8">
               <img 
                 src="/images/sergio-wilde.jpg" 
                 alt="Sergio Wilde" 
-                class="w-56 h-56 object-cover rounded-full mx-auto border-4 border-yellow-400"
+                class="w-56 h-56 object-cover rounded-full mx-auto border-4 border-primary"
               />
             </div>
 
             <!-- Contacto -->
             <section class="mb-8">
-              <h2 class="text-yellow-400 text-xl font-bold mb-3 border-b border-yellow-400 pb-2">
+              <h2 class="text-primary text-xl font-bold mb-3 border-b border-primary pb-2">
                 Contacto
               </h2>
               <div class="space-y-2">
                 <p class="flex items-center gap-2">
-                  <span class="text-yellow-400">📍</span>
+                  <span class="text-primary">📍</span>
                   Universidad Nacional de Tucumán
                 </p>
                 <p class="flex items-center gap-2">
-                  <span class="text-yellow-400">🏛️</span>
+                  <span class="text-primary">🏛️</span>
                   Facultad de Educación Física
                 </p>
                 <p class="flex items-center gap-2">
-                  <span class="text-yellow-400">📌</span>
+                  <span class="text-primary">📌</span>
                   Tucumán, Argentina
+                </p>
+              </div>
+            </section>
+
+            <!-- Formación -->
+            <section class="mb-8">
+              <h2 class="text-primary text-xl font-bold mb-3 border-b border-primary pb-2">
+                Formación
+              </h2>
+              <div class="space-y-2">
+                <p class="flex items-center gap-2">
+                  <span class="text-primary">🎓</span>
+                  Profesor en Educación Física Universitario
+                </p>
+                <p class="flex items-center gap-2">
+                  <span class="text-primary">🎓</span>
+                  Especialista en Entrenamiento (UNT)
+                </p>
+                <p class="flex items-center gap-2">
+                  <span class="text-primary">📚</span>
+                  Biomecánica, Psicología, Pedagogía, Fisiología, Filosofía, Antropología, Nutrición
+                </p>
+                <p class="flex items-center gap-2">
+                  <span class="text-primary">📜</span>
+                  Evaluador ISAK (Antropometría)
+                </p>
+                <p class="flex items-center gap-2">
+                  <span class="text-primary">🤿</span>
+                  Experto en Buceo
+                </p>
+                <p class="flex items-center gap-2">
+                  <span class="text-primary">⚓</span>
+                  Timonel Yate Motor (Prefectura Naval Argentina)
+                </p>
+                <p class="flex items-center gap-2">
+                  <span class="text-primary">🏹</span>
+                  Formación en Escalada Deportiva, Rappel, Arquería, Equitación, Tiro Práctico
                 </p>
               </div>
             </section>
 
             <!-- Certificaciones -->
             <section class="mb-8">
-              <h2 class="text-yellow-400 text-xl font-bold mb-3 border-b border-yellow-400 pb-2">
+              <h2 class="text-primary text-xl font-bold mb-3 border-b border-primary pb-2">
                 Certificaciones
               </h2>
               <div class="space-y-2">
                 <p class="flex items-center gap-2">
-                  <span class="text-yellow-400">🎓</span>
+                  <span class="text-primary">🎓</span>
                   Evaluador ISAK (Nivel 1)
                 </p>
                 <p class="flex items-center gap-2">
-                  <span class="text-yellow-400">🤿</span>
+                  <span class="text-primary">🤿</span>
                   Profesor Internacional de Buceo (CMAS)
                 </p>
                 <p class="flex items-center gap-2">
-                  <span class="text-yellow-400">🏅</span>
+                  <span class="text-primary">🏅</span>
                   Profesor "honoris causa" - PFA
                 </p>
               </div>
@@ -61,28 +98,28 @@ import Layout from '../../layouts/Layout.astro';
 
             <!-- Competencias -->
             <section class="mb-8">
-              <h2 class="text-yellow-400 text-xl font-bold mb-3 border-b border-yellow-400 pb-2">
+              <h2 class="text-primary text-xl font-bold mb-3 border-b border-primary pb-2">
                 Competencias
               </h2>
               <ul class="space-y-2">
                 <li class="flex items-center gap-2">
-                  <span class="text-yellow-400">✓</span>
+                  <span class="text-primary">✓</span>
                   Entrenamiento Deportivo
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="text-yellow-400">✓</span>
+                  <span class="text-primary">✓</span>
                   Evaluación Física
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="text-yellow-400">✓</span>
+                  <span class="text-primary">✓</span>
                   Dirección de Proyectos
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="text-yellow-400">✓</span>
+                  <span class="text-primary">✓</span>
                   Docencia Universitaria
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="text-yellow-400">✓</span>
+                  <span class="text-primary">✓</span>
                   Investigación Académica
                 </li>
               </ul>
@@ -90,28 +127,28 @@ import Layout from '../../layouts/Layout.astro';
 
             <!-- Especialidades -->
             <section class="mb-8">
-              <h2 class="text-yellow-400 text-xl font-bold mb-3 border-b border-yellow-400 pb-2">
+              <h2 class="text-primary text-xl font-bold mb-3 border-b border-primary pb-2">
                 Especialidades
               </h2>
               <ul class="space-y-2">
                 <li class="flex items-center gap-2">
-                  <span class="text-yellow-400">✓</span>
+                  <span class="text-primary">✓</span>
                   Rugby
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="text-yellow-400">✓</span>
+                  <span class="text-primary">✓</span>
                   Buceo
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="text-yellow-400">✓</span>
+                  <span class="text-primary">✓</span>
                   Antropometría
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="text-yellow-400">✓</span>
+                  <span class="text-primary">✓</span>
                   Preparación Física
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="text-yellow-400">✓</span>
+                  <span class="text-primary">✓</span>
                   Actividades Subacuáticas
                 </li>
               </ul>
@@ -120,20 +157,20 @@ import Layout from '../../layouts/Layout.astro';
         </aside>
 
         <!-- Contenido principal - Ajustado el ancho y reducido el padding -->
-        <div class="lg:w-2/3 bg-white p-6">
+        <div class="lg:w-2/3 bg-secondary p-6">
           <header class="mb-8">
-            <h1 class="text-4xl font-bold mb-3 text-gray-800">SERGIO WILDE</h1>
-            <div class="bg-yellow-400 inline-block px-4 py-2 rounded-lg">
-              <h2 class="text-xl text-gray-800 font-semibold">PROFESOR UNIVERSITARIO / DIRECTOR</h2>
+            <h1 class="text-4xl font-bold mb-3 text-tertiary">SERGIO LADISLAO WILDE</h1>
+            <div class="bg-primary inline-block px-4 py-2 rounded-lg">
+              <h2 class="text-xl text-tertiary font-semibold">PROFESOR UNIVERSITARIO / DIRECTOR</h2>
             </div>
           </header>
 
           <!-- Perfil -->
           <section class="mb-8">
-            <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-yellow-400 mb-4 pb-2">
+            <h2 class="text-2xl font-bold text-tertiary border-b-2 border-primary mb-4 pb-2">
               Perfil Profesional
             </h2>
-            <p class="text-gray-700 leading-relaxed">
+            <p class="text-tertiary leading-relaxed">
               Profesor universitario con amplia experiencia en el campo del entrenamiento deportivo y la educación física. 
               Director de la Escuela de Buceo de la UNT y del laboratorio de evaluaciones antropométricas. 
               Especialista en preparación física de alto rendimiento con destacada trayectoria en rugby nacional e internacional.
@@ -142,20 +179,26 @@ import Layout from '../../layouts/Layout.astro';
 
           <!-- Cargos Actuales -->
           <section class="mb-8">
-            <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-yellow-400 mb-4 pb-2">
+            <h2 class="text-2xl font-bold text-tertiary border-b-2 border-primary mb-4 pb-2">
               Cargos Académicos Actuales
             </h2>
             <div class="space-y-4">
               <article class="bg-gray-50 p-4 rounded-lg shadow-sm">
                 <div class="flex flex-col sm:flex-row sm:justify-between mb-3">
-                  <h3 class="font-bold text-gray-800">Profesor Titular | Universidad Nacional de Tucumán</h3>
+                  <h3 class="font-bold text-tertiary">Profesor Titular | Universidad Nacional de Tucumán</h3>
                   <p class="text-gray-600">Actualidad | Tucumán</p>
                 </div>
-                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                <ul class="list-disc list-inside text-tertiary space-y-1">
                   <li>Cátedra de Entrenamiento - Facultad de Educación Física</li>
                   <li>Cátedra de Evaluación de Capacidades Biomotoras</li>
                   <li>Director de la Escuela de Buceo UNT</li>
                   <li>Director del laboratorio de evaluaciones antropométricas</li>
+                  <li>Secretario Académico de la FACDEF</li>
+                  <li>Miembro del Concejo Académico de la UNT</li>
+                  <li>Secretario de Extensión FACDEF UNT</li>
+                  <li>Responsable de Relaciones Internacionales FACDEF UNT</li>
+                  <li>Vice Director del Departamento de Educación Física, FACDEF UNT</li>
+                  <li>Consejero Directivo de la Facultad y Vice Decano Subrogante</li>
                 </ul>
               </article>
             </div>
@@ -163,22 +206,86 @@ import Layout from '../../layouts/Layout.astro';
 
           <!-- Experiencia en Rugby -->
           <section class="mb-8">
-            <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-yellow-400 mb-4 pb-2">
+            <h2 class="text-2xl font-bold text-tertiary border-b-2 border-primary mb-4 pb-2">
               Experiencia en Rugby
             </h2>
             <div class="space-y-4">
               <article class="bg-gray-50 p-4 rounded-lg shadow-sm">
-                <h3 class="font-bold text-gray-800 mb-1">Preparador Físico - Selección Argentina "Los Pumas"</h3>
+                <h3 class="font-bold text-tertiary mb-1">Preparador Físico - Selección Argentina "Los Pumas"</h3>
                 <p class="text-gray-600">Test Matches Internacionales</p>
               </article>
               <article class="bg-gray-50 p-4 rounded-lg shadow-sm">
-                <h3 class="font-bold text-gray-800 mb-1">Preparador Físico - Selección Argentina M18 "Los Pumitas"</h3>
+                <h3 class="font-bold text-tertiary mb-1">Preparador Físico - Selección Argentina M18 "Los Pumitas"</h3>
                 <p class="text-gray-600">Competencias Internacionales</p>
               </article>
               <article class="bg-gray-50 p-4 rounded-lg shadow-sm">
-                <h3 class="font-bold text-gray-800 mb-1">Preparador Físico - Seleccionado Tucumano de Rugby</h3>
+                <h3 class="font-bold text-tertiary mb-1">Preparador Físico - Seleccionado Tucumano de Rugby</h3>
                 <p class="text-gray-600">1997-2000</p>
               </article>
+              <article class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                <h3 class="font-bold text-tertiary mb-1">Entrenador de Clubs de Rugby</h3>
+                <p class="text-gray-600">Planteles Superiores y Seleccionados de la Unión Tucumana de Rugby</p>
+              </article>
+              <article class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                <h3 class="font-bold text-tertiary mb-1">Preparador Físico - Unión Argentina de Rugby</h3>
+                <p class="text-gray-600">Pumitas, Juniors, Argentina A y Pumas</p>
+              </article>
+              <article class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                <h3 class="font-bold text-tertiary mb-1">Coaching Deportivo</h3>
+                <p class="text-gray-600">Seleccionados y Equipos de Rugby de Argentina, Chile, Brasil, Francia, Italia</p>
+              </article>
+              <article class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                <h3 class="font-bold text-tertiary mb-1">Coaching - Seleccionados de Hockey</h3>
+                <p class="text-gray-600">Leonas y Leones antes de Olimpiadas o Mundiales</p>
+              </article>
+            </div>
+          </section>
+
+          <!-- Experiencia en Buceo -->
+          <section class="mb-8">
+            <h2 class="text-2xl font-bold text-tertiary border-b-2 border-primary mb-4 pb-2">
+              Experiencia en Buceo
+            </h2>
+            <div class="space-y-4">
+              <article class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                <h3 class="font-bold text-tertiary mb-1">Experto en Buceo Táctico</h3>
+                <p class="text-gray-600">Miembro del Comité Técnico de FAAS</p>
+              </article>
+              <article class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                <h3 class="font-bold text-tertiary mb-1">Instructor de Fuerzas Especiales (GEOF)</h3>
+                <p class="text-gray-600">Asesor Técnico</p>
+              </article>
+            </div>
+          </section>
+
+          <!-- Experiencia Empresarial -->
+          <section class="mb-8">
+            <h2 class="text-2xl font-bold text-tertiary border-b-2 border-primary mb-4 pb-2">
+              Experiencia Empresarial
+            </h2>
+            <div class="space-y-4">
+              <article class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                <h3 class="font-bold text-tertiary mb-1">Socio Gerente - SW Tucumán Aventuras</h3>
+              </article>
+              <article class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                <h3 class="font-bold text-tertiary mb-1">Socio Gerente - SW Buceo</h3>
+              </article>
+            </div>
+          </section>
+
+          <!-- Contacto -->
+          <section class="mb-8">
+            <h2 class="text-2xl font-bold text-tertiary border-b-2 border-primary mb-4 pb-2">
+              Contacto
+            </h2>
+            <div class="space-y-4">
+              <button 
+                class="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:scale-105 hover:bg-primary/90 transition-all duration-300"
+                onclick="window.location.href='mailto:sergio.wilde@example.com'"
+              >
+                <span class="mr-2">✉️</span>
+                Enviar Correo
+              </button>
             </div>
           </section>
         </div>

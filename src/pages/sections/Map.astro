@@ -3,6 +3,20 @@ import config from "@/config/config.ts";
 ---
 
 <section class="map-section pt-10 bg-white">
+    <!-- Efecto de goteo -->
+    <div class="absolute top-0 w-full flex justify-between px-32">
+        {
+            Array.from({ length: 3 }).map((_, i) => (
+                <div
+                    class="drip-container"
+                    style={{ "--delay": `${Math.random() * 8}s` }}
+                >
+                    <div class="drop" />
+                </div>
+            ))
+        }
+    </div>
+
     <div class="mb-16 text-center relative">
         <div class="inline-block relative">
             <h2 class="text-5xl md:text-6xl font-bold relative z-10">
@@ -19,49 +33,98 @@ import config from "@/config/config.ts";
             </div>
         </div>
     </div>
-    <div class="flex flex-col items-center text-tertiary">
-        <div class="map-container flex flex-row">
-            <!-- <iframe
-                title={`Como llegar a ${config.title}`}
-                src="https://www.google.com/maps/d/u/0/embed?mid=1VqwsCeBoH74_iPKziyNm3INxLVlAbhI&ehbc=2E312F"
-                width="100%"
-                height="450"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe> -->
-
-            <iframe
-                title={`Como llegar a ${config.title}`}
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3566.770675474034!2d-65.20336182381959!3d-26.623796481195527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94226487579f9c8d%3A0x9196f1acb7ee933!2sSW%20Tucuman%20Aventuras!5e0!3m2!1ses-419!2sar!4v1736727860412!5m2!1ses-419!2sar"
-                width="100%"
-                height="450"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-            <iframe
-                title={`Como llegar a ${config.title}`}
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.3846862809596!2d-65.36253852456463!3d-26.79587717671686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x942243aa9455058d%3A0x4c9ad4f5217ae5a5!2sCerro%20San%20Javier!5e0!3m2!1ses-419!2sar!4v1738273584852!5m2!1ses-419!2sar"
-                width="100%"
-                height="450"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="flex flex-col items-center text-tertiary w-full">
+        <div class="flex flex-col lg:flex-row w-full gap-x-5 px-5 gap-y-10">
+            <div
+                class="border-2 border-primary rounded-lg shadow-lg flex-1"
+            >
+                <iframe
+                    title={`Como llegar a ${config.title}`}
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3566.770675474034!2d-65.20336182381959!3d-26.623796481195527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94226487579f9c8d%3A0x9196f1acb7ee933!2sSW%20Tucuman%20Aventuras!5e0!3m2!1ses-419!2sar!4v1736727860412!5m2!1ses-419!2sar"
+                    class="rounded-lg shadow-lg h-[calc(100vh - 200px)] w-full"
+                    width="100%"
+                    height="550"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div
+                class="border-2 border-primary rounded-lg shadow-lg flex-1"
+            >
+                <iframe
+                    title={`Como llegar a ${config.title}`}
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.3846862809596!2d-65.36253852456463!3d-26.79587717671686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x942243aa9455058d%3A0x4c9ad4f5217ae5a5!2sCerro%20San%20Javier!5e0!3m2!1ses-419!2sar!4v1738273584852!5m2!1ses-419!2sar"
+                    class="rounded-lg shadow-lg h-[calc(100vh - 200px)] w-full"
+                    width="100%"
+                    height="550"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </div>
     </div>
 </section>
 
 <style>
-    .map-section {
-        background-color: white; /* Fondo blanco */
-    }
-
     .map-container {
         width: 100%;
         max-width: 100%; /* Ocupa toda la pantalla */
         overflow: hidden;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Efecto de goteo */
+    .drip-container {
+        position: relative;
+        width: 40px;
+        height: 300px;
+        animation: drip-reset 8s infinite;
+    }
+
+    .drop {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: #015871;
+        border-radius: 20px;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: drip 3s cubic-bezier(1, 0, 0.91, 0.19) infinite;
+        animation-delay: var(--delay);
+    }
+
+    .drop:before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 30px solid #015871;
+        top: -22px;
+    }
+
+    @keyframes drip {
+        from {
+            top: -30px;
+        }
+        to {
+            top: 190px;
+        }
+    }
+
+    @keyframes drip-reset {
+        0%,
+        100% {
+            opacity: 1;
+            top: -30px;
+        }
+        95% {
+            opacity: 0;
+            top: 190px;
+        }
     }
 </style>

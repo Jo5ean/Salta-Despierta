@@ -54,7 +54,7 @@ const { isFixed = true, messageContact = null } = Astro.props;
                         </div>
                     </a>
                     <ul
-                        class="dropdown-menu absolute bg-tertiary text-white w-64 rounded-lg shadow-lg mt-2 mx-auto px-2 py-4 z-50"
+                        class="dropdown-menu absolute bg-tertiary text-white w-64 rounded-lg shadow-lg mt-2 mx-auto px-2 py-4 z-50 space-y-3"
                     >
                         {
                             adventures
@@ -79,7 +79,7 @@ const { isFixed = true, messageContact = null } = Astro.props;
                         .map((item) => (
                             <li>
                                 <a
-                                                href={`/atracciones/${item.id}/${formatName(item.title)}`}
+                                    href={`/atracciones/${item.id}/${formatName(item.title)}`}
                                     class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
                                 >
                                     {item.nameMenu}
@@ -92,7 +92,7 @@ const { isFixed = true, messageContact = null } = Astro.props;
                             <li class="text-white/50">|</li>
                         ))
                 }
-                <li>
+                <li class="relative nav-item">
                     <button
                         id="contactButton"
                         aria-label="Abrir formulario de contacto"
@@ -104,6 +104,27 @@ const { isFixed = true, messageContact = null } = Astro.props;
                         >
                         </div>
                     </button>
+                    <ul
+                        class="dropdown-menu absolute bg-tertiary text-white w-64 rounded-lg shadow-lg mt-2 mx-auto px-2 py-4 z-50 space-y-3"
+                    >
+                        <li class="relative">
+                            <button
+                                id="contactButtonPrev"
+                                aria-label="Abrir formulario de contacto"
+                                class="nav-link hover:text-primary transition-all duration-300 relative group px-4 py-2 block whitespace-normal"
+                            >
+                            Contacto
+                        </button>
+                        </li>
+                        <li class="relative">     
+                            <a
+                                href="/sergio-wilde"
+                                class="nav-link hover:text-primary transition-all duration-300 relative group px-4 py-2 block whitespace-normal"
+                            >
+                                Sergio Wilde
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>
@@ -354,6 +375,8 @@ const { isFixed = true, messageContact = null } = Astro.props;
 </style>
 
 <script>
+import { openSidebar } from "@/utils/helpers";
+
     const menuButton = document.getElementById(
         "menuButton",
     ) as HTMLButtonElement;
@@ -438,26 +461,22 @@ const { isFixed = true, messageContact = null } = Astro.props;
     });
 
     const contactButton = document.getElementById("contactButton");
+    const contactButtonPrev = document.getElementById("contactButtonPrev");
     const mobileContactButton = document.getElementById("mobileContactButton");
     const contactSidebar = document.getElementById("contactSidebar");
     const sidebarOverlay = document.getElementById("sidebarOverlay");
-
-    const openSidebar = () => {
-        contactSidebar?.classList.remove("translate-x-full");
-        sidebarOverlay?.classList.remove("opacity-0", "pointer-events-none");
-        document.body.style.overflow = "hidden";
-        // Si estamos en móvil, cerrar el menú móvil también
-        mobileMenu?.classList.add("hidden");
-        mobileMenu?.classList.remove("menu-enter");
-    };
 
     const closeSidebarHandler = () => {
         contactSidebar?.classList.add("translate-x-full");
         sidebarOverlay?.classList.add("opacity-0", "pointer-events-none");
         document.body.style.overflow = "";
     };
-
+    contactSidebar
+sidebarOverlay
+mobileMenu
+mobileMenu
     contactButton?.addEventListener("click", openSidebar);
+    contactButtonPrev?.addEventListener("click", openSidebar);
     mobileContactButton?.addEventListener("click", openSidebar);
     document
         .getElementById("closeSidebarBtn")

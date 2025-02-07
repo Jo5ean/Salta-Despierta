@@ -35,3 +35,17 @@ export const formatName = (name: string) => {
             .replaceAll("Ñ", "n")
     );
 };
+
+
+
+export const openSidebar = () => {
+    const mobileMenu = document.getElementById("mobileMenu") as HTMLDivElement;
+    const contactSidebar = document.getElementById("contactSidebar");
+    const sidebarOverlay = document.getElementById("sidebarOverlay");
+    contactSidebar?.classList.remove("translate-x-full");
+    sidebarOverlay?.classList.remove("opacity-0", "pointer-events-none");
+    document.body.style.overflow = "hidden";
+    // Si estamos en móvil, cerrar el menú móvil también
+    mobileMenu?.classList.add("hidden");
+    mobileMenu?.classList.remove("menu-enter");
+};

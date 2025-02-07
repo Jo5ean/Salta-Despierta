@@ -11,4 +11,9 @@ export default defineConfig({
     mode: "standalone"
   }),
   integrations: [tailwind()],
+  vite: {
+    server: {
+      allowedHosts: true
+    }
+  }
 });

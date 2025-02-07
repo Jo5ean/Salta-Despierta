@@ -78,6 +78,30 @@ const canonicalURL = new URL(pathname, url);
 			href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
 			rel="stylesheet"
 		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+		/>
+		{config.IS_PRODUCTION && 
+			<>
+				<script type="text/javascript">
+					(function(c,l,a,r,i,t,y){
+						c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+						t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+						y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+					})(window, document, "clarity", "script", "q6awzjbqi7");
+				</script>
+				<script async src="https://www.googletagmanager.com/gtag/js?id=G-M26ZZET872"></script>
+				<script is:inline>
+					window.dataLayer = window.dataLayer || [];
+					function gtag(){dataLayer.push(arguments);}
+					gtag('js', new Date());
+
+					gtag('config', 'G-M26ZZET872');
+				</script>
+			</>
+		}
+
 	</head>
 	<body class="bg-gray-800 text-white max-w-full overflow-x-hidden font-body">
 		<div class="z-[999] relative">
@@ -86,7 +110,6 @@ const canonicalURL = new URL(pathname, url);
 		<div class="relative z-[1]">
 			<slot />
 		</div>
-
 		<Footer isFixed={false} />
 	</body>
 </html>

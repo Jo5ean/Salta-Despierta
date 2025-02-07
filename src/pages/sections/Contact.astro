@@ -14,7 +14,7 @@
                 <div
                     class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8 space-y-6"
                 >
-                    <form class="space-y-4">
+                    <form class="space-y-4" id="contact-form-page">
                         <div>
                             <label
                                 class="block text-gray-800 font-medium mb-1"
@@ -24,7 +24,6 @@
                                 type="text"
                                 id="name"
                                 name="name"
-                                required
                                 class="w-full p-2 border-b border-gray-300 focus:outline-none focus:border-primary transition duration-200"
                                 placeholder="Ingresa tu nombre"
                             />
@@ -38,7 +37,6 @@
                                 type="email"
                                 id="email"
                                 name="email"
-                                required
                                 class="w-full p-2 border-b border-gray-300 focus:outline-none focus:border-primary transition duration-200"
                                 placeholder="Ingresa tu correo electrónico"
                             />
@@ -51,8 +49,7 @@
                             <textarea
                                 id="message"
                                 name="message"
-                                required
-                                class="w-full p-2 border-b border-gray-300 focus:outline-none focus:border-primary transition duration-200"
+                                class="w-full p-2 border-b border-gray-300 focus:outline-none focus:border-primary transition duration-200 text-black"
                                 rows="4"
                                 placeholder="Escribe tu mensaje aquí"
                             ></textarea>
@@ -178,5 +175,72 @@
 
     document.querySelectorAll(".translate-effect").forEach((el) => {
         observer.observe(el);
+    });
+</script>
+
+<script>
+    import { message as showMessage } from "@/utils/helpers";
+    const form = document.getElementById(
+        "contact-form-page",
+    ) as HTMLFormElement;
+    if (!form) throw new Error("Formulario no encontrado");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        console.log("enviar");
+        try {
+            const formData = new FormData(form);
+            const button = form.querySelector("button") as HTMLButtonElement;
+            console.log({ button });
+            const name = formData.get("name");
+            const email = formData.get("email");
+            const message = formData.get("message");
+
+            if (!name || !email || !message) {
+                showMessage({
+                    message: "Completa todos los campos",
+                    type: "error",
+                });
+                return;
+            }
+            button.disabled = true;
+            button.innerHTML = "Enviando...";
+            button.classList.add("animate-pulse");
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    message,
+                }),
+            });
+
+            if (!response.ok) {
+                button.disabled = false;
+                button.innerHTML = "Enviar Mensaje";
+                button.classList.remove("animate-pulse");
+                showMessage({
+                    message: "No se pudo enviar el formulario de contacto",
+                    type: "error",
+                });
+                throw new Error("Failed to send message");
+            }
+            button.disabled = false;
+            button.innerHTML = "Enviar Mensaje";
+            button.classList.remove("animate-pulse");
+            showMessage({
+                message: "Tu mensaje fue enviado con éxito",
+                type: "success",
+            });
+            form.reset();
+        } catch (error) {
+            console.error("Error sending message:", error);
+            showMessage({
+                message: "No se pudo enviar el formulario de contacto",
+                type: "error",
+            });
+        }
     });
 </script>

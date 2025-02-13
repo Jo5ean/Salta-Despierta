@@ -19,7 +19,7 @@ import { formatName } from "@/utils/helpers";
       Array.from({ length: 3 }).map((_, i) => (
         <div
           class="drip-container"
-          style={`animation-delay: ${Math.random() * 8}s`}
+          style={`animation-delay: ${Math.random() * 15}s`}
         >
           <div class="drop" />
         </div>
@@ -114,8 +114,9 @@ import { formatName } from "@/utils/helpers";
     position: relative;
     width: 40px;
     height: 300px;
-    animation: drip-reset 8s infinite;
+    animation: drip-reset 15s infinite;
     z-index: 20;
+    transform: none;
   }
 
   .drop {
@@ -127,9 +128,10 @@ import { formatName } from "@/utils/helpers";
     top: -30px;
     left: 50%;
     transform: translateX(-50%);
-    animation: drip 3s cubic-bezier(1, 0, 0.91, 0.19) infinite;
+    animation: drip-down 5s cubic-bezier(0.19, 0, 0.91, 1) infinite;
     animation-delay: inherit;
     z-index: 20;
+    opacity: 0;
   }
 
   .drop:before {
@@ -144,19 +146,26 @@ import { formatName } from "@/utils/helpers";
     z-index: 20;
   }
 
-  @keyframes drip {
-    to {
-      top: 190px;
+  @keyframes drip-down {
+    0% {
+      top: -30px;
+      opacity: 1;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      top: 120px;
+      opacity: 0;
     }
   }
 
   @keyframes drip-reset {
-    0%,
-    100% {
+    0% {
       opacity: 1;
     }
-    95% {
-      opacity: 0;
+    100% {
+      opacity: 1;
     }
   }
 

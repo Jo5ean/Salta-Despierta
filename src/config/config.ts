@@ -3,7 +3,7 @@ const config = {
     site_name: "swaventuras",
     description: "SW Tucumán Aventuras ofrece turismo activo en la naturaleza, con compromiso ambiental y experiencias únicas, promoviendo sostenibilidad y cuidado del entorno.",
     image: "/logos/imagotipo-blend.PNG",
-    theme_color: "#009bce",
+    theme_color: "#E26128",
     keywords: "turismo activo, experiencias únicas, naturaleza, cuidado del medio ambiente, uso responsable, sostenibilidad, aventuras, SW Tucumán, servicios en la naturaleza, compromiso ambiental",
     author: "@swaventuras",
     email: "soporte@swaventuras.com",

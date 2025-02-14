@@ -4,7 +4,7 @@ import config from "@/config/config.ts";
 
 <section class="relative map-section pt-10 bg-white">
     <!-- Efecto de goteo -->
-    <div class="absolute top-0 w-full flex justify-between px-32">
+    <div class="absolute top-0 w-full flex justify-between px-32" style="z-index: 0;">
         {
             Array.from({ length: 3 }).map((_, i) => (
                 <div
@@ -17,7 +17,7 @@ import config from "@/config/config.ts";
         }
     </div>
 
-    <div class="mb-16 text-center relative">
+    <div class="mb-16 text-center relative" style="z-index: 1;">
         <div class="inline-block relative">
             <h2 class="text-5xl md:text-6xl font-bold relative z-10">
                 <span class="text-primary">¿CÓMO</span>
@@ -33,7 +33,7 @@ import config from "@/config/config.ts";
             </div>
         </div>
     </div>
-    <div class="flex flex-col items-center text-tertiary w-full">
+    <div class="flex flex-col items-center text-tertiary w-full relative" style="z-index: 1;">
         <div class="flex flex-col lg:flex-row w-full gap-x-5 px-5 gap-y-10">
             <div
                 class="border-2 border-primary rounded-lg shadow-lg flex-1"
@@ -75,12 +75,11 @@ import config from "@/config/config.ts";
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    /* Efecto de goteo */
+    /* Efecto de gote.o */
     .drip-container {
         position: relative;
         width: 40px;
-        height: 300px;
-        animation: drip-reset 8s infinite;
+        height: 400px; /* Aumentado para mayor distancia de caída */
     }
 
     .drop {
@@ -92,7 +91,8 @@ import config from "@/config/config.ts";
         top: -30px;
         left: 50%;
         transform: translateX(-50%);
-        animation: drip 3s cubic-bezier(1, 0, 0.91, 0.19) infinite;
+        opacity: 0;
+        animation: drip 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; /* Reducido a 6s y añadido cubic-bezier para aceleración */
         animation-delay: var(--delay);
     }
 
@@ -108,23 +108,28 @@ import config from "@/config/config.ts";
     }
 
     @keyframes drip {
-        from {
+        0% {
             top: -30px;
+            opacity: 0;
+            transform: translateX(-50%) scale(0.8);
         }
-        to {
-            top: 190px;
-        }
-    }
-
-    @keyframes drip-reset {
-        0%,
-        100% {
+        5% {
             opacity: 1;
-            top: -30px;
+            transform: translateX(-50%) scale(1);
+        }
+        85% {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
         }
         95% {
+            top: 300px; /* Aumentada la distancia de caída */
+            opacity: 0.5;
+            transform: translateX(-50%) scale(0.9);
+        }
+        100% {
+            top: 350px; /* Punto final más bajo */
             opacity: 0;
-            top: 190px;
+            transform: translateX(-50%) scale(0.8);
         }
     }
 </style>

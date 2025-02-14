@@ -1,4 +1,5 @@
 ---
+export const prerender = true;
 import Layout from "@/layouts/Layout.astro";
 import Calendar from "../sections/Calendar.astro";
 import { adventures } from "@/data/adventure";
@@ -22,6 +23,8 @@ const horario = null;
 if (!adventure) {
   return Astro.redirect("/404");
 }
+
+const horaries = adventure.date.length > 3 ? `De ${adventure.date[0]} a ${adventure.date[adventure.date.length - 1]}` : adventure.date.join(", ");
 ---
 
 <Layout
@@ -119,7 +122,7 @@ if (!adventure) {
                   <div class="flex items-start gap-2">
                     <span class="text-gray-700 font-medium whitespace-nowrap">🕒 Horarios:</span>
                     <span class="text-gray-600">
-                      {adventure.date.join(", ")}
+                      {horaries}
                     </span>
                   </div>
                   <div class="flex items-start gap-2">

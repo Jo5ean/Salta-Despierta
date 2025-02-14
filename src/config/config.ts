@@ -16,6 +16,7 @@ const config = {
         CONTACT_USER: import.meta.env.MAILER_CONTACT_USER,
     },
     URL: {
+        WEB: 'https://tucumanaventuras.com.ar/',
         MAILER: import.meta.env.MAILER_API_URL,
     },
 }

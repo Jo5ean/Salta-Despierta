@@ -106,27 +106,27 @@ if (!adventure) {
             {
               adventure.allowReserve && (
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                  <div class="flex items-center gap-2">
+                  <div class="flex items-start gap-2">
                     <span class="text-gray-700 font-medium">🧗‍♀️ Actividad:</span>
                     <span class="text-gray-600">{adventure.category}</span>
                   </div>
-                  <div class="flex items-center gap-2">
+                  <div class="flex items-start gap-2">
                     <span class="text-gray-700 font-medium">💰 Precio:</span>
                     <span class="text-gray-600">
                       Desde ARS {adventure.price} x Persona
                     </span>
                   </div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-gray-700 font-medium">🕒 Horarios:</span>
+                  <div class="flex items-start gap-2">
+                    <span class="text-gray-700 font-medium whitespace-nowrap">🕒 Horarios:</span>
                     <span class="text-gray-600">
                       {adventure.date.join(", ")}
                     </span>
                   </div>
-                  <div class="flex items-center gap-2">
+                  <div class="flex items-start gap-2">
                     <span class="text-gray-700 font-medium">🕒 Duración:</span>
                     <span class="text-gray-600">{adventure.duration}</span>
                   </div>
-                  <div class="flex items-center gap-2">
+                  <div class="flex items-start gap-2">
                     <span class="text-gray-700 font-medium">
                       📊 Dificultad:
                     </span>

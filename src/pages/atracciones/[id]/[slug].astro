@@ -106,27 +106,27 @@ if (!adventure) {
             {
               adventure.allowReserve && (
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                  <div class="flex items-center gap-2">
+                  <div class="flex items-start gap-2">
                     <span class="text-gray-700 font-medium">🧗‍♀️ Actividad:</span>
                     <span class="text-gray-600">{adventure.category}</span>
                   </div>
-                  <div class="flex items-center gap-2">
+                  <div class="flex items-start gap-2">
                     <span class="text-gray-700 font-medium">💰 Precio:</span>
                     <span class="text-gray-600">
                       Desde ARS {adventure.price} x Persona
                     </span>
                   </div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-gray-700 font-medium">🕒 Horarios:</span>
+                  <div class="flex items-start gap-2">
+                    <span class="text-gray-700 font-medium whitespace-nowrap">🕒 Horarios:</span>
                     <span class="text-gray-600">
                       {adventure.date.join(", ")}
                     </span>
                   </div>
-                  <div class="flex items-center gap-2">
+                  <div class="flex items-start gap-2">
                     <span class="text-gray-700 font-medium">🕒 Duración:</span>
                     <span class="text-gray-600">{adventure.duration}</span>
                   </div>
-                  <div class="flex items-center gap-2">
+                  <div class="flex items-start gap-2">
                     <span class="text-gray-700 font-medium">
                       📊 Dificultad:
                     </span>
@@ -843,21 +843,27 @@ if (!adventure) {
   if (reserveButton && footer) {
     const observer = new IntersectionObserver(
       ([entry]) => {
+        // Calculamos la altura del footer
+        const footerHeight = footer.offsetHeight;
+        
         if (entry.isIntersecting) {
+          // Cuando el footer es visible, posicionamos el botón justo encima
           reserveButton.style.position = "absolute";
-          reserveButton.style.bottom = "fixed";
-          //centramos el boton
+          reserveButton.style.bottom = `${footerHeight + 24}px`; // Añadimos margen
           reserveButton.style.left = "50%";
           reserveButton.style.transform = "translateX(-50%)";
         } else {
+          // Cuando el footer no es visible, mantenemos el botón fijo en la parte inferior
           reserveButton.style.position = "fixed";
           reserveButton.style.bottom = "24px";
-          //devuelve el boton a su posicion original
-          reserveButton.style.left = "10px";
+          reserveButton.style.left = "24px";
           reserveButton.style.transform = "none";
         }
       },
-      { threshold: 0.1 },
+      { 
+        threshold: 0.1,
+        rootMargin: "-100px 0px 0px 0px" // Ajustamos el margen para detectar el footer antes
+      }
     );
 
     observer.observe(footer);

@@ -13,13 +13,13 @@ import { formatName } from "@/utils/helpers";
   <!-- Efecto de gotas -->
   <div
     class="absolute top-0 w-full flex justify-between px-32"
-    style="z-index: 20;"
+    style="z-index: 0;"
   >
     {
       Array.from({ length: 3 }).map((_, i) => (
         <div
           class="drip-container"
-          style={`animation-delay: ${Math.random() * 8}s`}
+          style={{ "--delay": `${Math.random() * 8}s` }}
         >
           <div class="drop" />
         </div>
@@ -27,7 +27,7 @@ import { formatName } from "@/utils/helpers";
     }
   </div>
 
-  <div class="max-w-7xl mx-auto py-16 px-4">
+  <div class="max-w-7xl mx-auto py-16 px-4 relative" style="z-index: 1;">
     <div class="mb-16 text-center relative">
       <div class="inline-block relative">
         <h2 class="text-5xl md:text-6xl font-bold relative z-10">
@@ -111,122 +111,130 @@ import { formatName } from "@/utils/helpers";
 
 <style>
     .drip-container {
-    position: relative;
-    width: 40px;
-    height: 300px;
-    animation: drip-reset 8s infinite;
-    z-index: 20;
-  }
-
-  .drop {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: #015871;
-    border-radius: 20px;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: drip 3s cubic-bezier(1, 0, 0.91, 0.19) infinite;
-    animation-delay: inherit;
-    z-index: 20;
-  }
-
-  .drop:before {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 30px solid #015871;
-    top: -22px;
-    z-index: 20;
-  }
-
-  @keyframes drip {
-    to {
-      top: 190px;
+        position: relative;
+        width: 40px;
+        height: 400px;
     }
-  }
 
-  @keyframes drip-reset {
-    0%,
-    100% {
-      opacity: 1;
+    .drop {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: #015871;
+        border-radius: 20px;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        animation: drip 6s cubic-bezier(0.55, 0.085, 0.68, 0.53) infinite;
+        animation-delay: var(--delay);
     }
-    95% {
-      opacity: 0;
+
+    .drop:before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 30px solid #015871;
+        top: -22px;
     }
-  }
 
-  /* Efecto de olas */
-  .ocean {
-    height: 100%;
-    background: linear-gradient(180deg, #E26128/5 0%, #E26128/30 100%);
-  }
-
-  .wave {
-    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg)
-      repeat-x;
-    position: absolute;
-    bottom: 0;
-    width: 6400px;
-    height: 198px;
-    animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
-    transform: translate3d(0, 0, 0);
-  }
-
-  .wave:nth-of-type(2) {
-    bottom: 25px;
-    animation:
-      wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
-      swell 7s ease -1.25s infinite;
-    opacity: 0.5;
-  }
-
-  @keyframes wave {
-    0% {
-      margin-left: 0;
+    @keyframes drip {
+        0% {
+            top: -30px;
+            opacity: 0;
+            transform: translateX(-50%) scale(0.8);
+        }
+        5% {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+        70% {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+            top: 200px;
+        }
+        85% {
+            top: 280px;
+            opacity: 0.7;
+            transform: translateX(-50%) scale(0.9);
+        }
+        100% {
+            top: 320px;
+            opacity: 0;
+            transform: translateX(-50%) scale(0.8);
+        }
     }
-    100% {
-      margin-left: -1600px;
-    }
-  }
 
-  @keyframes swell {
-    0%,
-    100% {
-      transform: translate3d(0, -25px, 0);
+    /* Efecto de olas */
+    .ocean {
+        height: 100%;
+        background: linear-gradient(180deg, #E26128/5 0%, #E26128/30 100%);
     }
-    50% {
-      transform: translate3d(0, 5px, 0);
-    }
-  }
 
-  /* Efecto de condensación en el "techo" */
-  .water-drop::before {
-    content: "";
-    position: absolute;
-    top: -4px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 12px;
-    height: 4px;
-    background: linear-gradient(to bottom, transparent, rgba(226, 97, 40, 0.3));
-    border-radius: 0 0 6px 6px;
-  }
-
-  @keyframes slide {
-    0% {
-      width: 0;
+    .wave {
+        background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg)
+            repeat-x;
+        position: absolute;
+        bottom: 0;
+        width: 6400px;
+        height: 198px;
+        animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+        transform: translate3d(0, 0, 0);
     }
-    100% {
-      width: 50%;
-    }
-  }
 
-  .animate-slide {
-    animation: slide 2s ease-out forwards;
-  }
+    .wave:nth-of-type(2) {
+        bottom: 25px;
+        animation:
+            wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+            swell 7s ease -1.25s infinite;
+        opacity: 0.5;
+    }
+
+    @keyframes wave {
+        0% {
+            margin-left: 0;
+        }
+        100% {
+            margin-left: -1600px;
+        }
+    }
+
+    @keyframes swell {
+        0%,
+        100% {
+            transform: translate3d(0, -25px, 0);
+        }
+        50% {
+            transform: translate3d(0, 5px, 0);
+        }
+    }
+
+    /* Efecto de condensación en el "techo" */
+    .water-drop::before {
+        content: "";
+        position: absolute;
+        top: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 12px;
+        height: 4px;
+        background: linear-gradient(to bottom, transparent, rgba(226, 97, 40, 0.3));
+        border-radius: 0 0 6px 6px;
+    }
+
+    @keyframes slide {
+        0% {
+            width: 0;
+        }
+        100% {
+            width: 50%;
+        }
+    }
+
+    .animate-slide {
+        animation: slide 2s ease-out forwards;
+    }
 </style>

@@ -38,7 +38,9 @@ const aboutData = {
       </div>
 
       <!-- Columna derecha - Texto original -->
-      <div class="order-1 lg:order-2 relative z-10 flex flex-col items-center space-y-8">
+      <div
+        class="order-1 lg:order-2 relative z-10 flex flex-col items-center space-y-8"
+      >
         <div
           class="slide-in relative w-full h-[200px] lg:w-[500px] lg:h-[250px] mx-auto"
         >
@@ -147,5 +149,7 @@ const aboutData = {
     observer.observe(el);
   });
   const contactButtonCard = document.getElementById("contactButtonCard");
-  contactButtonCard?.addEventListener("click", openSidebar);
+  document.addEventListener("DOMContentLoaded", () => {
+    contactButtonCard?.addEventListener("click", openSidebar);
+  });
 </script>

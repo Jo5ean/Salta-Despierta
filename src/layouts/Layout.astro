@@ -120,6 +120,9 @@ const canonicalURL = new URL(pathname, url);
 
 	</head>
 	<body class="bg-gray-800 text-white max-w-full overflow-x-hidden font-body">
+		<div id="loader" class="fixed top-0 left-0 w-full h-full bg-black/50 z-z-[9999] flex items-center justify-center">
+			<div class="loader"></div>
+		</div>
 		<div class="z-[999] relative">
 			<Header isFixed={fixedHeader} messageContact={messageContact} />
 		</div>
@@ -161,4 +164,55 @@ const canonicalURL = new URL(pathname, url);
 		width: 200px;
 		scroll-snap-align: start;
 	}
+
+	.loader {
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+		background: linear-gradient(45deg, #E26128, #e74e1c);
+		animation: pulse 1.5s infinite;
+	}
+
+	@keyframes pulse {
+		0% {
+			transform: scale(0.9);
+			opacity: 0.7;
+		}
+		50% {
+			transform: scale(1);
+			opacity: 1;
+		}
+		100% {
+			transform: scale(0.9);
+			opacity: 0.7;
+		}
+	}
+	
+
+    .disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
 </style>
+
+<script>
+	import { openSidebar } from "@/utils/helpers";
+	const contactButton = document.getElementById("contactButton") as HTMLButtonElement;
+	const contactButtonPrev = document.getElementById("contactButtonPrev") as HTMLButtonElement;
+	const mobileContactButton = document.getElementById("mobileContactButton") as HTMLButtonElement;
+	const loading = document.getElementById("loader") as HTMLDivElement;
+
+	document.addEventListener("DOMContentLoaded", () => {
+		if(!contactButton || !contactButtonPrev || !mobileContactButton) return;
+		contactButton?.classList.remove("disabled");
+		contactButtonPrev?.classList.remove("disabled");
+		mobileContactButton?.classList.remove("disabled");
+		contactButton.disabled = false;
+		contactButtonPrev.disabled = false;
+		mobileContactButton.disabled = false;
+		contactButton?.addEventListener("click", openSidebar);
+		contactButtonPrev?.addEventListener("click", openSidebar);
+		mobileContactButton?.addEventListener("click", openSidebar);
+		loading?.remove();
+	});
+</script>

@@ -24,7 +24,10 @@ if (!adventure) {
   return Astro.redirect("/404");
 }
 
-const horaries = adventure.date.length > 3 ? `De ${adventure.date[0]} a ${adventure.date[adventure.date.length - 1]}` : adventure.date.join(", ");
+const horaries =
+  adventure.date.length > 3
+    ? `De ${adventure.date[0]} a ${adventure.date[adventure.date.length - 1]}`
+    : adventure.date.join(", ");
 ---
 
 <Layout
@@ -120,10 +123,10 @@ const horaries = adventure.date.length > 3 ? `De ${adventure.date[0]} a ${advent
                     </span>
                   </div>
                   <div class="flex items-start gap-2">
-                    <span class="text-gray-700 font-medium whitespace-nowrap">🕒 Horarios:</span>
-                    <span class="text-gray-600">
-                      {horaries}
+                    <span class="text-gray-700 font-medium whitespace-nowrap">
+                      🕒 Horarios:
                     </span>
+                    <span class="text-gray-600">{horaries}</span>
                   </div>
                   <div class="flex items-start gap-2">
                     <span class="text-gray-700 font-medium">🕒 Duración:</span>
@@ -803,11 +806,13 @@ const horaries = adventure.date.length > 3 ? `De ${adventure.date[0]} a ${advent
     modal.classList.remove("hidden");
   };
 
-  openContact.addEventListener("click", openSideBarContact);
-  openContactDesktop.addEventListener("click", openSideBarContact);
+  document.addEventListener("DOMContentLoaded", () => {
+    openContact.addEventListener("click", openSideBarContact);
+    openContactDesktop.addEventListener("click", openSideBarContact);
 
-  openModalButton.addEventListener("click", openModal);
-  openModalDesktop.addEventListener("click", openModal);
+    openModalButton.addEventListener("click", openModal);
+    openModalDesktop.addEventListener("click", openModal);
+  });
 </script>
 
 <script is:inline>
@@ -828,9 +833,11 @@ const horaries = adventure.date.length > 3 ? `De ${adventure.date[0]} a ${advent
     document.body.style.overflow = "";
   }
 
-  openButton?.addEventListener("click", openSidebarReserva);
-  closeButton?.addEventListener("click", closeSidebar);
-  overlay?.addEventListener("click", closeSidebar);
+  document.addEventListener("DOMContentLoaded", () => {
+    openButton?.addEventListener("click", openSidebarReserva);
+    closeButton?.addEventListener("click", closeSidebar);
+    overlay?.addEventListener("click", closeSidebar);
+  });
 
   window.addEventListener("resize", () => {
     if (window.innerWidth >= 1024) {
@@ -848,7 +855,7 @@ const horaries = adventure.date.length > 3 ? `De ${adventure.date[0]} a ${advent
       ([entry]) => {
         // Calculamos la altura del footer
         const footerHeight = footer.offsetHeight;
-        
+
         if (entry.isIntersecting) {
           // Cuando el footer es visible, posicionamos el botón justo encima
           reserveButton.style.position = "absolute";
@@ -863,10 +870,10 @@ const horaries = adventure.date.length > 3 ? `De ${adventure.date[0]} a ${advent
           reserveButton.style.transform = "none";
         }
       },
-      { 
+      {
         threshold: 0.1,
-        rootMargin: "-100px 0px 0px 0px" // Ajustamos el margen para detectar el footer antes
-      }
+        rootMargin: "-100px 0px 0px 0px", // Ajustamos el margen para detectar el footer antes
+      },
     );
 
     observer.observe(footer);

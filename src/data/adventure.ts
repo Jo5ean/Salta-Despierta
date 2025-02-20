@@ -29,7 +29,7 @@ export const adventures: Adventure[] = [
         duration: "10 Minutos",
         difficulty: "Fácil",
         date: ["13:00", "15:00", "17:00"],
-        price: 8235,
+        price: 9000,
         allowReserve: true,
         isSubMenu: true,
     },

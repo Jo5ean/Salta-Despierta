@@ -3,7 +3,9 @@ interface Props {
     messageContact?: string | null;
     isSection?: boolean;
 }
-const { messageContact = null, isSection = true } = Astro.props;
+const messageContact = Astro.props.messageContact ?? null;
+const isSection = Astro.props.isSection ?? true;
+
 
 import { socials } from "@/data/social";
 import config from "@/config/config";
@@ -105,7 +107,6 @@ import config from "@/config/config";
                             class="w-full p-2 border-b border-gray-300 focus:outline-none focus:border-primary transition duration-200"
                             rows="3"
                             placeholder="Escribe tu mensaje aquí"
-                            value={messageContact?.trim() ?? ""}
                             >{messageContact?.trim() ?? ""}</textarea
                         >
                     </div>

@@ -1,5 +1,4 @@
 ---
-import { adventures } from "@/data/adventure";
 import { socials } from "@/data/social";
 import { formatName } from "@/utils/helpers";
 import Whatsapp from "@/components/icons/Whatsapp.astro";
@@ -27,19 +26,6 @@ const { isFixed = false } = Astro.props;
           Home
         </a>
       </div>
-
-      {
-        adventures.map((item) => (
-          <div class="px-5 py-2">
-            <a
-              href={`/atracciones/${item.id}/${formatName(item.title)}`}
-              class="text-white hover:text-primary transition-all duration-300"
-            >
-              {item.nameMenu}
-            </a>
-          </div>
-        ))
-      }
     </nav>
 
     {/* Redes Sociales */}
@@ -68,7 +54,7 @@ const { isFixed = false } = Astro.props;
       >
         <img
           src="/logos/imagotipo-blend.PNG"
-          alt="SW Tucumán Aventuras Logo"
+          alt="salta despierta"
           class="h-20"
         />
       </a>
@@ -76,7 +62,7 @@ const { isFixed = false } = Astro.props;
 
     {/* Copyright */}
     <p class="mt-8 text-base leading-6 text-center text-white">
-      SW Tucumán Aventuras © {new Date().getFullYear()}. Todos los derechos
+      Salta Despierta © {new Date().getFullYear()}. Todos los derechos
       reservados.
     </p>
   </div>

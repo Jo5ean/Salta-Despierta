@@ -1,8 +1,4 @@
 ---
-import { adventures } from "@/data/adventure";
-import { formatName } from "@/utils/helpers";
-import ContactSidebar from "@/pages/sections/ContactSidebar.astro";
-
 interface Props {
     isFixed?: boolean;
     messageContact?: string | null;
@@ -21,7 +17,7 @@ const { isFixed = true, messageContact = null } = Astro.props;
             <a href="/" class="cursor-pointer">
                 <img
                     src="/logos/imagotipo-blend.PNG"
-                    alt="SW Tucumán Aventuras Logo"
+                    alt="Salta Despierta Logo"
                     class="h-20 lg:h-24"
                 />
             </a>
@@ -47,7 +43,7 @@ const { isFixed = true, messageContact = null } = Astro.props;
                         href="#"
                         class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
                     >
-                        Aventuras
+                        About
                         <div
                             class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
                         >
@@ -56,42 +52,11 @@ const { isFixed = true, messageContact = null } = Astro.props;
                     <ul
                         class="dropdown-menu absolute bg-tertiary text-white w-64 rounded-lg shadow-lg mt-2 mx-auto px-2 py-4 z-50 space-y-3"
                     >
-                        {
-                            adventures
-                                .filter((adventure) => adventure.allowReserve)
-                                .map((item) => (
-                                    <li class="relative">
-                                        <a
-                                            href={`/atracciones/${item.id}/${formatName(item.title)}`}
-                                            class="nav-link hover:text-primary transition-all duration-300 relative group px-4 py-2 block whitespace-normal"
-                                        >
-                                            {item.nameMenu}
-                                        </a>
-                                    </li>
-                                ))
-                        }
+                  
                     </ul>
                 </li>
                 <li class="text-white/50">|</li>
-                {
-                    adventures
-                        .filter((adventure) => !adventure.allowReserve)
-                        .map((item) => (
-                            <li>
-                                <a
-                                    href={`/atracciones/${item.id}/${formatName(item.title)}`}
-                                    class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
-                                >
-                                    {item.nameMenu}
-                                    <div
-                                        class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
-                                    >
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="text-white/50">|</li>
-                        ))
-                }
+
                 <li class="relative nav-item">
                     <button
                         id="contactButton"
@@ -118,14 +83,7 @@ const { isFixed = true, messageContact = null } = Astro.props;
                             Contacto
                         </button>
                         </li>
-                        <li class="relative">     
-                            <a
-                                href="/sergio-wilde"
-                                class="nav-link hover:text-primary transition-all duration-300 relative group px-4 py-2 block whitespace-normal"
-                            >
-                                Sergio Wilde
-                            </a>
-                        </li>
+     
                     </ul>
                 </li>
             </ul>
@@ -176,7 +134,7 @@ const { isFixed = true, messageContact = null } = Astro.props;
                 <div class="mb-16">
                     <img
                         src="/logos/logotipo-color.PNG"
-                        alt="SW Tucumán Aventuras Logo"
+                        alt="Salta Despierta Logo"
                         class="h-24 mb-4"
                     />
                 </div>
@@ -195,36 +153,7 @@ const { isFixed = true, messageContact = null } = Astro.props;
                             </div>
                         </a>
                     </li>
-                    {
-                        adventures
-                            .filter((adventure) => adventure.allowReserve)
-                            .map((item) => (
-                                <li class="menu-item">
-                                    <a
-                                        href={`/atracciones/${item.id}/${formatName(item.title)}`}
-                                        class="nav-link hover:text-primary transition-all duration-300 relative group"
-                                    >
-                                        {item.nameMenu}
-                                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0" />
-                                    </a>
-                                </li>
-                            ))
-                    }
-                    {
-                        adventures
-                            .filter((adventure) => !adventure.allowReserve)
-                            .map((item) => (
-                                <li class="menu-item">
-                                    <a
-                                        href={`/atracciones/${item.id}/${formatName(item.title)}`}
-                                        class="nav-link hover:text-primary transition-all duration-300 relative group"
-                                    >
-                                        {item.nameMenu}
-                                        <div class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0" />
-                                    </a>
-                                </li>
-                            ))
-                    }
+
                     <li class="menu-item">
                         <button
                             id="mobileContactButton"
@@ -267,7 +196,6 @@ const { isFixed = true, messageContact = null } = Astro.props;
                 d="M6 18L18 6M6 6l12 12"></path>
         </svg>
     </button>
-    <ContactSidebar messageContact={messageContact} />
 </div>
 
 <!-- overlay -->

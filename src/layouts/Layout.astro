@@ -1,6 +1,10 @@
 ---
+// Imports
 import Footer from "../layouts/partials/Footer.astro";
 import Header from "../layouts/partials/Header.astro";
+import config from "../config/config";
+
+// Props
 interface Props {
 	image?: string;
 	title: string;
@@ -15,8 +19,6 @@ const {
 	messageContact = null,
 	image = imageConfig,
 } = Astro.props;
-
-import config from "../config/config";
 
 const titleD = `${title} | ${config.title}`.slice(0, 69);
 const { pathname } = Astro.url;
@@ -33,7 +35,6 @@ const canonicalURL = new URL(pathname, url);
 		<meta name="generator" content={Astro.generator} />
 		<title>{titleD}</title>
 
-		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonicalURL} />
 		<meta name="author" content={config.author} />
@@ -43,17 +44,15 @@ const canonicalURL = new URL(pathname, url);
 		<meta itemprop="image" content={new URL(image, url)} />
 		<meta name="keywords" content={config.keywords} />
 
-		<meta name="theme-color" content={config.theme_color} />
-		<meta name="msapplication-TileColor" content={config.theme_color} />
+		<!-- 🎨 Colores institucionales -->
+		<meta name="theme-color" content="#F59A2F" />
+		<meta name="msapplication-TileColor" content="#F59A2F" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-
-		<meta
-			name="viewport"
-			content="width=device-width,initial-scale=1,shrink-to-fit=no"
-		/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
 		<meta http-equiv="x-ua-compatible" content="ie=edge" />
 
+		<!-- Redes sociales -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:site" content={config.author} />
 		<meta name="twitter:creator" content={config.author} />
@@ -61,17 +60,10 @@ const canonicalURL = new URL(pathname, url);
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={new URL(image, url)} />
 
-		<meta name="og:image" content={new URL(image, url)} />
-		<meta name="og:title" content={titleD} />
-		<meta name="og:description" content={description} />
-		<meta name="og:url" content={url} />
-		<meta name="og:site_name" content={config.site_name} />
-		<meta name="og:type" content="website" />
-		<meta name="og:locale" content="es_ES" />
-
 		<meta property="og:title" content={titleD} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={url} />
+		<meta property="og:image" content={new URL(image, url)} />
 		<meta property="og:site_name" content={config.site_name} />
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="es_ES" />
@@ -80,7 +72,6 @@ const canonicalURL = new URL(pathname, url);
 		<meta name="googlebot" content="index, follow" />
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		<meta name="apple-mobile-web-app-title" content={config.site_name} />
 		<meta name="application-name" content={config.site_name} />
 
@@ -88,16 +79,18 @@ const canonicalURL = new URL(pathname, url);
 
 		<link rel="manifest" href="/manifest.webmanifest" />
 
+		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
 			rel="stylesheet"
 		/>
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
-		/>
+
+		<!-- Notificaciones (Notyf) -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css" />
+
+		<!-- Analítica (solo en producción) -->
 		{config.IS_PRODUCTION && 
 			<>
 				<script type="text/javascript">
@@ -112,29 +105,34 @@ const canonicalURL = new URL(pathname, url);
 					window.dataLayer = window.dataLayer || [];
 					function gtag(){dataLayer.push(arguments);}
 					gtag('js', new Date());
-
 					gtag('config', 'G-M26ZZET872');
 				</script>
 			</>
 		}
-
 	</head>
-	<body class="bg-gray-800 text-white max-w-full overflow-x-hidden font-body">
-		<div id="loader" class="fixed top-0 left-0 w-full h-full bg-black/50 z-z-[9999] flex items-center justify-center">
+	<body class="bg-gray text-white max-w-full overflow-x-hidden font-body">
+		<!-- Loader corregido con colores institucionales -->
+		<div id="loader" class="fixed top-0 left-0 w-full h-full bg-black/50 z-[9999] flex items-center justify-center">
 			<div class="loader"></div>
 		</div>
+
+		<!-- Header -->
 		<div class="z-[999] relative">
 			<Header isFixed={fixedHeader} messageContact={messageContact} />
 		</div>
+
+		<!-- Main content -->
 		<div class="relative z-[1]">
 			<slot />
 		</div>
+
+		<!-- Footer -->
 		<Footer isFixed={false} />
 	</body>
 </html>
-<style is:global>
-	@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
+<!-- Estilos globales -->
+<style is:global>
 	:root {
 		font-family: "Open Sans", sans-serif;
 	}
@@ -142,9 +140,7 @@ const canonicalURL = new URL(pathname, url);
 	.animate-fade-in {
 		opacity: 0;
 		transform: translateY(20px);
-		transition:
-			opacity 0.5s ease-out,
-			transform 0.5s ease-out;
+		transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 	}
 
 	.animate-fade-in.visible {
@@ -165,11 +161,12 @@ const canonicalURL = new URL(pathname, url);
 		scroll-snap-align: start;
 	}
 
+	/* 🎨 Loader corregido */
 	.loader {
 		width: 80px;
 		height: 80px;
 		border-radius: 50%;
-		background: linear-gradient(45deg, #E26128, #e74e1c);
+		background: linear-gradient(45deg, #F59A2F, #EFAC70);
 		animation: pulse 1.5s infinite;
 	}
 
@@ -187,32 +184,28 @@ const canonicalURL = new URL(pathname, url);
 			opacity: 0.7;
 		}
 	}
-	
 
-    .disabled {
-        cursor: not-allowed;
-        opacity: 0.5;
-    }
+	.disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
 </style>
 
+<!-- Script para habilitar botones y ocultar loader -->
 <script>
 	import { openSidebar } from "@/utils/helpers";
-	const contactButton = document.getElementById("contactButton") as HTMLButtonElement;
-	const contactButtonPrev = document.getElementById("contactButtonPrev") as HTMLButtonElement;
-	const mobileContactButton = document.getElementById("mobileContactButton") as HTMLButtonElement;
-	const loading = document.getElementById("loader") as HTMLDivElement;
+	const contactButton = document.getElementById("contactButton");
+	const contactButtonPrev = document.getElementById("contactButtonPrev");
+	const mobileContactButton = document.getElementById("mobileContactButton");
+	const loading = document.getElementById("loader");
 
 	document.addEventListener("DOMContentLoaded", () => {
 		if(!contactButton || !contactButtonPrev || !mobileContactButton) return;
-		contactButton?.classList.remove("disabled");
-		contactButtonPrev?.classList.remove("disabled");
-		mobileContactButton?.classList.remove("disabled");
-		contactButton.disabled = false;
-		contactButtonPrev.disabled = false;
-		mobileContactButton.disabled = false;
-		contactButton?.addEventListener("click", openSidebar);
-		contactButtonPrev?.addEventListener("click", openSidebar);
-		mobileContactButton?.addEventListener("click", openSidebar);
+		[contactButton, contactButtonPrev, mobileContactButton].forEach(btn => {
+			(btn as HTMLButtonElement)?.classList.remove("disabled");
+			(btn as HTMLButtonElement).disabled = false;
+			btn?.addEventListener("click", openSidebar);
+		});
 		loading?.remove();
 	});
 </script>

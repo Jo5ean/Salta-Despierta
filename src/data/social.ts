@@ -7,17 +7,17 @@ import Whatsapp from "@/components/icons/Whatsapp.astro";
 export const socials: Social[] = [
     {
         name: "Facebook",
-        url: "https://www.facebook.com/SWTucumanAventuras",
+        url: "https://www.facebook.com/SaltaDespierta",
         icon: Facebook,
     },
     {
         name: "Instagram",
-        url: "https://www.instagram.com/sw_tucuman_aventuras/?hl=es",
+        url: "https://www.instagram.com/saltadespierta/",
         icon: Instagram,
     },
     {
-        name: "WhatsApp",
-        url: "https://api.whatsapp.com/send/?phone=543816528031",
+        name: "WhatsApp",       
+        url: "https://api.whatsapp.com/send/?phone=543876147963",
         icon: Whatsapp,
     },
 ];

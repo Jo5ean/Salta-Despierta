@@ -1,0 +1,38 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+import NewsCard from './NewsCard.astro';
+import NewsCardFeatured from './NewsCardFeatured.astro';
+
+const { title, news, viewAllLink, layout = 'grid', featured = false } = Astro.props;
+---
+
+<section class="my-8">
+  <header class="flex justify-between items-center mb-4">
+    <SectionTitle>{title}</SectionTitle>
+    <a href={viewAllLink} class="text-primary text-sm font-medium hover:underline">
+      Ver todas
+    </a>
+  </header>
+  
+  {featured && news.length > 0 && (
+    <div class="mb-6">
+      <NewsCardFeatured news={news[0]} size="medium" />
+    </div>
+  )}
+  
+  {layout === 'grid' && (
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {news.slice(featured ? 1 : 0).map(item => (
+        <NewsCard news={item} />
+      ))}
+    </div>
+  )}
+  
+  {layout === 'horizontal' && (
+    <div class="flex flex-col space-y-4">
+      {news.slice(featured ? 1 : 0).map(item => (
+        <NewsCard news={item} layout="horizontal" />
+      ))}
+    </div>
+  )}
+</section>

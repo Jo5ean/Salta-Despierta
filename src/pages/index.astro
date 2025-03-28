@@ -1,10 +1,87 @@
 ---
-import Layout from "../layouts/Layout.astro";
-
+import Layout from '../layouts/Layout.astro';
+import HeroNews from '../pages/sections/HeroNews.astro';
+import NewsSection from '../pages/sections/NewsSection.astro';
+/* import PopularNews from '../pages/sections/PopularNews.astro';
+import NewsletterCTA from '../pages/sections/NewsletterCTA.astro';
+import ContentWrapper from '../components/layout/ContentWrapper.astro';
+import Sidebar from '../components/layout/Sidebar.astro';
+ */
+// Ejemplo de datos (en un sitio real vendrían de una API o CMS)
+import { featuredNews, recentNews, politicsNews, economyNews, sportsNews, socialNews } from '../data/mockNews';
 ---
 
-<Layout title="Inicio">
-	<main class="bg-black">
-
-	</main>
+<Layout title="Salta Despierta - Noticias de Salta">
+	<!-- Hero Section - Noticias destacadas -->
+	<HeroNews news={featuredNews} />
+	
+	<ContentWrapper>
+		<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+			<!-- Columna principal (2/3) -->
+			<div class="lg:col-span-2">
+				<!-- Sección de últimas noticias -->
+				<NewsSection 
+					title="ÚLTIMAS NOTICIAS" 
+					news={recentNews} 
+					viewAllLink="/todas" 
+					featured={true}
+				/>
+				
+				<!-- Separador visual -->
+				<div class="my-12 border-b border-gray-200"></div>
+				
+				<!-- Secciones temáticas -->
+				<NewsSection 
+					title="POLÍTICA" 
+					news={politicsNews.slice(0, 4)} 
+					viewAllLink="/politica" 
+					layout="grid"
+				/>
+				
+				<!-- Llamado a la acción - Newsletter -->
+				<!-- <NewsletterCTA 
+					title="MANTENTE INFORMADO" 
+					description="Recibe nuestras noticias destacadas en tu correo" 
+				/> -->
+				
+				<!-- Más secciones temáticas -->
+				<NewsSection 
+					title="ECONOMÍA" 
+					news={economyNews.slice(0, 4)} 
+					viewAllLink="/economia" 
+					layout="grid"
+				/>
+				
+				<NewsSection 
+					title="DEPORTES" 
+					news={sportsNews.slice(0, 4)} 
+					viewAllLink="/deportes" 
+					layout="horizontal"
+				/>
+				
+				<NewsSection 
+					title="SOCIAL" 
+					news={socialNews.slice(0, 4)} 
+					viewAllLink="/social" 
+					layout="grid"
+				/>
+			</div>
+			
+			<!-- Sidebar / Columna lateral (1/3) -->
+			<Sidebar>
+				<!-- Widget de noticias populares -->
+<!-- 				<PopularNews news={featuredNews.slice(0, 5)} />
+ -->				
+				<!-- Espacio para publicidad -->
+				<div class="bg-gray-100 rounded-lg p-4 text-center my-8 h-64 flex items-center justify-center">
+					<p class="text-gray-500">Espacio publicitario</p>
+				</div>
+				
+				<!-- Otros widgets que podrían ir en el sidebar -->
+				<!-- Widget de clima -->
+				<!-- Widget de calendario de eventos -->
+				<!-- Widget de redes sociales -->
+			</Sidebar>
+		</div>
+	</ContentWrapper>
 </Layout>

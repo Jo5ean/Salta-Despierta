@@ -1,0 +1,29 @@
+---
+const { title = "MANTENTE INFORMADO", description = "Recibe nuestras noticias directamente en tu correo" } = Astro.props;
+---
+
+<section class="my-12 bg-primary/10 rounded-lg p-6 md:p-8">
+  <div class="max-w-xl mx-auto text-center">
+    <h3 class="text-xl font-bold text-darkGray mb-3">{title}</h3>
+    <p class="text-gray-600 mb-6">{description}</p>
+    
+    <form class="flex flex-col sm:flex-row gap-3">
+      <input 
+        type="email" 
+        placeholder="Tu correo electrónico" 
+        class="flex-grow rounded-lg border-0 px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+        required
+      />
+      <button
+        type="submit"
+        class="bg-primary hover:bg-primary/90 text-white font-medium px-6 py-3 rounded-lg transition-colors duration-200"
+      >
+        Suscribirme
+      </button>
+    </form>
+    
+    <p class="text-xs text-gray-500 mt-4">
+      Respetamos tu privacidad. Puedes darte de baja en cualquier momento.
+    </p>
+  </div>
+</section>

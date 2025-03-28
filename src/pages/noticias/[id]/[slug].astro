@@ -1,0 +1,123 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import SocialSharing from '../../components/news/SocialSharing.astro';
+import PopularNews from '../../components/news/PopularNews.astro';
+import NewsletterCTA from '../../components/news/NewsletterCTA.astro';
+
+// En un sitio real, esto vendría de una consulta a la base de datos o CMS
+import { featuredNews } from '../../data/mockNews';
+
+// Simulando la obtención de una noticia específica por slug
+export async function getStaticPaths() {
+  return featuredNews.map(news => ({
+    params: { slug: news.url.split('/').pop() },
+    props: { news },
+  }));
+}
+
+const { news } = Astro.props;
+const { title, content, image, category, date, author } = news;
+---
+
+<ArticleLayout title={title}>
+  <div class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Columna principal (artículo) -->
+      <div class="lg:col-span-2">
+        <article>
+          <!-- Cabecera del artículo -->
+          <header class="mb-8">
+            <div class="flex items-center text-sm text-gray-500 mb-3">
+              <a href={`/${category.toLowerCase()}`} class="bg-primary/10 text-primary px-3 py-1 rounded-full">
+                {category}
+              </a>
+              <span class="mx-2">•</span>
+              <time datetime={date}>
+                {new Date(date).toLocaleDateString('es-ES', {
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric'
+                })}
+              </time>
+            </div>
+            
+            <h1 class="text-3xl md:text-4xl font-bold text-darkGray mb-4">{title}</h1>
+            
+            <div class="flex items-center">
+              <img 
+                src="/images/avatars/default.jpg" 
+                alt={author} 
+                class="w-10 h-10 rounded-full mr-3"
+              />
+              <span class="text-gray-600">Por <strong>{author}</strong></span>
+            </div>
+          </header>
+          
+          <!-- Imagen destacada -->
+          <figure class="mb-8">
+            <img 
+              src={image} 
+              alt={title}
+              class="w-full h-auto rounded-lg object-cover"
+            />
+          </figure>
+          
+          <!-- Compartir en redes -->
+          <SocialSharing title={title} url={Astro.url.toString()} />
+          
+          <!-- Contenido del artículo -->
+          <div class="prose prose-lg max-w-none prose-headings:text-darkGray prose-a:text-primary">
+            <Fragment set:html={content} />
+          </div>
+          
+          <!-- Etiquetas -->
+          <div class="mt-8 pt-6 border-t border-gray-200">
+            <h3 class="text-sm font-semibold text-gray-500 mb-3">ETIQUETAS</h3>
+            <div class="flex flex-wrap gap-2">
+              <a href="#" class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200">
+                Salta
+              </a>
+              <a href="#" class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200">
+                Gobierno
+              </a>
+              <a href="#" class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200">
+                Infraestructura
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+      
+      <!-- Sidebar -->
+      <aside class="lg:col-span-1">
+        <!-- Autor -->
+        <div class="bg-gray-50 p-6 rounded-lg mb-8">
+          <h3 class="text-lg font-bold mb-4">Sobre el autor</h3>
+          <div class="flex items-center mb-4">
+            <img 
+              src="/images/avatars/default.jpg" 
+              alt={author} 
+              class="w-16 h-16 rounded-full mr-4"
+            />
+            <div>
+              <h4 class="font-bold">{author}</h4>
+              <p class="text-gray-600 text-sm">Periodista</p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-sm">
+            Especialista en temas políticos y sociales con más de 10 años de experiencia en medios de comunicación.
+          </p>
+        </div>
+        
+        <!-- Noticias relacionadas -->
+        <div class="mb-8">
+          <h3 class="text-lg font-bold mb-4">Noticias relacionadas</h3>
+          <PopularNews news={featuredNews.filter(n => n.id !== news.id).slice(0, 4)} />
+        </div>
+        
+        <!-- Newsletter -->
+        <NewsletterCTA />
+      </aside>
+    </div>
+  </div>
+</ArticleLayout>

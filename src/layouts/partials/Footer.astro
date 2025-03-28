@@ -1,6 +1,6 @@
 ---
 import { socials } from "@/data/social";
-import { formatName } from "@/utils/helpers";
+import LogoHoriz from '@/components/logos/Logo-horiz-alt.astro';
 import Whatsapp from "@/components/icons/Whatsapp.astro";
 
 interface Props {
@@ -8,181 +8,219 @@ interface Props {
 }
 
 const { isFixed = false } = Astro.props;
+
+// Enlaces de navegación para el footer
+const footerLinks = [
+  { name: 'INICIO', url: '/' },
+  { name: 'SALTA', url: '/salta' },
+  { name: 'POLÍTICA', url: '/politica' },
+  { name: 'ECONOMÍA', url: '/economia' },
+  { name: 'DEPORTES', url: '/deportes' },
+  { name: 'SOCIAL', url: '/social' }
+];
+
+// Enlaces secundarios
+const secondaryLinks = [
+  { name: 'Quiénes Somos', url: '/about' },
+  { name: 'Contacto', url: '/contacto' },
+  { name: 'Política de Privacidad', url: '/privacidad' },
+  { name: 'Términos y Condiciones', url: '/terminos' },
+];
 ---
 
-<footer
-  class={`bg-black/50 backdrop-blur ${isFixed ? "fixed" : "static"} w-full bottom-0`}
->
-  <div
-    class="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8"
-  >
-    {/* Navegación */}
-    <nav class="flex flex-wrap justify-center -mx-5 -my-2">
-      <div class="px-5 py-2">
-        <a
-          href="/"
-          class="text-white hover:text-primary transition-all duration-300"
-        >
-          Home
-        </a>
-      </div>
-    </nav>
-
-    {/* Redes Sociales */}
-    <div class="flex justify-center mt-8 space-x-6">
-      {
-        socials.map((social) => (
-          <a
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-white hover:text-primary transition-all duration-300"
-          >
-            <span class="sr-only">{social.name}</span>
-            <social.icon className="w-6 h-6" />
-          </a>
-        ))
-      }
-    </div>
-
-    {/* Logo */}
-    <div class="flex justify-center mt-8">
-      <a 
-        href="/" 
-        class="hover:opacity-80 transition-opacity duration-300"
-        aria-label="Ir al inicio"
-      >
-        <img
-          src="/logos/imagotipo-blend.PNG"
-          alt="salta despierta"
-          class="h-20"
-        />
-      </a>
-    </div>
-
-    {/* Copyright */}
-    <p class="mt-8 text-base leading-6 text-center text-white">
-      Salta Despierta © {new Date().getFullYear()}. Todos los derechos
-      reservados.
-    </p>
+<footer class={`w-full ${isFixed ? "fixed bottom-0" : ""} bg-darkGray relative z-10`}>
+  <!-- Patrón de fondo sutil -->
+  <div class="absolute inset-0 bg-[url('/patterns/noise.png')] opacity-5 z-0"></div>
+  
+  <!-- Onda decorativa superior -->
+  <div class="wave-top relative h-12 overflow-hidden">
+    <svg class="absolute bottom-0 w-full h-16" viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path class="fill-white" d="M0,96L80,80C160,64,320,32,480,21.3C640,11,800,21,960,42.7C1120,64,1280,96,1360,112L1440,128L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
+    </svg>
   </div>
+  
+  <!-- Contenido principal del footer -->
+  <div class="container mx-auto px-6 md:px-12 lg:px-16 pt-8 pb-12 relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <!-- Columna 1: Logo e información -->
+      <div class="md:col-span-4 flex flex-col items-center md:items-start">
+        <LogoHoriz width={220} height={55} className="mb-4" />
+        <p class="text-white text-sm text-center md:text-left mb-4">
+          Medio de comunicación comprometido con la información y el análisis para Salta y la región.
+        </p>
+        <div class="flex space-x-3 mt-2">
+          {socials.map((social) => (
+            <a
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-white hover:text-primary transition-all duration-300 bg-white/10 p-2 rounded-full hover:bg-white/20"
+              aria-label={`Visitar ${social.name}`}
+            >
+              <social.icon className="w-5 h-5" />
+            </a>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Columna 2: Enlaces principales -->
+      <div class="md:col-span-3 flex flex-col items-center md:items-start">
+        <h3 class="text-primary font-bold text-lg mb-4 relative">
+          SECCIONES
+          <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/70"></span>
+        </h3>
+        <nav class="flex flex-col space-y-2">
+          {footerLinks.map(link => (
+            <a href={link.url} class="text-white hover:text-primary transition-all duration-200 text-sm">
+              {link.name}
+            </a>
+          ))}
+        </nav>
+      </div>
+      
+      <!-- Columna 3: Enlaces secundarios -->
+      <div class="md:col-span-2 flex flex-col items-center md:items-start">
+        <h3 class="text-primary font-bold text-lg mb-4 relative">
+          ENLACES
+          <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/70"></span>
+        </h3>
+        <nav class="flex flex-col space-y-2">
+          {secondaryLinks.map(link => (
+            <a href={link.url} class="text-white hover:text-primary transition-all duration-200 text-sm">
+              {link.name}
+            </a>
+          ))}
+        </nav>
+      </div>
+      
+      <!-- Columna 4: Boletín -->
+      <div class="md:col-span-3 flex flex-col items-center md:items-start">
+        <h3 class="text-primary font-bold text-lg mb-4 relative">
+          SUSCRIBIRSE
+          <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/70"></span>
+        </h3>
+        <p class="text-white text-sm mb-3">Recibe nuestras últimas noticias directamente en tu correo.</p>
+        
+        <form class="w-full">
+          <div class="flex flex-col space-y-2">
+            <div class="flex">
+              <input
+                type="email"
+                placeholder="Tu correo electrónico"
+                class="flex-grow rounded-l-md border-0 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-gray-300 focus:outline-none focus:ring-1 focus:ring-primary"
+                required
+              />
+              <button
+                type="submit"
+                class="rounded-r-md bg-primary px-3 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors duration-200"
+              >
+                Enviar
+              </button>
+            </div>
+            <p class="text-xs text-gray-300">
+              Al suscribirte, aceptas nuestra política de privacidad.
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Separador -->
+    <div class="border-t border-white/20 my-6"></div>
+    
+    <!-- Pie del footer -->
+    <div class="flex flex-col md:flex-row justify-between items-center text-sm text-white">
+      <p>
+        &copy; {new Date().getFullYear()} Salta Despierta. Todos los derechos reservados.
+      </p>
+      <p class="mt-2 md:mt-0">
+        Diseñado con <span class="text-red-500">♥</span> en Salta, Argentina
+      </p>
+    </div>
+  </div>
+  
+  <!-- Botones flotantes -->
+  <!-- WhatsApp -->
+  <a
+    href={socials.find((item) => item.name.toLowerCase() === "whatsapp")?.url}
+    class="fixed bottom-6 right-6 z-50 group"
+    aria-label="Chatear por WhatsApp"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <!-- Efecto de ping -->
+    <div class="absolute -inset-2">
+      <div class="w-full h-full animate-ping rounded-full bg-green-500/30"></div>
+    </div>
+
+    <!-- Tooltip -->
+    <div class="absolute bottom-full right-0 mb-4 hidden group-hover:block">
+      <div
+        class="bg-white px-4 py-2 rounded-xl shadow-lg text-sm font-body text-gray-900 whitespace-nowrap"
+      >
+        Chatear por WhatsApp
+        <!-- Flecha del tooltip -->
+        <div class="absolute bottom-0 right-6 w-2 h-2 -mb-1 rotate-45 bg-white">
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón principal -->
+    <div
+      class="relative flex items-center justify-center w-12 h-12 text-white bg-green-500 rounded-full shadow-lg hover:bg-green-500/90 transform hover:-translate-y-1 transition duration-200"
+    >
+      <Whatsapp width="26" height="26" />
+    </div>
+  </a>
+
+  <!-- Scroll to Top -->
+  <button
+    id="scrollToTop"
+    class="fixed bottom-6 left-6 z-30 p-3 bg-primary/80 hover:bg-primary text-white rounded-full shadow-lg transform hover:-translate-y-1 transition-all duration-300 opacity-0 invisible"
+    aria-label="Volver arriba"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M5 10l7-7m0 0l7 7m-7-7v18"
+      />
+    </svg>
+  </button>
 </footer>
 
-<a
-  href={socials.find((item) => item.name.toLowerCase() === "whatsapp")?.url}
-  class="fixed bottom-6 right-6 z-50 group"
-  aria-label="Chatear por WhatsApp"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  {/* Efecto de ping */}
-  <div class="absolute -inset-2">
-    <div class="w-full h-full animate-ping rounded-full bg-green-500/30"></div>
-  </div>
-
-  {/* Tooltip */}
-  <div class="absolute bottom-full right-0 mb-4 hidden group-hover:block">
-    <div
-      class="bg-white px-4 py-2 rounded-xl shadow-lg text-sm font-body text-gray-900 whitespace-nowrap"
-    >
-      Chatear por WhatsApp
-      {/* Flecha del tooltip */}
-      <div class="absolute bottom-0 right-6 w-2 h-2 -mb-1 rotate-45 bg-white">
-      </div>
-    </div>
-  </div>
-
-  {/* Botón principal */}
-  <div
-    class="relative flex items-center justify-center w-11 h-11 text-white bg-green-500 rounded-full shadow-lg hover:bg-green-500/90 transform hover:-translate-y-1 transition duration-200"
-  >
-    <Whatsapp width="24" height="24" />
-  </div>
-</a>
-
-{/* Botón Scroll to Top */}
-<button
-  id="scrollToTop"
-  class="fixed bottom-6 left-6 z-30 p-3 bg-primary/80 hover:bg-primary text-white rounded-full shadow-lg transform hover:-translate-y-1 transition-all duration-300 opacity-0 invisible"
-  aria-label="Volver arriba"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    class="h-6 w-6"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      d="M5 10l7-7m0 0l7 7m-7-7v18"
-    />
-  </svg>
-</button>
-
 <style>
+  /* Animación de ping para el botón de WhatsApp */
   @keyframes ping {
-    75%,
-    100% {
+    75%, 100% {
       transform: scale(2);
       opacity: 0;
     }
   }
+  
   .animate-ping {
     animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-  }
-
-  .underline-animation {
-    width: 0;
-    opacity: 0;
-    transition:
-      width 0.8s ease-out,
-      opacity 0.3s ease-out;
-  }
-
-  .underline-animation.visible {
-    width: 5rem; /* w-20 equivale a 5rem */
-    opacity: 1;
   }
 
   /* Animación para el botón de scroll */
   #scrollToTop {
     transition: all 0.3s ease;
   }
+  
+  /* Efecto hover para los links */
+  a:hover .hover-underline {
+    width: 100%;
+  }
 </style>
 
 <script>
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.1,
-    },
-  );
-
-  document.querySelectorAll(".underline-animation").forEach((el) => {
-    observer.observe(el);
-  });
-
-  const scrollLink = document.querySelector(".scroll-to-top");
-  if (scrollLink) {
-    scrollLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    });
-  }
-
   // Lógica para el botón de scroll
   const scrollButton = document.getElementById('scrollToTop');
 

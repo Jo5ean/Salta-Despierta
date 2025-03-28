@@ -1,5 +1,5 @@
 ---
-import NewsCardFeatured from './NewsCardFeatured.astro';
+/* import NewsCardFeatured from './NewsCardFeatured.astro'; */
 
 const { news } = Astro.props;
 ---
@@ -9,13 +9,13 @@ const { news } = Astro.props;
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <!-- Noticia principal (grande) -->
       <div class="lg:col-span-2">
-        <NewsCardFeatured news={news[0]} size="large" />
-      </div>
+<!--         <NewsCardFeatured news={news[0]} size="large" />
+ -->      </div>
       
       <!-- Noticias secundarias (vertical) -->
       <div class="flex flex-col gap-4">
-        <NewsCardFeatured news={news[1]} size="medium" />
-        <NewsCardFeatured news={news[2]} size="medium" />
+  <!--       <NewsCardFeatured news={news[1]} size="medium" />
+        <NewsCardFeatured news={news[2]} size="medium" /> -->
       </div>
     </div>
   </div>

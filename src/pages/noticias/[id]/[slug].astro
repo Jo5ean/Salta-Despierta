@@ -1,13 +1,11 @@
----
+<!-- ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import SocialSharing from '../../components/news/SocialSharing.astro';
 import PopularNews from '../../components/news/PopularNews.astro';
 import NewsletterCTA from '../../components/news/NewsletterCTA.astro';
 
-// En un sitio real, esto vendría de una consulta a la base de datos o CMS
 import { featuredNews } from '../../data/mockNews';
 
-// Simulando la obtención de una noticia específica por slug
 export async function getStaticPaths() {
   return featuredNews.map(news => ({
     params: { slug: news.url.split('/').pop() },
@@ -22,10 +20,8 @@ const { title, content, image, category, date, author } = news;
 <ArticleLayout title={title}>
   <div class="container mx-auto px-4 py-8">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <!-- Columna principal (artículo) -->
       <div class="lg:col-span-2">
         <article>
-          <!-- Cabecera del artículo -->
           <header class="mb-8">
             <div class="flex items-center text-sm text-gray-500 mb-3">
               <a href={`/${category.toLowerCase()}`} class="bg-primary/10 text-primary px-3 py-1 rounded-full">
@@ -53,7 +49,6 @@ const { title, content, image, category, date, author } = news;
             </div>
           </header>
           
-          <!-- Imagen destacada -->
           <figure class="mb-8">
             <img 
               src={image} 
@@ -62,15 +57,12 @@ const { title, content, image, category, date, author } = news;
             />
           </figure>
           
-          <!-- Compartir en redes -->
           <SocialSharing title={title} url={Astro.url.toString()} />
           
-          <!-- Contenido del artículo -->
           <div class="prose prose-lg max-w-none prose-headings:text-darkGray prose-a:text-primary">
             <Fragment set:html={content} />
           </div>
           
-          <!-- Etiquetas -->
           <div class="mt-8 pt-6 border-t border-gray-200">
             <h3 class="text-sm font-semibold text-gray-500 mb-3">ETIQUETAS</h3>
             <div class="flex flex-wrap gap-2">
@@ -88,9 +80,7 @@ const { title, content, image, category, date, author } = news;
         </article>
       </div>
       
-      <!-- Sidebar -->
       <aside class="lg:col-span-1">
-        <!-- Autor -->
         <div class="bg-gray-50 p-6 rounded-lg mb-8">
           <h3 class="text-lg font-bold mb-4">Sobre el autor</h3>
           <div class="flex items-center mb-4">
@@ -109,15 +99,14 @@ const { title, content, image, category, date, author } = news;
           </p>
         </div>
         
-        <!-- Noticias relacionadas -->
         <div class="mb-8">
           <h3 class="text-lg font-bold mb-4">Noticias relacionadas</h3>
           <PopularNews news={featuredNews.filter(n => n.id !== news.id).slice(0, 4)} />
         </div>
         
-        <!-- Newsletter -->
         <NewsletterCTA />
       </aside>
     </div>
   </div>
 </ArticleLayout>
+ -->
